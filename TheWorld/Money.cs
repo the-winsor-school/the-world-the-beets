@@ -60,6 +60,9 @@ namespace TheWorld
             return output;
         }
 
+        /// <summary>
+        /// Normalize the members of this Instance so that you have the minimum number of "coins" of each value.
+        /// </summary>
         public void NormalizeCoinage()
         {
             while(this.Copper > 100)
@@ -115,7 +118,7 @@ namespace TheWorld
         /// <returns></returns>
         public static Money operator -(Money a, Money b)
         {
-            // You write this method!!
+            //TODO: You write this method!!
             return new Money();
         }
     }

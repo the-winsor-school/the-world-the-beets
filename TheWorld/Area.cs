@@ -58,15 +58,17 @@ namespace TheWorld
 		/// </summary>
 		/// <returns>The Description of the thing you are looking at.</returns>
 		/// <param name="thing">Thing.</param>
-		public string LookAt( string thing )
+		public string LookAt(string thing)
 		{
 			if(Items.ContainsKey(thing))
 			{
 				return string.Format("{0} - {1}", Items [thing].Name, Items [thing].Description);
-			} else if(Creatures.ContainsKey(thing))
+			}
+            else if(Creatures.ContainsKey(thing))
 			{
 				return string.Format("{0} - {1}", Creatures [thing].Name, Creatures [thing].Description);
-			} else if(NeighboringAreas.ContainsKey(thing))
+			}
+            else if(NeighboringAreas.ContainsKey(thing))
 			{
 				return NeighboringAreas [thing].Name;
 			}
@@ -81,10 +83,12 @@ namespace TheWorld
 		public string LookAround()
 		{
 			string longDescription = this.ToString() + Environment.NewLine;
-			foreach(string key in Items.Keys)
+
+            foreach (string key in Items.Keys)
 			{
 				longDescription += string.Format("There is a [{0}]. {1}", key, Environment.NewLine);
 			}
+
 			foreach(string key in Creatures.Keys)
 			{
 				longDescription += string.Format("You see a [{0}]. {1}", key, Environment.NewLine);
@@ -97,6 +101,7 @@ namespace TheWorld
 				                                  NeighboringAreas [keyword].Name,
 				                                  Environment.NewLine);
 			}
+
 			return longDescription;
 		}
 
@@ -112,7 +117,7 @@ namespace TheWorld
 		/// <param name="neighbor">Neighbor.</param>
 		/// <param name="keyword">Keyword. Must be unique in this area.</param>
 		/// <exception cref="WorldException">Throws an WorldException if the keyword is already used in this area.</exception>
-		public void AddNeighbor( Area neighbor, string keyword )
+		public void AddNeighbor(Area neighbor, string keyword)
 		{
 			if(NeighboringAreas.ContainsKey(keyword))
 				throw new WorldException("That keyword is already taken");
@@ -126,7 +131,7 @@ namespace TheWorld
 		/// <returns>The neighbor.</returns>
 		/// <param name="keyword">Keyword.</param>
 		/// <exception cref="WorldException">If there is no neighbor with the given keyword.</exception>
-		public Area GetNeighbor( string keyword )
+		public Area GetNeighbor(string keyword)
 		{
 			if(!NeighboringAreas.ContainsKey(keyword))
 				throw new WorldException("I can't go that way...");
@@ -140,7 +145,7 @@ namespace TheWorld
 		/// <param name="item">Item.</param>
 		/// <param name="uid">Unique Name for the item.  Must be unique in this area.</param>
 		/// <exception cref="WorldException">Throws an WorldException if the uid is already used in this area.</exception>
-		public void AddItem( Item item, string uid )
+		public void AddItem(Item item, string uid)
 		{
 			if(Items.ContainsKey(uid))
 				throw new WorldException("There is already an Item in this area with that Unique Name.");
@@ -153,7 +158,7 @@ namespace TheWorld
 		/// </summary>
 		/// <returns>The item.</returns>
 		/// <param name="uid">Uid.</param>
-		public Item GetItem( string uid )
+		public Item GetItem(string uid)
 		{
 			if(!Items.ContainsKey(uid))
 				throw new WorldException("I don't see anything like that...");
@@ -161,6 +166,11 @@ namespace TheWorld
 			return Items [uid];
 		}
 
+        /// <summary>
+        /// Literally: Does the Items dictionary contain the given string as a Key.
+        /// </summary>
+        /// <param name="uid">name of the item</param>
+        /// <returns></returns>
         public bool HasItem(string uid) => Items.ContainsKey(uid);
 
 		/// <summary>
@@ -169,7 +179,7 @@ namespace TheWorld
 		/// <param name="creature">Creature.</param>
 		/// <param name="uid">Unique name for the creature.  Must be unique in this area.</param>
 		/// <exception cref="WorldException">Throws an WorldException if the uid is already used in this area.</exception>
-		public void AddCreature( Creature creature, string uid )
+		public void AddCreature(Creature creature, string uid)
 		{
 			if(Creatures.ContainsKey(uid))
 				throw new WorldException("There is already a Creature with that unique name in this area.");
@@ -182,7 +192,7 @@ namespace TheWorld
 		/// </summary>
 		/// <returns>The creature.</returns>
 		/// <param name="uid">Uid.</param>
-		public Creature GetCreature( string uid )
+		public Creature GetCreature(string uid)
 		{
 			if(!Creatures.ContainsKey(uid))
 				throw new WorldException("I don't see that around here...");
@@ -205,10 +215,11 @@ namespace TheWorld
 
 		/// <summary>
 		/// Determines whether this instance can go the specified direction.
+        /// Literally:  does the NeighboringAreas dictionary contain the specified direction as a Key.
 		/// </summary>
 		/// <returns><c>true</c> if this instance can go the specified direction; otherwise, <c>false</c>.</returns>
 		/// <param name="direction">Direction.</param>
-		public bool CanGo( string direction ) => NeighboringAreas.ContainsKey(direction);
+		public bool CanGo(string direction) => NeighboringAreas.ContainsKey(direction);
 
 	}
 }

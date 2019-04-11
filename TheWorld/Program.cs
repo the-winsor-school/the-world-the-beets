@@ -15,11 +15,12 @@ namespace TheWorld
 		/// These are all the words that the game will accept as commands.
 		/// You will need to add more words to make the game more interesting!
 		/// </summary>
-		private static List<string> CommandWords = new List<string>() {
+		private static List<string> CommandWords = new List<string>()
+        {
 			"go", "look", "help", "quit", "examine", "fight"
 		};
 
-		public static void Main( string[] args )
+		public static void Main(string[] args)
 		{
             // Initialization
 			PrintPositive("What is your name?  ");
@@ -61,7 +62,7 @@ namespace TheWorld
 		/// Parses the command and do any required actions.
 		/// </summary>
 		/// <param name="command">Command as typed by the user.</param>
-		private static void ParseCommand( string command )
+		private static void ParseCommand(string command)
 		{
 			string[] parts = command.Split(' ');
 			string cmdWord = parts [0];

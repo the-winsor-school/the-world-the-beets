@@ -37,7 +37,7 @@ namespace TheWorld
 		/// <param name="type">Type.</param>
 		/// <param name="count">numbre of dice to throw.</param>
 		/// <returns>The Sum of all dice thrown</returns>
-		public static int Roll( Dice.Type type, int count = 1, int modifier = 0 )
+		public static int Roll(Dice.Type type, int count = 1, int modifier = 0)
 		{
 			int total = 0;
 			for(int i = 0; i < count; i++)
@@ -71,8 +71,7 @@ namespace TheWorld
         ///(e.g. 4d6 +5)
         /// </summary>
         public int Modifier { get; protected set; }
-
-
+        
         /// <summary>
         /// Initialize a Dice type for you to roll
         /// for example 3d6 would be:
@@ -94,6 +93,12 @@ namespace TheWorld
             Modifier = modifier;
         }
 
+        /// <summary>
+        /// Roll this dice!
+        /// 
+        /// literally, Dice.Roll(DiceType, Count) + Modifier
+        /// </summary>
+        /// <returns></returns>
         public int Roll() => Dice.Roll(DiceType, Count) + Modifier;
     }
 }

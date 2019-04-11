@@ -38,24 +38,26 @@ namespace TheWorld
 		/// <summary>
 		/// The items. In Stacks.  By Name.
 		/// </summary>
-		private Dictionary<string, List<Item>> Backpack;
+		private Dictionary<string, List<ICarryable>> Backpack;
 
-		public Player( string name )
+		public Player(string name)
 		{
 			Name = name;
-			Backpack = new Dictionary<string, List<Item>>();
+			Backpack = new Dictionary<string, List<ICarryable>>();
 		}
 
 		/// <summary>
 		/// Put the Item in your backpack.
 		/// </summary>
 		/// <param name="item">Item.</param>
-		public void PickUp( Item item )
+		public void PickUp(ICarryable item)
 		{
+            // if you already have some of this item, put it with those.
 			if(Backpack.ContainsKey(item.Name))
 				Backpack [item.Name].Add(item);
+            // otherwise start a new stack
 			else
-				Backpack.Add(item.Name, new List<Item>() { item });
+				Backpack.Add(item.Name, new List<ICarryable>() { item });
 		}
 	}
 }

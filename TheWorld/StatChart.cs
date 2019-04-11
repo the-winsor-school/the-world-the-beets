@@ -61,9 +61,9 @@ namespace TheWorld
 		/// </summary>
 		/// <returns>The attack value in HPs.</returns>
 		/// <param name="opponent">Opponent's stat chart.</param>
-		public int CalculateAttack( StatChart opponent )
+		public int CalculateAttack(StatChart opponent)
 		{
-			// To Do: You need to write some calculations here.
+			// TODO: You need to write some calculations here.
 			// Ideally, your calculations should have to do with
 			// this object's attack power and the opponent's defense 
 			// modifier.  You should also involve a dice roll probably!

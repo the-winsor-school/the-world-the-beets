@@ -35,3 +35,8 @@ start.AddNeighbor(stream, "north");
 stream.AddNeighbor(start, "south");
 ```
 This ensures that when I **go north** from the **start** Area, I enter the **stream** Area and can **go south** to return to **start**.  This also means that I can create Areas which are connected in only *one* direction (like, falling down a cliff to go from one Area to another).
+
+### Deliberately poorly written algorithms
+Some of the provided algorithms in the base code are deliberately poorly written with the intent that students will make improvements to the functionality.  Some of these problems are within the provided methods, while others are more structural (e.g. the logical placement of methods into particular classes).
+
+Some code is also missing entirely!  The "help" command, as it is, is not very helpful at all.  These methods are flagged with **TODO:** comments.

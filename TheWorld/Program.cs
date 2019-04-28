@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+// this allows me to use the static methods defined in TextFormatter without typing "TextFormatter." every time.
 using static TheWorld.TextFormatter;
 
 namespace TheWorld
@@ -86,7 +87,11 @@ namespace TheWorld
                 ProcessFightCommand(parts);
             }
 		}
-
+        
+        /// <summary>
+		/// Enter Combat mode.
+		/// </summary>
+		/// <param name="parts">Command as typed by the user split into individual words.</param>
         private static void ProcessFightCommand(string[] parts)
         {
             Creature creature;
@@ -103,6 +108,8 @@ namespace TheWorld
                 return;
             }
 
+            // This method is part of the MainClass but is defined in a different file.
+            // Check out the Combat.cs file.
             CombatResult result = DoCombat(ref creature);
             
             switch(result)

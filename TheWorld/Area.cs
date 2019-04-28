@@ -221,6 +221,7 @@ namespace TheWorld
 		/// <param name="direction">Direction.</param>
 		public bool CanGo(string direction) => NeighboringAreas.ContainsKey(direction);
 
+        
 	}
 }
 

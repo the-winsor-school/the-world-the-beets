@@ -10,6 +10,9 @@ namespace TheWorld
 
     public partial class MainClass
     {
+        /// <summary>
+        /// Enumeration for possible results of doing Combat.
+        /// </summary>
         public enum CombatResult
         {
             Lose,
@@ -17,8 +20,16 @@ namespace TheWorld
             RunAway = -1
         };
 
+        /// <summary>
+        /// Commands usable in Combat.
+        /// </summary>
         private static List<string> CombatCommands = new List<string>() { "attack", "defend", "use", "run" };
 
+        /// <summary>
+        /// Compute a display message for the creature's health.
+        /// Does this method belong here?
+        /// </summary>
+        /// <param name="creature">the Creature you're talking about.</param>
         protected static string hpMessage(Creature creature)
         {
             float percentage =(float)creature.Stats.HPs /(float)creature.Stats.MaxHPs;
@@ -30,6 +41,10 @@ namespace TheWorld
             else return "badly wounded";
         }
 
+        /// <summary>
+        /// Enter combat with a particular creature.
+        /// </summary>
+        /// <param name="creature">the Creature you're fighting. passed by reference so that it can be modified.</param>
         public static CombatResult DoCombat(ref Creature creature)
         {
             bool inCombat = true;
@@ -37,8 +52,11 @@ namespace TheWorld
             {
                 bool playerDefending = false;
 
+                // Roll a d20 to determine the creature's action.
                 int creatureAction = Dice.Roll20();
+                // if the roll is at most 4, defend.
                 bool creatureDefending = creatureAction <= 4;
+                
                 Console.WriteLine("[{0} ({1} / {2})]", player.Name, player.Stats.HPs, player.Stats.MaxHPs);
                 Console.Write("[{0} ({1})] << ", creature.Name, hpMessage(creature));
                 string command = Console.ReadLine();
@@ -50,6 +68,8 @@ namespace TheWorld
                     continue;
                 }
 
+                // parse the combat command!
+                // there are many things that can be improved about this.
                 switch(parts[0])
                 {
                     case "attack":
@@ -75,6 +95,7 @@ namespace TheWorld
 
                         PrintLineDanger("You tried to run away but you failed!");
                         break;
+                    // There is no "default" case here.  Why?
                 }
 
                 if(creatureAction <= 4)

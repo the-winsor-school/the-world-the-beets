@@ -120,6 +120,7 @@ namespace TheWorld
         /// <exception cref="WorldException">Throws an WorldException if the keyword is already used in this area.</exception>
         public void AddNeighbor(Area neighbor, string keyword)
 		{
+			keyword = keyword.ToLowerInvariant();
 			if(this.CanGo(keyword))
 				throw new WorldException("That keyword is already taken");
 			
@@ -134,7 +135,8 @@ namespace TheWorld
 		/// <exception cref="WorldException">If there is no neighbor with the given keyword.</exception>
 		public Area GetNeighbor(string keyword)
 		{
-			if(!this.CanGo(keyword))
+			keyword = keyword.ToLowerInvariant();
+			if (!this.CanGo(keyword))
 				throw new WorldException("I can't go that way...");
 
 			return NeighboringAreas [keyword];
@@ -146,7 +148,7 @@ namespace TheWorld
 		/// </summary>
 		/// <returns><c>true</c> if this instance can go the specified direction; otherwise, <c>false</c>.</returns>
 		/// <param name="direction">Direction.</param>
-		public bool CanGo(string direction) => NeighboringAreas.ContainsKey(direction);
+		public bool CanGo(string direction) => NeighboringAreas.ContainsKey(direction.ToLowerInvariant());
 
         #endregion // Neighbors
 
@@ -159,6 +161,7 @@ namespace TheWorld
         /// <exception cref="WorldException">Throws an WorldException if the uid is already used in this area.</exception>
         public void AddItem(Item item, string uid)
 		{
+			uid = uid.ToLowerInvariant();
 			if(this.HasItem(uid))
 				throw new WorldException("There is already an Item in this area with that uid.");
 			
@@ -172,7 +175,8 @@ namespace TheWorld
 		/// <param name="uid">Uid.</param>
 		public Item GetItem(string uid)
 		{
-			if(!this.HasItem(uid))
+			uid = uid.ToLowerInvariant();
+			if (!this.HasItem(uid))
 				throw new WorldException("I don't see anything like that...");
 
 			return Items [uid];
@@ -183,7 +187,7 @@ namespace TheWorld
         /// </summary>
         /// <param name="uid">name of the item</param>
         /// <returns></returns>
-        public bool HasItem(string uid) => Items.ContainsKey(uid);
+        public bool HasItem(string uid) => Items.ContainsKey(uid.ToLowerInvariant());
 
         #endregion // Items
 
@@ -197,7 +201,8 @@ namespace TheWorld
         /// <exception cref="WorldException">Throws an WorldException if the uid is already used in this area.</exception>
         public void AddCreature(Creature creature, string uid)
 		{
-			if(Creatures.ContainsKey(uid))
+			uid = uid.ToLowerInvariant();
+			if (Creatures.ContainsKey(uid))
 				throw new WorldException("There is already a Creature with that unique name in this area.");
 
 			Creatures.Add(uid, creature);
@@ -210,7 +215,8 @@ namespace TheWorld
 		/// <param name="uid">Uid.</param>
 		public Creature GetCreature(string uid)
 		{
-			if(!Creatures.ContainsKey(uid))
+			uid = uid.ToLowerInvariant();
+			if (!Creatures.ContainsKey(uid))
 				throw new WorldException("I don't see that around here...");
 
 			return Creatures [uid];
@@ -222,8 +228,9 @@ namespace TheWorld
         /// </summary>
         /// <param name="uid"></param>
         public void RemoveCreature(string uid)
-        {
-            if(!Creatures.ContainsKey(uid))
+		{
+			uid = uid.ToLowerInvariant();
+			if (!Creatures.ContainsKey(uid))
                 throw new WorldException("I don't see that around here...");
 
             Creatures.Remove(uid);

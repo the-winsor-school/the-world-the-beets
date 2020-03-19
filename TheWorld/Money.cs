@@ -8,6 +8,7 @@ namespace TheWorld
 {
     /// <summary>
     /// Represents a money value in TheWorld
+    /// There isn't much to add to this class, but it might come in handy for other things
     /// </summary>
     public class Money
     {
@@ -27,6 +28,30 @@ namespace TheWorld
         /// the lowest denomination of coinage.
         /// </summary>
         public uint Copper { get; set; }
+
+        public Money()
+        {
+            /// nothing needs to go here.  Set the properties individually.
+        }
+
+        /// <summary>
+        /// TODO:  Hard Achievement
+        /// Convert a String like "400g 34c" into a Money object.
+        /// You should be able to Enter large numbers, but not negative numbers.
+        /// (after all, these properties are "unsigned integers")
+        ///
+        /// So, "2841924c" is a valid string
+        /// but, "-24p" is not.
+        ///
+        /// "10p 249g 24s 842c" is valid but not in simplest terms, so it is
+        /// up to you how you will handle the difference.
+        /// 
+        /// </summary>
+        /// <param name="displayString"></param>
+        public Money(string displayString)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// returns a string representation of this amount of money.

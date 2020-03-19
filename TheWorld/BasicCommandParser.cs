@@ -7,7 +7,22 @@ namespace TheWorld
     // this allows me to use the static methods defined in TextFormatter without typing "TextFormatter." every time.
 	using static TheWorld.TextFormatter;
 
-    public partial class MainClass
+
+    /// <summary>
+    /// You might notice that this class has the same name as the one in
+    /// Program.cs as well as in Combat.cs
+    ///
+    /// This is allowed because the class has the "partial" attribute.  This
+    /// means that the class has parts spread across multiple files because
+    /// it is large and breaking it up into chunks makes it easier to follow.
+    ///
+    /// This file contains the methods and properties that are only relevant to
+    /// processing game commands.
+    ///
+    /// The fact is, the entire game is really made up of just a bunch of calls
+    /// to the ParseCommand method.  At least until you spice things up a bit!
+    /// </summary>
+    public static partial class TheGame
     {
 
 		/// <summary>
@@ -69,8 +84,17 @@ namespace TheWorld
             {
                 // TODO:  Implement this to show a new player how to use commands!
             }
+
+            // TODO: Many Achievements
+            // Implement more commands like "use" and "get" and "talk"
 		}
 
+
+        /// <summary>
+        /// TODO:  Write this Method
+        /// Several Achievements inside.
+        /// </summary>
+        /// <param name="parts"></param>
         private static void ProcessHelpCommand(string[] parts)
         {
             if(parts.Length == 1)
@@ -126,9 +150,23 @@ namespace TheWorld
 					PrintLinePositive("You win!");
 					Player.Stats.Exp += creature.Stats.Exp;
 					CurrentArea.RemoveCreature(parts[1]);
+                    // TODO: Part of a larger achievement
+                    // After you gain Exp, how do you improve your stats?
+                    // there should be some rules to how this works.
+                    // But, you are the god of this universe.  You make the rules.
+
+                    // TODO: Part of a larger achievement
+                    // After defeating an Enemy, they should drop their Inventory
+                    // into the CurrentArea so that the player can then PickUp those Items.
 					break;
 				case CombatResult.Lose:
 					PrintLineDanger("You lose!");
+                    // TODO:  Easy Achievement:
+                    // What happens when you die?  Deep questions.
+					break;
+				case CombatResult.RunAway:
+					// TODO: Moderate Achievement
+					// Handle running away.  What happens if you run from a battle?
 					break;
 				default: break;
 			}
@@ -170,7 +208,7 @@ namespace TheWorld
 				PrintLineWarning("Go where?");
 			else
 			{
-				// try to find the neigbor the user has indicated.
+				// try to find the neighbor the user has indicated.
 				try
 				{
 					// move to that area if the command is understood.

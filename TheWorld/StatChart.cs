@@ -4,13 +4,22 @@ namespace TheWorld
 {
 	public class StatChart
 	{
+		private int hps;
 		/// <summary>
 		/// Gets or sets the Hit Points.
+        /// HPs cannot exceed MaxHPs.
 		/// </summary>
 		public int HPs
 		{
-			get;
-			set;
+			get => hps;
+			set
+            {
+				hps = value;
+                if(hps > MaxHPs)
+                {
+					hps = MaxHPs;
+                }
+            }
 		}
 
 		/// <summary>

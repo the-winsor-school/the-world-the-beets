@@ -46,6 +46,7 @@
     <Compile Include="WorldException.cs" />
     <Compile Include="BasicCommandParser.cs" />
     <Compile Include="CarryableItem.cs" />
+    <Compile Include="IUseableItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

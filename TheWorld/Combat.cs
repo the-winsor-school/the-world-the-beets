@@ -8,7 +8,7 @@ namespace TheWorld
 {
     using static TextFormatter;
 
-    public partial class MainClass
+    public static partial class TheGame
     {
         /// <summary>
         /// Enumeration for possible results of doing Combat.
@@ -30,7 +30,7 @@ namespace TheWorld
         /// Does this method belong here?
         /// </summary>
         /// <param name="creature">the Creature you're talking about.</param>
-        protected static string hpMessage(Creature creature)
+        private static string hpMessage(Creature creature)
         {
             float percentage =(float)creature.Stats.HPs /(float)creature.Stats.MaxHPs;
 
@@ -39,6 +39,15 @@ namespace TheWorld
             else if(percentage > 0.6f) return "injured";
             else if(percentage > 0.4f) return "wounded";
             else return "badly wounded";
+        }
+
+        /// <summary>
+        /// For those times when you really need to ambush the player...
+        /// </summary>
+        /// <param name="creatureName"></param>
+        public static void SurpriseFight(string creatureName)
+        {
+            ProcessFightCommand(new string[] { "attack", creatureName });
         }
 
         /// <summary>
@@ -88,6 +97,8 @@ namespace TheWorld
                         break;
                     case "use":
                         // TODO: Write this!
+                        // Requires that you have a UseableItem
+                        // 
                         break;
                     case "run":
                         if(Dice.Roll(Dice.Type.Coin) == 1)

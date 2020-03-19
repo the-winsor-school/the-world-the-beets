@@ -5,6 +5,13 @@ namespace TheWorld
 {
 	/// <summary>
 	/// The Player playing the game!
+    ///
+    /// TODO:  Hard Achievement
+    /// Write a LevelUp method wich increases the characters stats
+    /// based on formulae that you divise when a character earns a certain amount
+    /// of experience by defeating enemies or completing "quests".
+    ///
+    /// 
 	/// </summary>
 	public class Player
 	{
@@ -37,8 +44,21 @@ namespace TheWorld
 
 		/// <summary>
 		/// The items. In Stacks.  By Name.
+        ///
+        /// TODO: Hard Achievement
+        /// Encapsulate this Backpack into a Specialized container class.
+        /// The Backpack class should include additional properties such as:
+        ///
+        /// int MaxCapacity  //how much weight can it hold?
+        /// int CurrentWeight //Calculates the weight of all items currently in it
+        /// bool Contains(string itemName)
+        ///
+        /// void Add(ICarryable item, string uid)
+        /// void Remove(string uid)
+        /// void Use(
 		/// </summary>
 		private Dictionary<string, List<ICarryable>> Backpack;
+
 
 		public Player(string name)
 		{
@@ -59,6 +79,17 @@ namespace TheWorld
 			else
 				Backpack.Add(item.Name, new List<ICarryable>() { item });
 		}
+
+        /// <summary>
+        /// TODO:  Moderate Achievement
+        /// Get a neatly formatted string that shows the names of each of
+        /// the Item in your Inventory.
+        /// </summary>
+        /// <returns></returns>
+        public string ListInventory()
+        {
+			throw new NotImplementedException();
+        }
 	}
 }
 

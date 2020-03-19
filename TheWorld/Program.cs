@@ -6,27 +6,35 @@ using static TheWorld.TextFormatter;
 
 namespace TheWorld
 {
-	public partial class MainClass
+	public static partial class TheGame
 	{
-		private static Area CurrentArea;
-		private static Player Player;
+		public static Area CurrentArea;
+		public static Player Player;
+
+        // TODO: Moderate Achievement
+        // Implement a property called PlayedTime which is of type TimeSpan
+        // and a private DateTime StartTime.
+        // PlayedTime should be Calculated as DateTime.Now - StartTime.
+        // You can use this to tell the Player how long they have been playing.
 
 
 		public static void Main(string[] args)
 		{
+
+            HealingPotion pot = new HealingPotion();
             // Initialization
 			PrintPositive("What is your name?  ");
 			Player = new Player(Console.ReadLine());
 
             // Check out that second parameter?!?! WAHT!@
-            int hps = Dice.Roll(Dice.Type.D6, modifier: 4);
+            int hps = Dice.Roll(Dice.Type.D6, modifier: 4);  // roll 1d6+4
 
             Player.Stats = new StatChart() {
                 Level = 1,
                 MaxHPs = hps,
                 HPs = hps,
-                Atk = new Dice(1, Dice.Type.D6),
-                Def = new Dice(1, Dice.Type.D4),
+                Atk = new Dice(Dice.Type.D6),  // 1d6
+                Def = new Dice(Dice.Type.D4),  // 1d4
                 Exp = 0
 			};
 
@@ -55,6 +63,9 @@ namespace TheWorld
 
                 // This command.ToLowerInvariant() is why all names for things must be in all lowercase.
 				ParseCommand(command.ToLowerInvariant());
+
+                // TODO: You can spice up the game by having things happen randomly
+                // Add things here to insert them in between the users commands.
 			}
 
 			#endregion // THE GAME

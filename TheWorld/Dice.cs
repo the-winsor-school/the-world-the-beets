@@ -7,42 +7,44 @@ namespace TheWorld
     /// </summary>
 	public class Dice
 	{
-        #region Static Dice Methods
 
         /// <summary>
         /// The random number generator for the dice!
         /// </summary>
-        private static Random rand = new Random();
+        private static Random GodPlaysDice = new Random();
 
-		/// <summary>
-		/// Type of Die to throw.
-		/// Enums can be used to limit the number of possible values for a variable.
-		/// In this case, the enum will be treated like an Integer, but only the defined values
-		/// are allowed.
-		/// </summary>
-		public enum Type
-		{
-			Coin = 2,
-			D4 = 4,
-			D6 = 6,
-			D8 = 8,
-			D10 = 10,
-			D12 = 12,
-			D20 = 20
-		}
+        /// <summary>
+        /// Type of Die to throw.
+        /// Enums can be used to limit the number of possible values for a variable.
+        /// In this case, the enum will be treated like an Integer, but only the defined values
+        /// are allowed.
+        /// </summary>
+        public enum Type
+        {
+            Coin = 2,
+            D4 = 4,
+            D6 = 6,
+            D8 = 8,
+            D10 = 10,
+            D12 = 12,
+            D20 = 20
+        }
 
-		/// <summary>
-		/// Roll a number of the specified type of dice.
-		/// </summary>
-		/// <param name="type">Type.</param>
-		/// <param name="count">numbre of dice to throw.</param>
-		/// <returns>The Sum of all dice thrown</returns>
-		public static int Roll(Dice.Type type, int count = 1, int modifier = 0)
+        #region Static Dice Methods
+
+
+        /// <summary>
+        /// Roll a number of the specified type of dice.
+        /// </summary>
+        /// <param name="type">Type.</param>
+        /// <param name="count">numbre of dice to throw.</param>
+        /// <returns>The Sum of all dice thrown</returns>
+        public static int Roll(Dice.Type type, int count = 1, int modifier = 0)
 		{
 			int total = 0;
 			for(int i = 0; i < count; i++)
 			{
-				total += rand.Next((int)type) + 1;
+				total += GodPlaysDice.Next((int)type) + 1;
 			}
 			return total + modifier;
 		}
@@ -94,12 +96,49 @@ namespace TheWorld
         }
 
         /// <summary>
+        /// TODO: Easy Achievement (1):
+        ///
+        /// Complete this Constructor.
+        ///
+        /// You should accept strings that look like: "4d4+10" and parse the
+        /// correct Dice object fromthis string.
+        ///
+        /// e.g.  the above should translate to Dice(4, Type.D4, 10);
+        ///
+        /// TODO: Easy Achievement (2):
+        ///
+        /// If the given string is Not Valid, throw an ArgumentException.
+        ///
+        /// TODO: Hard Achievement (3):
+        ///
+        /// Use a Regular Expression (System.Text.RegularExpressions.Regex) to determine if the given string is Valid in one line!
+        /// 
+        /// </summary>
+        /// <param name="DnDFormat"></param>
+        public Dice(string DnDFormat)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Roll this dice!
         /// 
         /// literally, Dice.Roll(DiceType, Count) + Modifier
         /// </summary>
         /// <returns></returns>
         public int Roll() => Dice.Roll(DiceType, Count) + Modifier;
+
+        /// <summary>
+        /// TODO: Easy Achievement:
+        /// 
+        /// Complete this method so that it returns a DnD style dice notation
+        /// e.g.  (new Dice(2, 8, 5)).ToString() should return: "2d8+5"
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

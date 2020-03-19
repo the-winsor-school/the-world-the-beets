@@ -44,6 +44,8 @@
     <Compile Include="TextFormatter.cs" />
     <Compile Include="WorldBuilder.cs" />
     <Compile Include="WorldException.cs" />
+    <Compile Include="BasicCommandParser.cs" />
+    <Compile Include="CarryableItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

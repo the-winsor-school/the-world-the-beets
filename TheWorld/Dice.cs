@@ -21,17 +21,17 @@ namespace TheWorld
         /// </summary>
         public enum Type
         {
-            Coin = 2,
-            D4 = 4,
-            D6 = 6,
-            D8 = 8,
-            D10 = 10,
-            D12 = 12,
-            D20 = 20
+            Coin    = 2,
+            D4      = 4,
+            D6      = 6,
+            D8      = 8,
+            D10     = 10,
+            D12     = 12,
+            D20     = 20,
+            D100    = 100
         }
 
         #region Static Dice Methods
-
 
         /// <summary>
         /// Roll a number of the specified type of dice.
@@ -44,7 +44,7 @@ namespace TheWorld
 			int total = 0;
 			for(int i = 0; i < count; i++)
 			{
-				total += GodPlaysDice.Next((int)type) + 1;
+				total += GodPlaysDice.Next((int)type) + 1;  // +1 because Dice don't have a zero.
 			}
 			return total + modifier;
 		}
@@ -54,6 +54,23 @@ namespace TheWorld
         /// </summary>
         /// <returns></returns>
         public static int Roll20() => Roll(Type.D20);
+
+        /// <summary>
+        /// TODO:  Parallel Achievement
+        /// Same as the constructor for Dice of the same type.
+        /// Apply the same logic here for an additional 2x Easy Achievements
+        /// OR
+        /// Do the achievements here first for full credit and duplicate later.
+        ///
+        /// It all depends on how/if you want to use it~
+        /// 
+        /// </summary>
+        /// <param name="DnDFormat"></param>
+        /// <returns></returns>
+        public static int Roll(string DnDFormat)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
 
@@ -88,7 +105,7 @@ namespace TheWorld
         /// <param name="type"></param>
         /// <param name="count"></param>
         /// <param name="modifier"></param>
-        public Dice(int count, Type type, int modifier = 0)
+        public Dice(Type type, int count = 1, int modifier = 0)
         {
             DiceType = type;
             Count = count;
@@ -111,7 +128,8 @@ namespace TheWorld
         ///
         /// TODO: Hard Achievement (3):
         ///
-        /// Use a Regular Expression (System.Text.RegularExpressions.Regex) to determine if the given string is Valid in one line!
+        /// Use a Regular Expression (System.Text.RegularExpressions.Regex)
+        /// to determine if the given string is Valid in ONE LINE of code!
         /// 
         /// </summary>
         /// <param name="DnDFormat"></param>

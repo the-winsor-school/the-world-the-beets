@@ -5,6 +5,25 @@ namespace TheWorld
 	/// <summary>
 	/// World builder is responsible for all World creation.  
 	/// It is a static class because it is only used once at the beginning of the program to construct the world.
+    ///
+    /// TODO:  Create your own world!
+    ///
+    /// TODO:  Easy Achievement (1):
+    /// Create 4 Areas which are linked together somehow.
+    ///
+    /// TODO:  Easy Achievement (2):
+    /// Populate each of your Areas with at least 2 Objects that the player can interact with.
+    ///
+    /// TODO:  Easy Achievement (3):
+    /// Create an Area which is accessible by a one-way entrance.
+    /// (i.e. You fall through a hole and must find another way out)
+    ///
+    /// TODO:  Easy Achievement (4):
+    /// Draw a Map of your World on Paper or in a graphics program.
+    /// Doesn't have to be crazy art work, just a visual representation of how
+    /// the world is connected together.  Can be completely conceptual. 
+    /// This is sometimes called "Story boarding"
+    /// 
 	/// </summary>
 	public static class WorldBuilder
 	{

@@ -111,15 +111,16 @@ namespace TheWorld
 		/// <returns>A string that represents the current object.</returns>
 		public override string ToString() => string.Format("{0}{1}{2}", Name, Environment.NewLine, Description);
 
-		/// <summary>
-		/// Adds the neighbor.
-		/// </summary>
-		/// <param name="neighbor">Neighbor.</param>
-		/// <param name="keyword">Keyword. Must be unique in this area.</param>
-		/// <exception cref="WorldException">Throws an WorldException if the keyword is already used in this area.</exception>
-		public void AddNeighbor(Area neighbor, string keyword)
+        #region Neighbors
+        /// <summary>
+        /// Adds the neighbor.
+        /// </summary>
+        /// <param name="neighbor">Neighbor.</param>
+        /// <param name="keyword">Keyword. Must be unique in this area.</param>
+        /// <exception cref="WorldException">Throws an WorldException if the keyword is already used in this area.</exception>
+        public void AddNeighbor(Area neighbor, string keyword)
 		{
-			if(NeighboringAreas.ContainsKey(keyword))
+			if(this.CanGo(keyword))
 				throw new WorldException("That keyword is already taken");
 			
 			NeighboringAreas.Add(keyword, neighbor);
@@ -133,22 +134,33 @@ namespace TheWorld
 		/// <exception cref="WorldException">If there is no neighbor with the given keyword.</exception>
 		public Area GetNeighbor(string keyword)
 		{
-			if(!NeighboringAreas.ContainsKey(keyword))
+			if(!this.CanGo(keyword))
 				throw new WorldException("I can't go that way...");
 
 			return NeighboringAreas [keyword];
 		}
 
 		/// <summary>
-		/// Adds the item.
+		/// Determines whether this instance can go the specified direction.
+		/// Literally:  does the NeighboringAreas dictionary contain the specified direction as a Key.
 		/// </summary>
-		/// <param name="item">Item.</param>
-		/// <param name="uid">Unique Name for the item.  Must be unique in this area.</param>
-		/// <exception cref="WorldException">Throws an WorldException if the uid is already used in this area.</exception>
-		public void AddItem(Item item, string uid)
+		/// <returns><c>true</c> if this instance can go the specified direction; otherwise, <c>false</c>.</returns>
+		/// <param name="direction">Direction.</param>
+		public bool CanGo(string direction) => NeighboringAreas.ContainsKey(direction);
+
+        #endregion // Neighbors
+
+        #region Items
+        /// <summary>
+        /// Adds the item.
+        /// </summary>
+        /// <param name="item">Item.</param>
+        /// <param name="uid">Unique Name for the item.  Must be unique in this area.</param>
+        /// <exception cref="WorldException">Throws an WorldException if the uid is already used in this area.</exception>
+        public void AddItem(Item item, string uid)
 		{
-			if(Items.ContainsKey(uid))
-				throw new WorldException("There is already an Item in this area with that Unique Name.");
+			if(this.HasItem(uid))
+				throw new WorldException("There is already an Item in this area with that uid.");
 			
 			Items.Add(uid, item);
 		}
@@ -160,7 +172,7 @@ namespace TheWorld
 		/// <param name="uid">Uid.</param>
 		public Item GetItem(string uid)
 		{
-			if(!Items.ContainsKey(uid))
+			if(!this.HasItem(uid))
 				throw new WorldException("I don't see anything like that...");
 
 			return Items [uid];
@@ -173,13 +185,17 @@ namespace TheWorld
         /// <returns></returns>
         public bool HasItem(string uid) => Items.ContainsKey(uid);
 
-		/// <summary>
-		/// Adds the creature.
-		/// </summary>
-		/// <param name="creature">Creature.</param>
-		/// <param name="uid">Unique name for the creature.  Must be unique in this area.</param>
-		/// <exception cref="WorldException">Throws an WorldException if the uid is already used in this area.</exception>
-		public void AddCreature(Creature creature, string uid)
+        #endregion // Items
+
+        #region Creatures
+
+        /// <summary>
+        /// Adds the creature.
+        /// </summary>
+        /// <param name="creature">Creature.</param>
+        /// <param name="uid">Unique name for the creature.  Must be unique in this area.</param>
+        /// <exception cref="WorldException">Throws an WorldException if the uid is already used in this area.</exception>
+        public void AddCreature(Creature creature, string uid)
 		{
 			if(Creatures.ContainsKey(uid))
 				throw new WorldException("There is already a Creature with that unique name in this area.");
@@ -213,15 +229,20 @@ namespace TheWorld
             Creatures.Remove(uid);
         }
 
-		/// <summary>
-		/// Determines whether this instance can go the specified direction.
-        /// Literally:  does the NeighboringAreas dictionary contain the specified direction as a Key.
-		/// </summary>
-		/// <returns><c>true</c> if this instance can go the specified direction; otherwise, <c>false</c>.</returns>
-		/// <param name="direction">Direction.</param>
-		public bool CanGo(string direction) => NeighboringAreas.ContainsKey(direction);
+        /// <summary>
+        /// TODO:  Easy Achievement
+        /// Implement this method to work the same way as HasItem and CanGo.
+        /// This method should return true if the Creatures dictionary contains
+        /// the given UID as a Key.
+        ///
+        /// Use this method appropriately in  AddCreature, GetCreature and RemoveCreature.
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+		public bool CreatureExists(string uid) => throw new NotImplementedException();
 
-        
-	}
+        #endregion // Creatures
+
+    }
 }
 

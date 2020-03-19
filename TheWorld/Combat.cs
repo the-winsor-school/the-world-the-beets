@@ -57,7 +57,7 @@ namespace TheWorld
                 // if the roll is at most 4, defend.
                 bool creatureDefending = creatureAction <= 4;
                 
-                Console.WriteLine("[{0} ({1} / {2})]", player.Name, player.Stats.HPs, player.Stats.MaxHPs);
+                Console.WriteLine("[{0} ({1} / {2})]", Player.Name, Player.Stats.HPs, Player.Stats.MaxHPs);
                 Console.Write("[{0} ({1})] << ", creature.Name, hpMessage(creature));
                 string command = Console.ReadLine();
                 string[] parts = command.Split(' ');
@@ -73,7 +73,7 @@ namespace TheWorld
                 switch(parts[0])
                 {
                     case "attack":
-                        int dmg = player.Stats.CalculateAttack(creature.Stats);
+                        int dmg = Player.Stats.CalculateAttack(creature.Stats);
                         if(creatureDefending)
                         {
                             PrintLineWarning("{0} is prepared for your attack...", creature.Name);
@@ -104,25 +104,25 @@ namespace TheWorld
                 }
                 else if(creatureAction <= 19)
                 {
-                    int dmg = creature.Stats.CalculateAttack(player.Stats);
+                    int dmg = creature.Stats.CalculateAttack(Player.Stats);
                     if(playerDefending)
                         dmg /= 2;
 
-                    player.Stats.HPs -= dmg;
+                    Player.Stats.HPs -= dmg;
 
                     PrintLineDanger("{0} attacks you and deals {1} dammage!", creature.Name, dmg);
                 }
                 else
                 {
-                    int dmg = 2 * creature.Stats.CalculateAttack(player.Stats);
+                    int dmg = 2 * creature.Stats.CalculateAttack(Player.Stats);
                     if(playerDefending)
                         dmg /= 2;
 
-                    player.Stats.HPs -= dmg;
+                    Player.Stats.HPs -= dmg;
                     PrintLineDanger("{0} lands a devastating blow and deals {1} dammage!", creature.Name, dmg);
                 }
 
-                if(player.Stats.HPs <= 0) return CombatResult.Lose;
+                if(Player.Stats.HPs <= 0) return CombatResult.Lose;
                 else if(creature.Stats.HPs <= 0) return CombatResult.Win;
             }
 

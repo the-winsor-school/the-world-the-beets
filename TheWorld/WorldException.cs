@@ -17,6 +17,16 @@ namespace TheWorld
         public object Sender { get; protected set; }
 
 
+        /// <summary>
+        /// An Exception relating directly to a part of TheWorld.
+        /// The "sender" parameter allows you to pass back to the programmer
+        /// what thing in TheWorld caused this exception to be thrown.
+        ///
+        /// There might even be some clever ways that you can use this!
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="sender"></param>
+        /// <param name="innerException"></param>
         public WorldException(string message, object sender = null, Exception innerException = null)
             : base(message, innerException)
         {

@@ -8,29 +8,20 @@ namespace TheWorld
 {
 	public partial class MainClass
 	{
-		private static Area currentArea;
-		private static Player player;
+		private static Area CurrentArea;
+		private static Player Player;
 
-		/// <summary>
-		/// The command words.
-		/// These are all the words that the game will accept as commands.
-		/// You will need to add more words to make the game more interesting!
-		/// </summary>
-		private static List<string> CommandWords = new List<string>()
-        {
-			"go", "look", "help", "quit", "examine", "fight"
-		};
 
 		public static void Main(string[] args)
 		{
             // Initialization
 			PrintPositive("What is your name?  ");
-			player = new Player(Console.ReadLine());
+			Player = new Player(Console.ReadLine());
 
             // Check out that second parameter?!?! WAHT!@
             int hps = Dice.Roll(Dice.Type.D6, modifier: 4);
 
-            player.Stats = new StatChart() {
+            Player.Stats = new StatChart() {
                 Level = 1,
                 MaxHPs = hps,
                 HPs = hps,
@@ -40,140 +31,35 @@ namespace TheWorld
 			};
 
             // Create the World from the WorldBuilder class.
-			currentArea = WorldBuilder.BuildWorld();
+			CurrentArea = WorldBuilder.BuildWorld();
 
 			string command = "";
 
-			Console.WriteLine(currentArea);
+            // TODO:  Easy Achievement:
+            // Script an Intro Sequence setting the stage for your game.
+            // Start your storyline off with a little more than just dropping
+            // the player into the world with no idea what is going on....
+            // ... or maybe that's what you want, nobody told me what was going on
+            // when I landed in this world.
 
-			while(!command.ToLower().Equals("quit"))
+            // Display the short information about the Starting Area
+			Console.WriteLine(CurrentArea);
+
+            #region The Entire Game Happens HERE
+
+            while (!command.ToLowerInvariant().Equals("quit"))
 			{
 				// Do the Game Loop!
-				Console.Write(">> ");
+				PrintSpecial(">> ");
 				command = Console.ReadLine();
 
-				ParseCommand(command.ToLower());
+                // This command.ToLowerInvariant() is why all names for things must be in all lowercase.
+				ParseCommand(command.ToLowerInvariant());
 			}
+
+			#endregion // THE GAME
 
 			PrintLinePositive("Bye!");
-			Console.ReadKey();
 		}
-
-		/// <summary>
-		/// Parses the command and do any required actions.
-		/// </summary>
-		/// <param name="command">Command as typed by the user.</param>
-		private static void ParseCommand(string command)
-		{
-			string[] parts = command.Split(' ');
-			string cmdWord = parts [0];
-
-			if(!CommandWords.Contains(cmdWord))
-			{
-				PrintLineWarning("I don't understand...(type \"help\" to see a list of commands I know.)");
-				return;
-			}
-
-			if(cmdWord.Equals("look"))
-			{
-				ProcessLookCommand(parts);
-			} 
-			else if(cmdWord.Equals("go"))
-			{
-				ProcessGoCommand(parts);
-			}
-            else if(cmdWord.Equals("fight"))
-            {
-                ProcessFightCommand(parts);
-            }
-		}
-        
-        /// <summary>
-		/// Enter Combat mode.
-		/// </summary>
-		/// <param name="parts">Command as typed by the user split into individual words.</param>
-        private static void ProcessFightCommand(string[] parts)
-        {
-            Creature creature;
-            try
-            {
-                creature = currentArea.GetCreature(parts[1]);
-            }
-            catch(WorldException e)
-            {
-                if(currentArea.HasItem(parts[1]))
-                    PrintLineWarning("You can't fight with that...");
-                else
-                    PrintLineDanger(e.Message);
-                return;
-            }
-
-            // This method is part of the MainClass but is defined in a different file.
-            // Check out the Combat.cs file.
-            CombatResult result = DoCombat(ref creature);
-            
-            switch(result)
-            {
-                case CombatResult.Win: PrintLinePositive("You win!");
-                    player.Stats.Exp += creature.Stats.Exp;
-                    currentArea.RemoveCreature(parts[1]);
-                    break;
-                case CombatResult.Lose: PrintLineDanger("You lose!");
-                    break;
-                default: break;
-            }
-        }
-
-		/// <summary>
-		/// What happens when the user types "look" as the command word.
-		/// </summary>
-		/// <param name="parts">Command Parts.</param>
-		private static void ProcessLookCommand(string[] parts)
-		{
-            // If you just type "look" then LookAround()
-			if(parts.Length == 1)
-				Console.WriteLine(currentArea.LookAround());
-			else
-			{
-                // try to find the thing that the user is looking at.
-				try
-				{
-                    // if it is there, print the appropriate description.
-					Console.WriteLine(currentArea.LookAt(parts [1]));
-				}
-				catch(WorldException e)
-				{
-                    // otherwise, print an appropriate error message.
-					PrintLineDanger(e.Message);
-				}
-			}
-		}
-
-		/// <summary>
-		/// Processes the go command.
-		/// </summary>
-		/// <param name="parts">Parts.</param>
-		private static void ProcessGoCommand(string[] parts)
-		{
-            // If the user has not indicated where to go...
-			if(parts.Length == 1)
-				PrintLineWarning("Go where?");
-			else
-			{
-                // try to find the neigbor the user has indicated.
-				try
-				{
-                    // move to that area if the command is understood.
-					currentArea = currentArea.GetNeighbor(parts[1]);
-				}
-				catch(WorldException e)
-				{
-                    // if GetNeighbor throws and exception, print the explanation.
-					PrintLineDanger(e.Message);
-				}
-			}
-		}
-
-
 	}
 }

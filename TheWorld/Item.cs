@@ -46,7 +46,7 @@ namespace TheWorld
     /// <summary>
     /// An Item that you can put in the world and then use it!
     ///
-    // TODO: Moderate Achievement
+    /// TODO: Moderate Achievement
     /// Requires:  Implement the Use Command.
     /// Add this Item to the world somewhere and then USE it!
     /// </summary>

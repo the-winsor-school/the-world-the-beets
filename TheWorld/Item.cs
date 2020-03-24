@@ -36,12 +36,17 @@ namespace TheWorld
 		}
 	}
 
+    // TODO: Moderate Achievement
+    // Build a "Book" class which is an Item that is both Carryable and Useable.
+    // The Use method should print a short bit of text which is the "Story" or 
+    // maybe some Plot element in your game.
+
 
 
     /// <summary>
     /// An Item that you can put in the world and then use it!
     ///
-    /// TODOßß: Moderate Achievement
+    // TODO: Moderate Achievement
     /// Requires:  Implement the Use Command.
     /// Add this Item to the world somewhere and then USE it!
     /// </summary>
@@ -97,7 +102,7 @@ namespace TheWorld
     /// Notice that this Extends the Item class, AND implements both
     /// ICarryable and IUseableItem
     ///
-    /// TODO:  Moderate Achievement
+    // TODO:  Moderate Achievement
     ///
     /// Implement this Item in TheWorld
     /// Requires:  Get command, Use command

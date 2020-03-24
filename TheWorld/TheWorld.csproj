@@ -36,7 +36,7 @@
     <Compile Include="Combat.cs" />
     <Compile Include="Creature.cs" />
     <Compile Include="Dice.cs" />
-    <Compile Include="ICarryableItem.cs" />
+    <Compile Include="ICarryable.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Player.cs" />
@@ -44,8 +44,9 @@
     <Compile Include="TextFormatter.cs" />
     <Compile Include="WorldBuilder.cs" />
     <Compile Include="WorldException.cs" />
-    <Compile Include="BasicCommandParser.cs" />
-    <Compile Include="IUseableItem.cs" />
+    <Compile Include="Properties\BasicCommandParser.cs" />
+    <Compile Include="Properties\ICarryableItem.cs" />
+    <Compile Include="Properties\IUseableItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

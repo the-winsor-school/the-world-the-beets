@@ -102,7 +102,7 @@ namespace TheWorld
     /// Notice that this Extends the Item class, AND implements both
     /// ICarryable and IUseableItem
     ///
-    // TODO:  Moderate Achievement
+    /// TODO:  Moderate Achievement
     ///
     /// Implement this Item in TheWorld
     /// Requires:  Get command, Use command

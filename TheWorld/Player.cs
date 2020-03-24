@@ -57,27 +57,27 @@ namespace TheWorld
         /// void Remove(string uid)
         /// void Use(
 		/// </summary>
-		private Dictionary<string, List<ICarryable>> Backpack;
+		private Dictionary<string, List<ICarryableItem>> Backpack;
 
 
 		public Player(string name)
 		{
 			Name = name;
-			Backpack = new Dictionary<string, List<ICarryable>>();
+			Backpack = new Dictionary<string, List<ICarryableItem>>();
 		}
 
 		/// <summary>
 		/// Put the Item in your backpack.
 		/// </summary>
 		/// <param name="item">Item.</param>
-		public void PickUp(ICarryable item)
+		public void PickUp(ICarryableItem item)
 		{
             // if you already have some of this item, put it with those.
 			if(Backpack.ContainsKey(item.Name))
 				Backpack [item.Name].Add(item);
             // otherwise start a new stack
 			else
-				Backpack.Add(item.Name, new List<ICarryable>() { item });
+				Backpack.Add(item.Name, new List<ICarryableItem>() { item });
 		}
 
         /// <summary>

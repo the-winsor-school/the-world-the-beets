@@ -13,7 +13,7 @@ namespace TheWorld
     /// Interfaces just as a quick way of noting the difference.  Your IDE also
     /// colors it differently to make that difference more clear.
     /// </summary>
-    public interface ICarryable
+    public interface ICarryableItem
     {
         string Name { get; set; }
         string Description { get; set; }

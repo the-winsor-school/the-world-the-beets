@@ -94,7 +94,11 @@ namespace TheWorld
     /// <summary>
     /// A Prototype Healing Item that might come in Handy.
     ///
-    /// TODO:  Implement this Item in TheWorld
+    /// Notice that this 
+    ///
+    /// TODO:  Moderate Achievement
+    ///
+    /// Implement this Item in TheWorld
     /// Requires:  Get command, Use command
     ///
     /// Place this item somewhere in the world, let the Player find it, and use it.

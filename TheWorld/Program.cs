@@ -19,9 +19,7 @@ namespace TheWorld
 
 
 		public static void Main(string[] args)
-		{
-
-            HealingPotion pot = new HealingPotion();
+        { 
             // Initialization
 			PrintPositive("What is your name?  ");
 			Player = new Player(Console.ReadLine());

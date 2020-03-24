@@ -41,7 +41,7 @@ namespace TheWorld
     /// <summary>
     /// An Item that you can put in the world and then use it!
     ///
-    /// TODO: Moderate Achievement
+    /// TODOßß: Moderate Achievement
     /// Requires:  Implement the Use Command.
     /// Add this Item to the world somewhere and then USE it!
     /// </summary>
@@ -94,7 +94,8 @@ namespace TheWorld
     /// <summary>
     /// A Prototype Healing Item that might come in Handy.
     ///
-    /// Notice that this 
+    /// Notice that this Extends the Item class, AND implements both
+    /// ICarryable and IUseableItem
     ///
     /// TODO:  Moderate Achievement
     ///
@@ -104,7 +105,7 @@ namespace TheWorld
     /// Place this item somewhere in the world, let the Player find it, and use it.
     /// 
     /// </summary>
-    public class HealingPotion : Item, ICarryable, IUseableItem
+    public class HealingPotion : Item, ICarryableItem, IUseableItem
     {
         /// <summary>
         /// How much does this thing weigh?

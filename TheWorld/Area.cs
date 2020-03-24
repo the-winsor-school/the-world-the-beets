@@ -121,6 +121,11 @@ namespace TheWorld
         public void AddNeighbor(Area neighbor, string keyword)
 		{
 			keyword = keyword.ToLowerInvariant();
+
+            // TODO:  Easy Achievement
+            // Make sure there are no Spaces in the keyword.
+            // Implement this in each of the other AddX methods as well.
+
 			if(this.CanGo(keyword))
 				throw new WorldException("That keyword is already taken");
 			

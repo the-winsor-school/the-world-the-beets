@@ -12,10 +12,14 @@ namespace TheWorld
 		public static Player Player;
 
         // TODO: Moderate Achievement
+        //
         // Implement a property called PlayedTime which is of type TimeSpan
         // and a private DateTime StartTime.
         // PlayedTime should be Calculated as DateTime.Now - StartTime.
         // You can use this to tell the Player how long they have been playing.
+        //
+        // Implement a command "played_time" which displays the current played time
+        // in hh:mm:ss format.
 
 
 		public static void Main(string[] args)

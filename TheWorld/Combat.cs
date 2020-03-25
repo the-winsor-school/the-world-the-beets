@@ -56,8 +56,7 @@ namespace TheWorld
         /// <param name="creature">the Creature you're fighting. passed by reference so that it can be modified.</param>
         public static CombatResult DoCombat(ref Creature creature)
         {
-            bool inCombat = true;
-            while(inCombat)
+            while(true)
             {
                 bool playerDefending = false;
 
@@ -96,9 +95,15 @@ namespace TheWorld
                         PrintLinePositive("You brace for the oncomming attack.");
                         break;
                     case "use":
-                        // TODO: Write this!
+                        // TODO: Moderate Achievement (1)
+                        // Write this!
                         // Requires that you have a UseableItem
-                        // 
+                        // Search through your inventory for an IUseableItem with
+                        // the provided keyword and then execute it's .Use method.
+                        //
+                        // TODO: Moderate Achievement (2)
+                        // Implement an IUseableItem that takes the creature as
+                        // the Target.   
                         break;
                     case "run":
                         if(Dice.Roll(Dice.Type.Coin) == 1)
@@ -136,8 +141,6 @@ namespace TheWorld
                 if(Player.Stats.HPs <= 0) return CombatResult.Lose;
                 else if(creature.Stats.HPs <= 0) return CombatResult.Win;
             }
-
-            return CombatResult.Lose;
         }
     }
 }

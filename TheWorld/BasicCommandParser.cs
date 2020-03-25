@@ -59,7 +59,7 @@ namespace TheWorld
             // This is why command words and unique names for objects cannot contain spaces.
 			string[] parts = command.Split(' ');
             // The first word is the command.
-			string cmdWord = parts[0];
+			string cmdWord = parts.First();
 
 
 			if (!CommandWords.Contains(cmdWord))
@@ -180,7 +180,9 @@ namespace TheWorld
 		{
 			// If you just type "look" then LookAround()
 			if (parts.Length == 1)
+			{
 				Console.WriteLine(CurrentArea.LookAround());
+			}
 			else
 			{
 				// try to find the thing that the user is looking at.

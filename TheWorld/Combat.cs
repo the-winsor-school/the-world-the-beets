@@ -56,6 +56,8 @@ namespace TheWorld
         /// <param name="creature">the Creature you're fighting. passed by reference so that it can be modified.</param>
         public static CombatResult DoCombat(ref Creature creature)
         {
+            // keep running until one of the exit conditions is met.
+            // Run Away, Win or Lose.
             while(true)
             {
                 bool playerDefending = false;

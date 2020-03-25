@@ -46,6 +46,7 @@
     <Compile Include="BasicCommandParser.cs" />
     <Compile Include="ICarryableItem.cs" />
     <Compile Include="IUseableItem.cs" />
+    <Compile Include="ITalkingCreature.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

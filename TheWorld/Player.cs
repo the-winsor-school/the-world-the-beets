@@ -44,7 +44,7 @@ namespace TheWorld
 
 		/// <summary>
 		/// The items. In Stacks.  By Name.
-        ///
+        /// _______________________________________
         /// TODO: Hard Achievement
         /// Encapsulate this Backpack into a Specialized container class.
         /// The Backpack class should include additional properties such as:
@@ -55,9 +55,17 @@ namespace TheWorld
         ///
         /// void Add(ICarryable item, string uid)
         /// void Remove(string uid)
-        /// void Use(
+        ///
+        /// _______________________________________
+        /// TODO: Hard Achievement (2)
+        /// Add to the Backpack class
+        ///
+        /// void Use(string uid)
+        ///
+        /// such that, only usable items which are in the backpack can be used directly from the backpack.
+        /// don't forget to handle events like ItemDepletedException.
 		/// </summary>
-		private Dictionary<string, List<ICarryableItem>> Backpack;
+		public Dictionary<string, List<ICarryableItem>> Backpack;
 
 
 		public Player(string name)

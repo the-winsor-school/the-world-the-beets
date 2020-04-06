@@ -122,16 +122,16 @@ namespace TheWorld
                 // will work in the current Area.  (e.g. "look [something]" where that
                 // something is a valid thing to look at in the CurrentArea.
 
-                PrintLineSpecial("The available command words are: ");
+                PrintLinePositive("The available command words are: ");
 
                 foreach (string cw in CommandWordsFormats)
                 {
-                    PrintLineSpecial("=> " + cw);
+                    PrintLinePositive("=> " + cw);
                 }
                 //This foreach loop prints each string in the CommandWordsFormats list (see a couple lines above) on a separate line
                 //this was specifically done for pleasant visual effect/formatting purposes
 
-                PrintLineSpecial("For example, you could use the 'look [item or creature]' command by typing 'look boulder'!");
+                PrintLinePositive("For example, you could use the 'look [item or creature]' command by typing 'look boulder'!");
 
             }
             if(parts.Length == 2)

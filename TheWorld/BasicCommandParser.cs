@@ -35,6 +35,14 @@ namespace TheWorld
 			"go", "look", "help", "quit", "examine", "fight", "played_time" 
 		};
 
+        //This below CommandWordsFormats list was created for the purpose of improving the Help command a few lines below
+        //By making a list here instead of just typing it in PrintLineSpecial("....."); is for convenience in the future
+            //if we ever need to add new command words or change usages of existing command words
+        private static List<string> CommandWordsFormats = new List<string>()
+        {
+            "go [direction]", "look", "look [item or creature]", "help", "help [command word]", "quit", "examine", "examine [item or creature]", "fight [creature]", "played_time"
+        };
+
         /// <summary>
         /// TODO:  Easy Achievement
         /// Improve the readability of other code by completing this method.
@@ -87,6 +95,8 @@ namespace TheWorld
             else if (cmdWord.Equals("help"))
             {
                 // TODO:  Implement this to show a new player how to use commands!
+                ProcessHelpCommand(parts);
+                //This line takes us to the ProcessHelpCommand method a couple lines below :)
             }
 
             // TODO: Many Achievements
@@ -106,11 +116,23 @@ namespace TheWorld
                 // TODO:  Easy Achievement (1):
                 // the whole command is just "help".  Print a generic help message that
                 // tells the player what valid command words are and how to formulate them
-                //
+
                 // TODO:  Easy Achievement (2):
                 // Print a helpful example that shows the Player an example command that
                 // will work in the current Area.  (e.g. "look [something]" where that
                 // something is a valid thing to look at in the CurrentArea.
+
+                PrintLineSpecial("The available command words are: ");
+
+                foreach (string cw in CommandWordsFormats)
+                {
+                    PrintLineSpecial("=> " + cw);
+                }
+                //This foreach loop prints each string in the CommandWordsFormats list (see a couple lines above) on a separate line
+                //this was specifically done for pleasant visual effect/formatting purposes
+
+                PrintLineSpecial("For example, you could use the 'look [item or creature]' command by typing 'look boulder'!");
+
             }
             if(parts.Length == 2)
             {
@@ -259,7 +281,7 @@ namespace TheWorld
                 }
                 catch (WorldException e)
                 {
-                    //this will catch all other errors (besides the player adding an extra word or two after 
+                    //this will catch all other errors (besides the player adding an extra word or two after)
                     PrintLineDanger(e.Message);
                 }
             }

@@ -243,7 +243,7 @@ namespace TheWorld
                 //also the fractions of a second printed might confuse the player
                 //added the "(hh:mm:ss)" for the sake of clarification
                 string pt = "You have played for " + PlayedTime.ToString(@"hh\:mm\:ss") + " (hh:mm:ss).";
-                PrintLineSpecial(pt);
+                PrintLinePositive(pt);
             }
             //using "PrintLineSpecial" for this specific text color so we can keep consistency 
             //(ex: I wouldn't want to use "PrintLineWarning" because the user hasn't had an error in commands -> they just want their playing time!)
@@ -253,7 +253,7 @@ namespace TheWorld
                 {
                     //this is catching the most likely error of the player accidentally typing a command with more than one word: 'played_time'
                     if (parts.Length >= 1)
-                        PrintLineWarning("In order for the 'played_time' command to work, please don't type any extra characters after 'played_time'");
+                        PrintLinePositive("In order for the 'played_time' command to work, please don't type any extra characters after 'played_time'");
                     //Now we're using "PrintLineWarning" because the user has made an error with this "played_time" command
                     //and we just want to correct them so they can use the "played_time" command properly
                 }

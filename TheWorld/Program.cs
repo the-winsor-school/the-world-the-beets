@@ -21,12 +21,16 @@ namespace TheWorld
         // Implement a command "played_time" which displays the current played time
         // in hh:mm:ss format.
 
+        //SUMMARY:
+        //I created and implemented the property, PlayedTime, that is type TimeSpan and it is a measure of how long the player has been playing the game.
+        //I also created the property, StartTime, that is of type DateTime and it is the time that you start the game.
         //The "played_time" command is implemented in BasicCommandParser.cs (this command tells the player how long they've been playing in hh:mm:ss format.)
 
         private static DateTime StartTime;
+        public static TimeSpan PlayedTime;
 
 		public static void Main(string[] args)
-        { 
+        {
             // Initialization
             StartTime = DateTime.Now;
 			PrintPositive("What is your name?  ");

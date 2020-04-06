@@ -21,10 +21,14 @@ namespace TheWorld
         // Implement a command "played_time" which displays the current played time
         // in hh:mm:ss format.
 
+        //The "played_time" command is implemented in BasicCommandParser.cs (this command tells the player how long they've been playing in hh:mm:ss format.)
+
+        private static DateTime StartTime;
 
 		public static void Main(string[] args)
         { 
             // Initialization
+            StartTime = DateTime.Now;
 			PrintPositive("What is your name?  ");
 			Player = new Player(Console.ReadLine());
 

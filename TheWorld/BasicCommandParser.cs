@@ -32,7 +32,7 @@ namespace TheWorld
 		/// </summary>
 		private static List<string> CommandWords = new List<string>()
 		{
-			"go", "look", "help", "quit", "examine", "fight"
+			"go", "look", "help", "quit", "examine", "fight", "played_time" 
 		};
 
         /// <summary>
@@ -80,6 +80,10 @@ namespace TheWorld
 			{
 				ProcessFightCommand(parts);
 			}
+            else if (cmdWord.Equals("played_time"))
+            {
+                ProcessPlayedTimeCommand(parts);
+            }
             else if (cmdWord.Equals("help"))
             {
                 // TODO:  Implement this to show a new player how to use commands!
@@ -223,6 +227,42 @@ namespace TheWorld
 				}
 			}
 		}
-	}
 
+        /// SUMMARY (VM)
+        /// Processes the played_time command
+        /// this command will tell the player how long they have been playing the game since they have started
+        /// it gives the amount of time in hh:mm:ss
+        private static void ProcessPlayedTimeCommand(string[] parts)
+        {
+            // This is where the played_time command runs successfully; aka where the only command is "played_time" and there aren't any extra words added afterwards
+            if (parts.Length == 1)
+            {
+                PlayedTime = DateTime.Now - StartTime;
+                //this string below is just converting the PlayedTime format to just hh/mm/ss
+                //otherwise, as I have tested, the PlayedTime will also contain fractions of a second, which is not needed for our purposes
+                //also the fractions of a second printed might confuse the player
+                //added the "(hh:mm:ss)" for the sake of clarification
+                string pt = "You have played for " + PlayedTime.ToString(@"hh\:mm\:ss") + " (hh:mm:ss).";
+                PrintLineSpecial(pt);
+            }
+            //using "PrintLineSpecial" for this specific text color so we can keep consistency 
+            //(ex: I wouldn't want to use "PrintLineWarning" because the user hasn't had an error in commands -> they just want their playing time!)
+            else
+            {
+                try
+                {
+                    //this is catching the most likely error of the player accidentally typing a command with more than one word: 'played_time'
+                    if (parts.Length >= 1)
+                        PrintLineWarning("In order for the 'played_time' command to work, please don't type any extra characters after 'played_time'");
+                    //Now we're using "PrintLineWarning" because the user has made an error with this "played_time" command
+                    //and we just want to correct them so they can use the "played_time" command properly
+                }
+                catch (WorldException e)
+                {
+                    //this will catch all other errors (besides the player adding an extra word or two after 
+                    PrintLineDanger(e.Message);
+                }
+            }
+        }
+    }
 }

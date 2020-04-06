@@ -94,7 +94,7 @@ namespace TheWorld
             }
             else if (cmdWord.Equals("help"))
             {
-                // TODO:  Implement this to show a new player how to use commands!
+                // TODO:  Implement this to show a new player how to use commands! VM
                 ProcessHelpCommand(parts);
                 //This line takes us to the ProcessHelpCommand method a couple lines below :)
             }
@@ -113,11 +113,11 @@ namespace TheWorld
         {
             if(parts.Length == 1)
             {
-                // TODO:  Easy Achievement (1):
+                // TODO:  Easy Achievement (1): VM
                 // the whole command is just "help".  Print a generic help message that
                 // tells the player what valid command words are and how to formulate them
 
-                // TODO:  Easy Achievement (2):
+                // TODO:  Easy Achievement (2): VM
                 // Print a helpful example that shows the Player an example command that
                 // will work in the current Area.  (e.g. "look [something]" where that
                 // something is a valid thing to look at in the CurrentArea.
@@ -143,6 +143,7 @@ namespace TheWorld
                 // explains what the command does and an example of how to use it.
                 // If the second word is not a valid command, make sure your message is clearly
                 // an Error message (Use the PrintWarning() method to make it obvious).
+
             }
         }
 

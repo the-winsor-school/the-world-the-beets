@@ -134,16 +134,40 @@ namespace TheWorld
                 PrintLinePositive("For example, you could use the 'look [item or creature]' command by typing 'look boulder'!");
 
             }
-            if(parts.Length == 2)
-            {
-                // TODO: Moderate Achievement (3):
-                // In this case, the user is looking for help with a specific command, so
-                // you should verify that the second word in the string is a valid command word
-                // then for each possible valid command word, print a useful help message that
-                // explains what the command does and an example of how to use it.
-                // If the second word is not a valid command, make sure your message is clearly
-                // an Error message (Use the PrintWarning() method to make it obvious).
 
+            else
+            {
+                // try to find the thing that the user is looking at.
+                try
+                {
+                    if (parts.Length == 2)
+                    {
+                        // TODO: Moderate Achievement (3): VM
+                        // In this case, the user is looking for help with a specific command, so
+                        // you should verify that the second word in the string is a valid command word
+                        // then for each possible valid command word, print a useful help message that
+                        // explains what the command does and an example of how to use it.
+                        // If the second word is not a valid command, make sure your message is clearly
+                        // an Error message (Use the PrintWarning() method to make it obvious).
+
+                        PrintLinePositive("It works!!");
+
+                    }
+                    else
+                    {
+                        if (parts.Length == 3)
+                        {
+                            PrintLinePositive("Please only use 'help [command word]' without typing any target uses (ex: Do not type 'help look [item or creature]'. Instead, type 'help look'");
+                        }
+                    }
+
+                }
+
+                catch (WorldException e)
+                {
+                    // this will catch all other possible errors so the program won't crash
+                    PrintLineDanger(e.Message);
+                }
             }
         }
 

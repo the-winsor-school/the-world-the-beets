@@ -135,6 +135,11 @@ namespace TheWorld
         /// <param name="DnDFormat"></param>
         public Dice(string DnDFormat)
         {
+            char[] splitChars = { 'd', '+' };
+            string[] param = DnDFormat.Split(splitChars);
+            Count = Convert.ToInt32(param[0]);
+            Modifier = Convert.ToInt32(param[2]);
+            //FIGURE OUT HOW TO TURN INTO TYPE
             throw new NotImplementedException();
         }
 

@@ -23,9 +23,9 @@ namespace TheWorld
 
 
 		public static void Main(string[] args)
-        { 
+        {
             // Initialization
-			PrintPositive("What is your name?  ");
+            PrintPositive("What is your name?  ");
 			Player = new Player(Console.ReadLine());
 
             // Check out that second parameter?!?! WAHT!@

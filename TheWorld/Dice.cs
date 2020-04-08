@@ -69,7 +69,18 @@ namespace TheWorld
         /// <returns></returns>
         public static int Roll(string DnDFormat)
         {
-            throw new NotImplementedException();
+            char[] splitChars = { 'd', '+' };
+            string[] diceParam = DnDFormat.Split(splitChars);
+            Dice.Type type = (Type)Convert.ToInt32(diceParam[1]);
+            int count = Convert.ToInt32(diceParam[0]);
+            int modifier = Convert.ToInt32(diceParam[2]);
+
+            int total = 0;
+            for (int i = 0; i < count; i++)
+            {
+                total += GodPlaysDice.Next((int)type) + 1;  // +1 because Dice don't have a zero.
+            }
+            return total + modifier;
         }
 
         #endregion
@@ -136,11 +147,10 @@ namespace TheWorld
         public Dice(string DnDFormat)
         {
             char[] splitChars = { 'd', '+' };
-            string[] param = DnDFormat.Split(splitChars);
-            Count = Convert.ToInt32(param[0]);
-            Modifier = Convert.ToInt32(param[2]);
-            //FIGURE OUT HOW TO TURN INTO TYPE
-            throw new NotImplementedException();
+            string[] diceParam = DnDFormat.Split(splitChars);
+            DiceType = (Type) Convert.ToInt32(diceParam[1]);
+            Count = Convert.ToInt32(diceParam[0]);
+            Modifier = Convert.ToInt32(diceParam[2]);
         }
 
         /// <summary>

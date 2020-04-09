@@ -105,7 +105,7 @@ namespace TheWorld
 
 
         /// <summary>
-        /// TODO:  Write this Method
+        /// TODO: VM  Write this Method
         /// Several Achievements inside.
         /// </summary>
         /// <param name="parts"></param>
@@ -150,14 +150,52 @@ namespace TheWorld
                         // If the second word is not a valid command, make sure your message is clearly
                         // an Error message (Use the PrintWarning() method to make it obvious).
 
-                        PrintLinePositive("It works!!");
+                        //below I am basically checking to see which command word the player wants help on 
+                        //-> I could make another list of of explanatory sentences for each type of command word
+                            //but at this point, because the sentences are so long anyway, it would just be easier writing the code this way with the sentences in the code right there
+                        if (parts[1].Equals("go"))
+                        {
+                            PrintLinePositive("You can use the 'go' command to travel to other areas on the map. To use the command, type it in the format: 'go [direction].' For example, you could type 'go north' to go north.");
+                        }
+                        else if (parts[1].Equals("look"))
+                        {
+                            PrintLinePositive("You can use the 'look' command to look around you and to look at specific things nearby. To use the command, either type in 'look' or 'look [item or creature].' For example, you could type 'look grass' to look at the grass.");
+                        }
+                        else if (parts[1].Equals("help"))
+                        {
+                            PrintLinePositive("You can use the 'help' command to get general help on which commands to available, and specific help on how to use a specific command. To use the command, either type in 'help' (for general help) or 'help [command word]' (for specific help). For example, you could type 'help fight' for information on how the 'fight' command works.");
+                        }
+                        else if (parts[1].Equals("quit"))
+                        {
+                            PrintLinePositive("You can use the 'quit' command to quit the game. To use the command (though strongly not reccomended because this game is super awesome and top-notch quality and you'll definitely miss out on lots of fun), type 'quit.'");
+                        }
+                        else if (parts[1].Equals("examine"))
+                        {
+                            PrintLinePositive("*THIS COMMAND IS CURRENTLY UNDER CONSTRUCTION. NOT CURRENTLY WORKING (not sure where the examine code is, and it's definitely not working when I try to use it)*");
+                        }
+                        else if (parts[1].Equals("fight"))
+                        {
+                            PrintLinePositive("You can use the 'fight' command to fight creatures nearby. To use the command, type in 'fight [creature].' For example, you could type 'fight bunny' to fight a bunny (but please don't because they're adorable little creatures).");
+                        }
+                        else if (parts[1].Equals("played_time"))
+                        {
+                            PrintLinePositive("You can use the 'played_time' command to find out how long you've been playing the game. To use the command, type in 'played_time.'");
+                        }
+                        else
+                        {
+                            //considering we can only have two typed words and the first one is definitely a valid, "help," and that we've checked for all other command words
+                            //the only possibillity left here is that the second word the player typed is not a command word (and we will tell the player that in the lines below)
+                            PrintLineWarning("Second command word not found.");
+                            PrintLinePositive("Please make sure you are typing a valid command word after 'help.' If you would like to see the list of command words again, please type 'help' alone.");
+                        }
 
-                    }
+                        }
                     else
                     {
-                        if (parts.Length == 3)
+                        //this catches the possibillity that the player is trying to get help with multiple command words, or maybe just a specific command word but they're typing the target (ex: item) too
+                        if (parts.Length >= 3)
                         {
-                            PrintLinePositive("Please only use 'help [command word]' without typing any target uses (ex: Do not type 'help look [item or creature]'. Instead, type 'help look'");
+                            PrintLinePositive("Please only use 'help [command word]' without typing any target uses or other extraneous words (ex: Do not type 'help look [item or creature]'. Instead, type 'help look'");
                         }
                     }
 

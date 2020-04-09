@@ -68,6 +68,15 @@ namespace TheWorld
                 "bunny"
             );
 
+			start.AddItem(new HealingPotion()
+			{
+				Name = "Healing Potion Lv1",
+				Description = "Pretty neat, drink up!",
+				UseCount = 8
+			},
+			"healing_potion"
+			);  
+
 			// Here's a second area.
 			Area stream = new Area()
             {

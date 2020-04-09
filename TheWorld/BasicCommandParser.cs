@@ -80,7 +80,15 @@ namespace TheWorld
 			{
 				ProcessFightCommand(parts);
 			}
-            else if (cmdWord.Equals("help"))
+            else if (cmdWord.Equals("use"))
+            {
+				ProcessUseCommand(parts);
+			}
+			else if (cmdWord.Equals("get"))
+			{
+				ProcessGetCommand(parts);
+			}
+			else if (cmdWord.Equals("help"))
             {
                 // TODO:  Implement this to show a new player how to use commands!
             }
@@ -89,13 +97,35 @@ namespace TheWorld
             // Implement more commands like "use" and "get" and "talk"
 		}
 
+        private static void ProcessUseCommand(string[] parts)
+        {
+            if (parts.Length == 2)
+            {
 
-        /// <summary>
-        /// TODO:  Write this Method
-        /// Several Achievements inside.
-        /// </summary>
-        /// <param name="parts"></param>
-        private static void ProcessHelpCommand(string[] parts)
+            }
+
+			if (parts.Length == 1)
+			{
+
+			}
+
+		}
+
+		private static void ProcessGetCommand(string[] parts)
+		{
+			if (parts.Length == 1)
+			{
+
+			}
+
+		}
+
+		/// <summary>
+		/// TODO:  Write this Method
+		/// Several Achievements inside.
+		/// </summary>
+		/// <param name="parts"></param>
+		private static void ProcessHelpCommand(string[] parts)
         {
             if(parts.Length == 1)
             {

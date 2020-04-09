@@ -67,6 +67,7 @@ namespace TheWorld
         /// </summary>
         /// <param name="DnDFormat"></param>
         /// <returns></returns>
+
         public static int Roll(string DnDFormat)
         {
             throw new NotImplementedException();

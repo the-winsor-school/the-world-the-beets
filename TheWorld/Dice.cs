@@ -69,7 +69,18 @@ namespace TheWorld
         /// <returns></returns>
         public static int Roll(string DnDFormat)
         {
-            throw new NotImplementedException();
+            char[] splitChars = { 'd', '+' };
+            string[] diceParam = DnDFormat.Split(splitChars);
+            Dice.Type type = (Type)Convert.ToInt32(diceParam[1]);
+            int count = Convert.ToInt32(diceParam[0]);
+            int modifier = Convert.ToInt32(diceParam[2]);
+
+            int total = 0;
+            for (int i = 0; i < count; i++)
+            {
+                total += GodPlaysDice.Next((int)type) + 1;  // +1 because Dice don't have a zero.
+            }
+            return total + modifier;
         }
 
         #endregion
@@ -137,6 +148,7 @@ namespace TheWorld
         {
             char[] splitChars = { 'd', '+' };
             string[] diceParam = DnDFormat.Split(splitChars);
+            //if (diceParam[1] != "2", "4", "6", "8", "10", "12", "20", "100" or diceParam[0] != int and diceParam[3] != int); if DiceType is not one of the types or count is not a number or modifier is not a number
             DiceType = (Type) Convert.ToInt32(diceParam[1]);
             Count = Convert.ToInt32(diceParam[0]);
             Modifier = Convert.ToInt32(diceParam[2]);

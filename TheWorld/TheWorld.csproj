@@ -47,7 +47,7 @@
     <Compile Include="ICarryableItem.cs" />
     <Compile Include="IUseableItem.cs" />
     <Compile Include="ITalkingCreature.cs" />
-    <Compile Include="Properties\IEquippableItem.cs" />
+    <Compile Include="IEquippableItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

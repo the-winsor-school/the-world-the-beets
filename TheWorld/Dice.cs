@@ -148,10 +148,18 @@ namespace TheWorld
         {
             char[] splitChars = { 'd', '+' };
             string[] diceParam = DnDFormat.Split(splitChars);
-            //if (diceParam[1] != "2", "4", "6", "8", "10", "12", "20", "100" or diceParam[0] != int and diceParam[3] != int); if DiceType is not one of the types or count is not a number or modifier is not a number
-            DiceType = (Type) Convert.ToInt32(diceParam[1]);
+            foreach (var Param in diceParam)
+            {
+                bool success = int.TryParse(Param, out int number);
+                if (!success)
+                {
+                    throw new ArgumentException(string.Format("Your input was not in DnD Format. Please enter in a valid format."));
+                }
+            }
+            DiceType = (Type)Convert.ToInt32(diceParam[1]);
             Count = Convert.ToInt32(diceParam[0]);
             Modifier = Convert.ToInt32(diceParam[2]);
+
         }
 
         /// <summary>

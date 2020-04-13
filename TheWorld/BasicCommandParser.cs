@@ -32,7 +32,7 @@ namespace TheWorld
 		/// </summary>
 		private static List<string> CommandWords = new List<string>()
 		{
-			"go", "look", "help", "quit", "examine", "fight", "played_time" 
+			"go", "look", "help", "quit", "examine", "fight", "played_time", "talk" 
 		};
 
         //This below CommandWordsFormats list was created for the purpose of improving the Help command a few lines below
@@ -101,7 +101,14 @@ namespace TheWorld
 
             // TODO: Many Achievements
             // Implement more commands like "use" and "get" and "talk"
-		}
+
+                // ~TODO~: VM
+                //"talk" command implemented
+            else if (cmdWord.Equals("talk"))
+            {
+                ProcessTalkCommand(parts);
+            }
+        }
 
 
         /// <summary>
@@ -349,5 +356,47 @@ namespace TheWorld
                 }
             }
         }
+
+        private static void ProcessTalkCommand(string[] parts)
+        {
+                // This is where the talk command runs not quite so successfully
+                //this is the scenario where you kinda just talk to yourself (since there's no target creature you're talking with)
+                if (parts.Length == 1)
+            {
+               
+                PrintLinePositive("You BELLOW at the top of your lungs.");
+                PrintLinePositive("Since no one knows who you're talking to, no one responds...");
+            }
+            else
+            {
+                if (parts.Length == 2)
+                {
+                    Creature creature;
+                    try
+                    {
+                        creature = CurrentArea.GetCreature(parts[1]);
+                    }
+                    catch (WorldException e)
+                    {
+                        if (CurrentArea.HasItem(parts[1]))
+                            PrintLinePositive("You try to talk to the {0}, but then you realize that you're just growing slightly less sane by the second...", parts[1]);
+                        else
+                            PrintLineDanger(e.Message);
+                        return;
+                    }
+                }
+                else if (parts.Length > 2)
+                {
+                    PrintLineWarning("Please only try to talk to one person/creature at a time!");
+                }
+                }
+
+                }
+
+            // CombatResult result = DoTalk(ref creature);
+
+
+       
+        }
     }
-}
+

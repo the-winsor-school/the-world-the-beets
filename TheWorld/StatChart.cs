@@ -40,7 +40,7 @@ namespace TheWorld
 			set;
 		}
 
-        public int DefBuff
+        public int DefBuff //used with masks, a modifier for Def rolls for player
         {
 			get;
 			set;

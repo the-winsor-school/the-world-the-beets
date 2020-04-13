@@ -162,19 +162,20 @@ namespace TheWorld
 
         public int UseCount { get; set; }
 
-        public int DefBuff { get; set; }
+        public int ThisBuff { get; set; }
 
         public StatChart Stats { get; set; }
 
         public bool IsEquipped { get; set; }
 
-        public Dice Def { get; set; }
+       // public Dice Def { get; set; }
 
         public void Equip()
         {
             if (IsEquipped == false)
             {
-                TheGame.Player.StatsChart.Def += DefBuff;
+                ThisBuff= TheGame.Player.Stats.DefBuff;
+
                 IsEquipped = true;
                 
             }

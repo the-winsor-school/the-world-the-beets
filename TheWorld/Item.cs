@@ -156,17 +156,34 @@ namespace TheWorld
             }
         }
     }
-    public class Mask : ICarryableItem, IEquippableItem
+    public class Mask : Item, ICarryableItem, IEquippableItem
     {
         public int Weight { get; set; }
 
         public int UseCount { get; set; }
 
         public int DefBuff { get; set; }
-    }
-    public void Equip()
-    {
-        TheGame.Player.Stats.Def += DefBuff;
+
+        public StatChart Stats { get; set; }
+
+        public bool IsEquipped { get; set; }
+
+        public Dice Def { get; set; }
+
+        public void Equip()
+        {
+            if (IsEquipped == false)
+            {
+                TheGame.Player.StatsChart.Def += DefBuff;
+                IsEquipped = true;
+                
+            }
+            else
+            {
+                throw new WorldException(string.Format("You already equipped that {0}", this.Name), this);
+            }
+
+        }
     }
         
 }

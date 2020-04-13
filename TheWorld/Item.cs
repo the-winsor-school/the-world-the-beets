@@ -156,5 +156,18 @@ namespace TheWorld
             }
         }
     }
+    public class Mask : ICarryableItem, IEquippableItem
+    {
+        public int Weight { get; set; }
+
+        public int UseCount { get; set; }
+
+        public int DefBuff { get; set; }
+    }
+    public void Equip()
+    {
+        TheGame.Player.Stats.Def += DefBuff;
+    }
+        
 }
 

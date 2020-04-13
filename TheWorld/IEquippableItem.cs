@@ -24,6 +24,10 @@ namespace TheWorld
             set;
         }
 
+        void Equip();
+
+       
+
         
     }
 }

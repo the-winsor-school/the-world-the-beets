@@ -174,7 +174,7 @@ namespace TheWorld
         {
             if (IsEquipped == false)
             {
-                ThisBuff= TheGame.Player.Stats.DefBuff;
+                TheGame.Player.Stats.DefBuff=ThisBuff;
 
                 IsEquipped = true;
                 

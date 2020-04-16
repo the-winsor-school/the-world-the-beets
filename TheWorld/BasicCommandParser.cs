@@ -93,6 +93,57 @@ namespace TheWorld
             // Implement more commands like "use" and "get" and "talk"
 		}
 
+<<<<<<< Updated upstream
+=======
+        private static void ProcessUseCommand(string[] parts)
+        {
+            if (parts.Length == 1)
+            {
+				PrintLineWarning("Please specify which item."); 
+            }
+
+            if (parts.Length == 2)
+            {
+				CurrentArea.GetItem(parts[1]);
+				IUseableItem itemToUse = CurrentArea.GetItem(parts[1]) as IUseableItem;
+				if (itemToUse != null)
+				{
+					itemToUse.Use(); //make this an exception later
+					PrintLinePositive("Neat thing!"); 
+					
+				}
+                else
+                {
+					PrintLineWarning("{0} cannot be used...", itemToUse);
+				}
+
+
+				//access the backpack
+				//using the Use method of the backpack dictionary
+				//Player.Backpack.Use(parts[1])
+				//["use"] ["HealingPotion"] ["Rabbit"]
+				//parts[1]-- > "HealingPotion"
+				//problem: how do i get from this text to the item
+				//confused on getting the instance of the player and how to write this general (sorry) 
+			}
+
+			if (parts.Length == 2)
+			{
+               
+                //Player.Backpack.Use(parts[1])
+			}
+
+		}
+
+		private static void ProcessGetCommand(string[] parts)
+		{
+			if (parts.Length == 2)
+			{
+
+			}
+
+		}
+>>>>>>> Stashed changes
 
         /// <summary>
         /// TODO:  Write this Method

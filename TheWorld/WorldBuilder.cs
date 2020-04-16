@@ -64,7 +64,7 @@ namespace TheWorld
                 {
 				    Name = "ChiChi",
 				    Description = "A cute hedgehog.  Actually it's not alive. It's just a stuffed animal. Hmmm",
-				    //Stats = new StatChart() { Level = 1, MaxHPs = 10, HPs = 10, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 3 }
+				    Stats = new StatChart() { Level = 1, MaxHPs = 10, HPs = 10, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 3 }
 			    },
                 "chichi"
             );
@@ -123,13 +123,82 @@ namespace TheWorld
             );
 
 			//3rd area
-			Area Supermarket = new Area() { Name = "Supermarket", Description = "Blinding white walls surround every inch of you. There are no windows, only one door that leads out into the wild..." };
+			Area Supermarket = new Area() { Name = "Supermarket", Description = "Here you can shop for things. Everything you need is here. But beware, everything comes with a price ;) " };
+
+			Supermarket.AddCreature(new Creature()
+			{
+				Name = "Kid",
+				Description = "You see a cute little kid. You approach him. But then, he begins to cough...",
+				Stats = new StatChart() { MaxHPs = 10, HPs = 10, Atk = new Dice(Dice.Type.D6), Def = new Dice(Dice.Type.D4), Level = 1, Exp = 5 }
+			},
+				"kid"
+			);
+
+			Supermarket.AddCreature(new Creature()
+			{
+				Name = "Cashier",
+				Description = "You're done buying things. You see a cashier. Perfect, let's check out.",
+				Stats = new StatChart() { MaxHPs = 10, HPs = 10, Atk = new Dice(Dice.Type.D6), Def = new Dice(Dice.Type.D4), Level = 1, Exp = 5 }
+                //fight the cashier to get stuff for free, basically stealing or running away
+			},
+				"cashier"
+			);
+
+			Supermarket.AddItem(new Item()
+			{
+				Name = "Fiji Water",
+				Description = "Fancy water ;) "
+                //value??
+				//interaction with water??
+			},
+				"fijiwater"
+			);
+
+			Supermarket.AddItem(new Item()
+			{
+				Name = "Apple",
+				Description = "Let's snack on it. It looks red and juicy."
+				//value??
+				//interaction with apple such as eat?
+			},
+				"apple"
+			);
+
+			Supermarket.AddItem(new Item()
+			{
+				Name = "Soup",
+				Description = "I fancy drinking something warm "
+				//value??
+				//interaction with soup?
+			},
+				"soup"
+			);
+
+			//4th area
+			Area RebeccasHouse = new Area() { Name = "Rebecca's House", Description = "She is secretly and illegally stashing toilet paper and selling it to people through the black market." };
+
+			RebeccasHouse.AddItem(new Item()
+			{
+				Name = "Toilet Paper",
+				Description = "It's white, round, and that's about it. "
+				//value??
+				//interaction with toilet paper such as exchange or buy
+			},
+				"toiletpaper"
+			);
+
+
+
 
 			// These two lines LINK the two areas together.  Don't forget to go both ways or you'll end up with a dead end
 			// and no way out!!!
+            //can only have one "north"/direction in each area
+            //but can have multiple areas be different directions
 			startLab.AddNeighbor(Park, "north");
 			Park.AddNeighbor(startLab, "south");
-			Supermarket.AddNeighbor(Supermarket, "east");
+
+            //Supermarket.AddNeighbor(Supermarket, "east");
+            //RebeccasHouse.AddNeighbor(RebeccasHouse, "west");
 
 			// Go back to the Main method and tell it where to start the game!
 			return startLab;

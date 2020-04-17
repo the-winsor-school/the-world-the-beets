@@ -25,19 +25,19 @@ namespace TheWorld
     public static partial class TheGame
     {
 
-		/// <summary>
-		/// The command words.
-		/// These are all the words that the game will accept as commands.
-		/// You will need to add more words to make the game more interesting!
-		/// </summary>
-		private static List<string> CommandWords = new List<string>()
-		{
-			"go", "look", "help", "quit", "examine", "fight", "played_time", "talk" 
-		};
+        /// <summary>
+        /// The command words.
+        /// These are all the words that the game will accept as commands.
+        /// You will need to add more words to make the game more interesting!
+        /// </summary>
+        private static List<string> CommandWords = new List<string>()
+        {
+            "go", "look", "help", "quit", "examine", "fight", "played_time", "talk"
+        };
 
         //This below CommandWordsFormats list was created for the purpose of improving the Help command a few lines below
         //By making a list here instead of just typing it in PrintLineSpecial("....."); is for convenience in the future
-            //if we ever need to add new command words or change usages of existing command words
+        //if we ever need to add new command words or change usages of existing command words
         private static List<string> CommandWordsFormats = new List<string>()
         {
             "go [direction]", "look", "look [item or creature]", "help", "help [command word]", "quit", "examine", "examine [item or creature]", "fight [creature]", "played_time"
@@ -57,37 +57,37 @@ namespace TheWorld
         /// <returns></returns>
 		private static bool IsValidCommandWord(string cmdWord) => throw new NotImplementedException();
 
-		/// <summary>
-		/// Parses the command and do any required actions.
-		/// </summary>
-		/// <param name="command">Command as typed by the user.</param>
-		private static void ParseCommand(string command)
-		{
+        /// <summary>
+        /// Parses the command and do any required actions.
+        /// </summary>
+        /// <param name="command">Command as typed by the user.</param>
+        private static void ParseCommand(string command)
+        {
             // Break apart the command into individual words:
             // This is why command words and unique names for objects cannot contain spaces.
-			string[] parts = command.Split(' ');
+            string[] parts = command.Split(' ');
             // The first word is the command.
-			string cmdWord = parts.First();
+            string cmdWord = parts.First();
 
 
-			if (!CommandWords.Contains(cmdWord))
-			{
-				PrintLineWarning("I don't understand...(type \"help\" to see a list of commands I know.)");
-				return;
-			}
+            if (!CommandWords.Contains(cmdWord))
+            {
+                PrintLineWarning("I don't understand...(type \"help\" to see a list of commands I know.)");
+                return;
+            }
 
-			if (cmdWord.Equals("look"))
-			{
-				ProcessLookCommand(parts);
-			}
-			else if (cmdWord.Equals("go"))
-			{
-				ProcessGoCommand(parts);
-			}
-			else if (cmdWord.Equals("fight"))
-			{
-				ProcessFightCommand(parts);
-			}
+            if (cmdWord.Equals("look"))
+            {
+                ProcessLookCommand(parts);
+            }
+            else if (cmdWord.Equals("go"))
+            {
+                ProcessGoCommand(parts);
+            }
+            else if (cmdWord.Equals("fight"))
+            {
+                ProcessFightCommand(parts);
+            }
             else if (cmdWord.Equals("played_time"))
             {
                 ProcessPlayedTimeCommand(parts);
@@ -102,8 +102,8 @@ namespace TheWorld
             // TODO: Many Achievements
             // Implement more commands like "use" and "get" and "talk"
 
-                // ~TODO~: VM
-                //"talk" command implemented
+            // ~TODO~: VM
+            //"talk" command implemented
             else if (cmdWord.Equals("talk"))
             {
                 ProcessTalkCommand(parts);
@@ -118,7 +118,7 @@ namespace TheWorld
         /// <param name="parts"></param>
         private static void ProcessHelpCommand(string[] parts)
         {
-            if(parts.Length == 1)
+            if (parts.Length == 1)
             {
                 // TODO:  Easy Achievement (1): VM
                 // the whole command is just "help".  Print a generic help message that
@@ -159,7 +159,7 @@ namespace TheWorld
 
                         //below I am basically checking to see which command word the player wants help on 
                         //-> I could make another list of of explanatory sentences for each type of command word
-                            //but at this point, because the sentences are so long anyway, it would just be easier writing the code this way with the sentences in the code right there
+                        //but at this point, because the sentences are so long anyway, it would just be easier writing the code this way with the sentences in the code right there
                         if (parts[1].Equals("go"))
                         {
                             PrintLinePositive("You can use the 'go' command to travel to other areas on the map. To use the command, type it in the format: 'go [direction].' For example, you could type 'go north' to go north.");
@@ -196,7 +196,7 @@ namespace TheWorld
                             PrintLinePositive("Please make sure you are typing a valid command word after 'help.' If you would like to see the list of command words again, please type 'help' alone.");
                         }
 
-                        }
+                    }
                     else
                     {
                         //this catches the possibillity that the player is trying to get help with multiple command words, or maybe just a specific command word but they're typing the target (ex: item) too
@@ -216,36 +216,36 @@ namespace TheWorld
             }
         }
 
-		/// <summary>
-		/// Enter Combat mode.
-		/// </summary>
-		/// <param name="parts">Command as typed by the user split into individual words.</param>
-		private static void ProcessFightCommand(string[] parts)
-		{
-			Creature creature;
-			try
-			{
-				creature = CurrentArea.GetCreature(parts[1]);
-			}
-			catch (WorldException e)
-			{
-				if (CurrentArea.HasItem(parts[1]))
-					PrintLineWarning("You can't fight with that...");
-				else
-					PrintLineDanger(e.Message);
-				return;
-			}
+        /// <summary>
+        /// Enter Combat mode.
+        /// </summary>
+        /// <param name="parts">Command as typed by the user split into individual words.</param>
+        private static void ProcessFightCommand(string[] parts)
+        {
+            Creature creature;
+            try
+            {
+                creature = CurrentArea.GetCreature(parts[1]);
+            }
+            catch (WorldException e)
+            {
+                if (CurrentArea.HasItem(parts[1]))
+                    PrintLineWarning("You can't fight with that...");
+                else
+                    PrintLineDanger(e.Message);
+                return;
+            }
 
-			// This method is part of the MainClass but is defined in a different file.
-			// Check out the Combat.cs file.
-			CombatResult result = DoCombat(ref creature);
+            // This method is part of the MainClass but is defined in a different file.
+            // Check out the Combat.cs file.
+            CombatResult result = DoCombat(ref creature);
 
-			switch (result)
-			{
-				case CombatResult.Win:
-					PrintLinePositive("You win!");
-					Player.Stats.Exp += creature.Stats.Exp;
-					CurrentArea.RemoveCreature(parts[1]);
+            switch (result)
+            {
+                case CombatResult.Win:
+                    PrintLinePositive("You win!");
+                    Player.Stats.Exp += creature.Stats.Exp;
+                    CurrentArea.RemoveCreature(parts[1]);
                     // TODO: Part of a larger achievement
                     // After you gain Exp, how do you improve your stats?
                     // there should be some rules to how this works.
@@ -254,71 +254,71 @@ namespace TheWorld
                     // TODO: Part of a larger achievement
                     // After defeating an Enemy, they should drop their Inventory
                     // into the CurrentArea so that the player can then PickUp those Items.
-					break;
-				case CombatResult.Lose:
-					PrintLineDanger("You lose!");
+                    break;
+                case CombatResult.Lose:
+                    PrintLineDanger("You lose!");
                     // TODO:  Easy Achievement:
                     // What happens when you die?  Deep questions.
-					break;
-				case CombatResult.RunAway:
-					// TODO: Moderate Achievement
-					// Handle running away.  What happens if you run from a battle?
-					break;
-				default: break;
-			}
-		}
+                    break;
+                case CombatResult.RunAway:
+                    // TODO: Moderate Achievement
+                    // Handle running away.  What happens if you run from a battle?
+                    break;
+                default: break;
+            }
+        }
 
-		/// <summary>
-		/// What happens when the user types "look" as the command word.
-		/// </summary>
-		/// <param name="parts">Command Parts.</param>
-		private static void ProcessLookCommand(string[] parts)
-		{
-			// If you just type "look" then LookAround()
-			if (parts.Length == 1)
-			{
-				Console.WriteLine(CurrentArea.LookAround());
-			}
-			else
-			{
-				// try to find the thing that the user is looking at.
-				try
-				{
-					// if it is there, print the appropriate description.
-					Console.WriteLine(CurrentArea.LookAt(parts[1]));
-				}
-				catch (WorldException e)
-				{
-					// otherwise, print an appropriate error message.
-					PrintLineDanger(e.Message);
-				}
-			}
-		}
+        /// <summary>
+        /// What happens when the user types "look" as the command word.
+        /// </summary>
+        /// <param name="parts">Command Parts.</param>
+        private static void ProcessLookCommand(string[] parts)
+        {
+            // If you just type "look" then LookAround()
+            if (parts.Length == 1)
+            {
+                Console.WriteLine(CurrentArea.LookAround());
+            }
+            else
+            {
+                // try to find the thing that the user is looking at.
+                try
+                {
+                    // if it is there, print the appropriate description.
+                    Console.WriteLine(CurrentArea.LookAt(parts[1]));
+                }
+                catch (WorldException e)
+                {
+                    // otherwise, print an appropriate error message.
+                    PrintLineDanger(e.Message);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Processes the go command.
-		/// </summary>
-		/// <param name="parts">Parts.</param>
-		private static void ProcessGoCommand(string[] parts)
-		{
-			// If the user has not indicated where to go...
-			if (parts.Length == 1)
-				PrintLineWarning("Go where?");
-			else
-			{
-				// try to find the neighbor the user has indicated.
-				try
-				{
-					// move to that area if the command is understood.
-					CurrentArea = CurrentArea.GetNeighbor(parts[1]);
-				}
-				catch (WorldException e)
-				{
-					// if GetNeighbor throws and exception, print the explanation.
-					PrintLineDanger(e.Message);
-				}
-			}
-		}
+        /// <summary>
+        /// Processes the go command.
+        /// </summary>
+        /// <param name="parts">Parts.</param>
+        private static void ProcessGoCommand(string[] parts)
+        {
+            // If the user has not indicated where to go...
+            if (parts.Length == 1)
+                PrintLineWarning("Go where?");
+            else
+            {
+                // try to find the neighbor the user has indicated.
+                try
+                {
+                    // move to that area if the command is understood.
+                    CurrentArea = CurrentArea.GetNeighbor(parts[1]);
+                }
+                catch (WorldException e)
+                {
+                    // if GetNeighbor throws and exception, print the explanation.
+                    PrintLineDanger(e.Message);
+                }
+            }
+        }
 
         /// SUMMARY (VM)
         /// Processes the played_time command
@@ -359,44 +359,50 @@ namespace TheWorld
 
         private static void ProcessTalkCommand(string[] parts)
         {
-                // This is where the talk command runs not quite so successfully
-                //this is the scenario where you kinda just talk to yourself (since there's no target creature you're talking with)
-                if (parts.Length == 1)
+            // This is where the talk command runs not quite so successfully
+            //this is the scenario where you kinda just talk to yourself (since there's no target creature you're talking with)
+            if (parts.Length == 1)
             {
-               
+
                 PrintLinePositive("You BELLOW at the top of your lungs.");
                 PrintLinePositive("Since no one knows who you're talking to, no one responds...");
             }
-            else
+
+            //this is when the player types more than 2 words, and we're just letting them know that they shouldn't do that
+            //(player is most likely trying to talk to two things at the same time
+            else if (parts.Length > 2)
             {
-                if (parts.Length == 2)
+                PrintLineWarning("Please only try to talk to one person/creature at a time!");
+            }
+
+
+            //this is when the player's typed in two words, "talk" and parts[1], and we're going to check whether parts[1] is a valid creature that we can talk to.
+            else if (parts.Length == 2)
+            {
+                try
                 {
-                    Creature creature;
-                    try
+                    if (CurrentArea.HasItem(parts[1]))
                     {
-                        creature = CurrentArea.GetCreature(parts[1]);
-                    }
-                    catch (WorldException e)
-                    {
-                        if (CurrentArea.HasItem(parts[1]))
-                            PrintLinePositive("You try to talk to the {0}, but then you realize that you're just growing slightly less sane by the second...", parts[1]);
-                        else
-                            PrintLineDanger(e.Message);
-                        return;
+                        PrintLinePositive("TEST: works -> you typed in 'talk' with a valid creature name!!!");
                     }
                 }
-                else if (parts.Length > 2)
+                catch (WorldException e)
                 {
-                    PrintLineWarning("Please only try to talk to one person/creature at a time!");
+                    //this is when the player tries to talk to an item...
+                    if (CurrentArea.HasItem(parts[1]))
+                        PrintLinePositive("You try to talk to the {0}... It doesn't respond, obviously. And then you realize that you're just growing slightly less sane by the second...", parts[1]);
+                    else
+                        PrintLineDanger(e.Message);
+                    return;
                 }
-                }
-
-                }
-
-            // CombatResult result = DoTalk(ref creature);
+            }
 
 
-       
+
+            }
+
         }
     }
+
+
 

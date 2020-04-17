@@ -381,18 +381,24 @@ namespace TheWorld
             {
                 try
                 {
-                    if (CurrentArea.HasItem(parts[1]))
+                    if (CurrentArea.CreatureExists(parts[1]))
                     {
                         PrintLinePositive("TEST: works -> you typed in 'talk' with a valid creature name!!!");
                     }
+                    //this is when the player tries to talk to an item...
+                    else if (CurrentArea.HasItem(parts[1]))
+                    {
+                        PrintLinePositive("You try to talk to the {0}... It doesn't respond, obviously. And then you realize that you're just growing slightly less sane by the second...", parts[1]);
+                    }
+                    else
+                    {
+                        PrintLinePositive("You try to talk to the '{0},' a creature that doesn't exist. Hmmm...is any of this actually real?", parts[1]);
+                    }
+
                 }
                 catch (WorldException e)
                 {
-                    //this is when the player tries to talk to an item...
-                    if (CurrentArea.HasItem(parts[1]))
-                        PrintLinePositive("You try to talk to the {0}... It doesn't respond, obviously. And then you realize that you're just growing slightly less sane by the second...", parts[1]);
-                    else
-                        PrintLineDanger(e.Message);
+                    PrintLineDanger(e.Message);
                     return;
                 }
             }

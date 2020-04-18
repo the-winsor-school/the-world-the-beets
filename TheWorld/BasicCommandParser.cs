@@ -392,7 +392,6 @@ namespace TheWorld
                             //This is the scenario where the player has succesfully typed in a creature that they can actually talk to
                             //(checked to see whether the creature has the ITalkingCreature interface fully implemented)
                             //now we can call this specific creature's Talk method so we can engage in unique dialogue with them
-                            PrintLinePositive("woohoo");
                             ((ITalkingCreature)creature).Talk();
                         }
                         else

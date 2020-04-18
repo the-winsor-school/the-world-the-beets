@@ -167,6 +167,8 @@ namespace TheWorld
 				case CombatResult.Lose:
                     // TODO: VM Easy Achievement:
                     // What happens when you die?  Deep questions.
+
+                    //below is basically just an overly-dramatic narrative about your DEMISE. Enjoy!
                     PrintLineDanger("As the {0} deals the fatal blow, you see your life flash before your eyes.", parts[1]);
                     //Thread.Sleep(#OfMilliSeconds) allows us to pause the program for a specified amount of time
                     Thread.Sleep(4000);
@@ -183,10 +185,24 @@ namespace TheWorld
                     //this line below allows us to force the player to quit our game and start a new one (basically emphasises the whole-death-part of this all...)
                     System.Environment.Exit(1);
                     break;
+
 				case CombatResult.RunAway:
-					// TODO: Moderate Achievement
-					// Handle running away.  What happens if you run from a battle?
+                    // TODO: VM Moderate Achievement
+                    // Handle running away.  What happens if you run from a battle?
+
+                    PrintLineWarning("You feel your heart jump into your throat. You are scared that you're going to die here. That you're going to die to the {0}", parts[1]);
+                    Thread.Sleep(2000);
+                    PrintLineWarning("So you run away as fast and as far as you can.");
+                    Thread.Sleep(2000);
+                    PrintLineWarning("You scream: AAAAAaaaaaAAAAAaaaAAAAAAaaAAAAAAAaaAAAAAaaaAAAAAAAHHHHHHhhhhhHHHHhhHhhhhhhHHHHHHHHHHHH!!!!!");
+                    Thread.Sleep(4000);
+                    PrintLineWarning("...It's not a dignified retreat...");
+                    Thread.Sleep(3000);
+                    PrintLineDanger("And as you flee, the {0} takes one, last, nearly-deadly, swipe at you.", parts[1]);
+                    Thread.Sleep(2000);
+                    PrintLineDanger("You are down to 1 HP.");
 					break;
+
 				default: break;
 			}
 		}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace TheWorld
 {
@@ -164,10 +165,24 @@ namespace TheWorld
                     // into the CurrentArea so that the player can then PickUp those Items.
 					break;
 				case CombatResult.Lose:
-					PrintLineDanger("You lose!");
-                    // TODO:  Easy Achievement:
+                    // TODO: VM Easy Achievement:
                     // What happens when you die?  Deep questions.
-					break;
+                    PrintLineDanger("As the {0} deals the fatal blow, you see your life flash before your eyes.", parts[1]);
+                    //Thread.Sleep(#OfMilliSeconds) allows us to pause the program for a specified amount of time
+                    Thread.Sleep(5000);
+                    PrintLineDanger("You see the best parts of your childhood...");
+                    Thread.Sleep(1000);
+                    PrintLineDanger("Your friends. The ice-cream truck. Your school's robotics club. The 2-ply toilet paper.");
+                    Thread.Sleep(4000);
+                    PrintLineDanger("But you also see your arch-enemy, BIG 'RONA, cackling away at your demise.");
+                    Thread.Sleep(1000);
+                    PrintLineDanger("And you slowly feel yourself fading away into the light...");
+                    Thread.Sleep(2000);
+                    PrintLineWarning("THE END");
+                    Thread.Sleep(5000);
+                    //this line below allows us to force the player to quit our game and start a new one (basically emphasises the whole-death-part of this all...)
+                    System.Environment.Exit(1);
+                    break;
 				case CombatResult.RunAway:
 					// TODO: Moderate Achievement
 					// Handle running away.  What happens if you run from a battle?

@@ -37,7 +37,7 @@ namespace TheWorld
     }
 
 
-    public class SleepingScientist : Creature, ITalkingCreature
+    public class SleepyScientist : Creature, ITalkingCreature
     {
         public void Talk(string word)
         {

@@ -37,26 +37,15 @@ namespace TheWorld
     }
 
 
-        public class SleepingScientist : Creature, ITalkingCreature
+    public class SleepingScientist : Creature, ITalkingCreature
+    {
+        public void Talk(string word)
         {
-
-            readonly Creature sleepingScientist = new Creature()
-            {
-                Name = "Sleeping scientist",
-                Description = "A fellow scientist who is sleeping on the floor. He cuddles with a roll of toilet paper like it's a teddy bear. It's honestly a pretty sad scene to be looking at.",
-                Stats = new StatChart() { Level = 1, MaxHPs = 10, HPs = 10, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 3 }
-            };
-            // "scientist"
-
-
-
-            public void Talk(string word)
-            {
-                TextFormatter.PrintLinePositive("ZzZZzzZZZzzZZzzz....");
-            }
-
-            }
+            TextFormatter.PrintLinePositive("ZzZZzzZZZzzZZzzz....");
         }
+    }
+
+}
 
 
 

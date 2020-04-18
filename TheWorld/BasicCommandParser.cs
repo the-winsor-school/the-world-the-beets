@@ -357,6 +357,8 @@ namespace TheWorld
             }
         }
 
+        //VM: Ultimately, this talk command allows you to talk to creatures with the ITalkingCreature interface implemented
+            //And funny stuff happens when you try to talk to unvalid things, like talking to no one and talking to boulders
         private static void ProcessTalkCommand(string[] parts)
         {
             // This is where the talk command runs not quite so successfully
@@ -383,7 +385,22 @@ namespace TheWorld
                 {
                     if (CurrentArea.CreatureExists(parts[1]))
                     {
-                        PrintLinePositive("TEST: works -> you typed in 'talk' with a valid creature name!!!");
+                        Creature creature = CurrentArea.GetCreature(parts[1]);
+                        if (creature is ITalkingCreature)
+                        {
+                            //SUCCESS!
+                            //This is the scenario where the player has succesfully typed in a creature that they can actually talk to
+                            //(checked to see whether the creature has the ITalkingCreature interface fully implemented)
+                            //now we can call this specific creature's Talk method so we can engage in unique dialogue with them
+                            PrintLinePositive("woohoo");
+                            ((ITalkingCreature)creature).Talk();
+                        }
+                        else
+                        {
+                            //we know that either the creature has the ITalkingCreature interface, or it doesn't
+                            //this case below is the scenario that the player wants to talk to a NON-TALKING creature...
+                            PrintLinePositive("...the {0} can't speak human...", parts[1]);
+                        }
                     }
                     //this is when the player tries to talk to an item...
                     else if (CurrentArea.HasItem(parts[1]))
@@ -402,7 +419,6 @@ namespace TheWorld
                     return;
                 }
             }
-
 
 
             }

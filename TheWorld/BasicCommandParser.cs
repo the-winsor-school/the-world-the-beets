@@ -169,15 +169,15 @@ namespace TheWorld
                     // What happens when you die?  Deep questions.
                     PrintLineDanger("As the {0} deals the fatal blow, you see your life flash before your eyes.", parts[1]);
                     //Thread.Sleep(#OfMilliSeconds) allows us to pause the program for a specified amount of time
-                    Thread.Sleep(5000);
+                    Thread.Sleep(4000);
                     PrintLineDanger("You see the best parts of your childhood...");
-                    Thread.Sleep(1000);
+                    Thread.Sleep(3000);
                     PrintLineDanger("Your friends. The ice-cream truck. Your school's robotics club. The 2-ply toilet paper.");
                     Thread.Sleep(4000);
-                    PrintLineDanger("But you also see your arch-enemy, BIG 'RONA, cackling away at your demise.");
-                    Thread.Sleep(1000);
+                    PrintLineDanger("But you also see your arch-nemesis, BIG 'RONA, cackling away at your demise.");
+                    Thread.Sleep(4000);
                     PrintLineDanger("And you slowly feel yourself fading away into the light...");
-                    Thread.Sleep(2000);
+                    Thread.Sleep(5000);
                     PrintLineWarning("THE END");
                     Thread.Sleep(5000);
                     //this line below allows us to force the player to quit our game and start a new one (basically emphasises the whole-death-part of this all...)

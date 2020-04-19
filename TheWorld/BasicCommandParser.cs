@@ -371,10 +371,25 @@ namespace TheWorld
             }
 
             //this is when the player types more than 2 words, and we're just letting them know that they shouldn't do that
-            //(player is most likely trying to talk to two things at the same time
+            //there are two scenarios: the player typed in multiple REAL creatures, or AT LEAST ONE creature that ISN'T REAL
+            //this block of code below tests which of the two cases (listed in line directly above) is true :)
             else if (parts.Length > 2)
             {
-                PrintLineWarning("Please only try to talk to one person/creature at a time!");
+                bool validCreatures = true;
+                int i = 1;
+                while (validCreatures == true && i <= parts.Length - 1)
+                {
+                    validCreatures = CurrentArea.CreatureExists(parts[i]);
+                    i++;
+                }
+                if (validCreatures == true)
+                {
+                    PrintLinePositive("You try to talk to multiple creatures, which are all real, thankfully. But it's hard to keep up a conversation with even one, so you decide it's best to try to talk to just one creature at a time!");
+                }
+                else
+                {
+                    PrintLinePositive("You try to talk to multiple creatures. Some weren't real. Even hearing you address just 1 imaginary creature scared off all the other, real creatures...");
+                }
             }
 
 

@@ -150,8 +150,7 @@ namespace TheWorld
             string[] diceParam = DnDFormat.Split(splitChars);
             foreach (var Param in diceParam)
             {
-                bool success = int.TryParse(Param, out int number);
-                if (!success)
+                if (!Char.IsNumber(DnDFormat, 0) || !Char.IsNumber(DnDFormat, -1)! || int.TryParse(Param, out int result1) || !Type.TryParse(Param, out char result2))
                 {
                     throw new ArgumentException(string.Format("Your input was not in DnD Format. Please enter in a valid format."));
                 }

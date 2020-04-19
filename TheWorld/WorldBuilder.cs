@@ -74,9 +74,19 @@ namespace TheWorld
             {
                 Name = "Sleepy Scientist",
                 Description = "A fellow scientist who is sleeping on the floor. He cuddles with the lab's last roll of 2-ply toilet paper like it's a teddy bear. It's honestly a pretty sad scene to be looking at",
-                Stats = new StatChart() { Level = 1, MaxHPs = 3, HPs = 3, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 1 }
+                Stats = new StatChart() { Level = 10, MaxHPs = 30, HPs = 30, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 10 }
             },
                 "scientist"
+            );
+
+            //VM: Added this new "creature", the intern, to create a more-complex talking system than I used for the sleepy scientist above
+            start.AddCreature(new Intern()
+            {
+                Name = "Fresh New Intern",
+                Description = "The new intern that's straight out of the local college. He does whatever people tell him to do. Get coffee. Wash the contaminated Petri dishes. Clean the toilets. He's fun to boss around...bless him.",
+                Stats = new StatChart() { Level = 5, MaxHPs = 7, HPs = 7, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 15 }
+            },
+                "intern"
             );
 
             // Here's a second area.

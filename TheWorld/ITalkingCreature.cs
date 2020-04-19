@@ -90,7 +90,17 @@ namespace TheWorld
                     TextFormatter.PrintLinePositive("ZZZzZZzZZZzzZZZZ...");
                     break;
             }
+            
+        }
+    }
 
+    public class Intern : Creature, ITalkingCreature
+    {
+        public void Talk(string word)
+        {
+            TextFormatter.PrintLinePositive("TEST WORKS: YOU ARE TALKING TO THE INTERN");
+            TextFormatter.PrintLineSpecial("'talk intern... :");
+            TextFormatter.PrintLineSpecial("[TEASE] [THREATEN] [CHITCHAT] [QUESTION]");
         }
     }
 

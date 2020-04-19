@@ -392,6 +392,15 @@ namespace TheWorld
                 }
             }
 
+            //This block below allows us to have a continual conversation with the intern (there's always a "goodbye" option though)
+            //this continual conversation aspect makes it easier for the player to talk
+            //the player doesn't need to keep typing intern after talk and before the conversation word
+            //also helps simulate a "real/normal" conversation with normal people haha ;p
+            else if (parts.Length == 2 && Intern.convoIntern == true)
+            {
+                Creature creature = CurrentArea.GetCreature("intern"); 
+                ((ITalkingCreature)creature).Talk(parts[1]);
+            }
 
             //this is when the player's typed in two words, "talk" and parts[1], and we're going to check whether parts[1] is a valid creature that we can talk to.
             else if (parts.Length == 2)

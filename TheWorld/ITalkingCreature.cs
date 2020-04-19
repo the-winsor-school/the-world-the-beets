@@ -59,35 +59,35 @@ namespace TheWorld
             switch (talkCount)
             {
                 case 0:
-                    TextFormatter.PrintLinePositive("ZzZZzzZZZzzZZzzz....");
+                    TextFormatter.PrintLineWarning("ZzZZzzZZZzzZZzzz....");
                     talkCount += 1;
                     break;
                 case 1:
-                    TextFormatter.PrintLinePositive("ZZzzZz...w- what? go away... i'm trying to sleep...");
+                    TextFormatter.PrintLineWarning("ZZzzZz...w- what? go away... i'm trying to sleep...");
                     talkCount += 1;
                     break;
                 case 1.5:
-                    TextFormatter.PrintLinePositive("zZzzZz...w- why are you waking me up again? just...go away... i'm still want to sleep...");
+                    TextFormatter.PrintLineWarning("zZzzZz...w- why are you waking me up again? just...go away... i'm still want to sleep...");
                     talkCount += 0.5;
                     break;
                 case 2:
-                    TextFormatter.PrintLinePositive("what do you want? it's not work hours...");
+                    TextFormatter.PrintLineWarning("what do you want? it's not work hours...");
                     talkCount += 1;
                     break;
                 case 3:
-                    TextFormatter.PrintLinePositive("ZzzZZz...take that, big 'rona.. ZZzzZ.. ka'pow!");
+                    TextFormatter.PrintLineWarning("ZzzZZz...take that, big 'rona.. ZZzzZ.. ka'pow!");
                     talkCount += 1;
                     break;
                 case 4:
-                    TextFormatter.PrintLinePositive("ah! just let me sleep!");
+                    TextFormatter.PrintLineWarning("ah! just let me sleep!");
                     talkCount += 1;
                     break;
                 case 5:
-                    TextFormatter.PrintLinePositive("ZZzZzz...i'm just gonna block you out for the next couple hours...ZZzZZzZZz...");
+                    TextFormatter.PrintLineWarning("ZZzZzz...i'm just gonna block you out for the next couple hours...ZZzZZzZZz...");
                     talkCount += 1;
                     break;
                 default:
-                    TextFormatter.PrintLinePositive("ZZZzZZzZZZzzZZZZ...");
+                    TextFormatter.PrintLineWarning("ZZZzZZzZZZzzZZZZ...");
                     break;
             }
             
@@ -96,11 +96,78 @@ namespace TheWorld
 
     public class Intern : Creature, ITalkingCreature
     {
+        double talkCount = 0;
+        public static bool convoIntern = false;
+
         public void Talk(string word)
         {
-            TextFormatter.PrintLinePositive("TEST WORKS: YOU ARE TALKING TO THE INTERN");
-            TextFormatter.PrintLineSpecial("'talk intern... :");
-            TextFormatter.PrintLineSpecial("[TEASE] [THREATEN] [CHITCHAT] [QUESTION]");
+            switch (talkCount)
+            {
+                case 0:
+                    TextFormatter.PrintLinePositive("You: Hi intern guy!");
+                    TextFormatter.PrintLineWarning("Intern: Hello! You need anything? :D");
+                    TextFormatter.PrintLineSpecial("'talk...'");
+                    TextFormatter.PrintLineSpecial("[JOKE] [THREAT] [CHITCHAT] [QUESTION] [GOODBYE]");
+                    convoIntern = true;
+                    talkCount = 1;
+                    break;
+                case 0.5:
+                    TextFormatter.PrintLinePositive("You: Hi, again, intern guy!");
+                    TextFormatter.PrintLineWarning("Intern: Hello! Suprised to see you again so quick, you still need anything?");
+                    TextFormatter.PrintLineSpecial("'talk...'");
+                    TextFormatter.PrintLineSpecial("[JOKE] [THREAT] [CHITCHAT] [QUESTION] [GOODBYE]");
+                    convoIntern = true;
+                    talkCount = 1;
+                    break;
+                case 1:
+                    switch (word)
+                    {
+                        case "joke":
+                            TextFormatter.PrintLinePositive("You: What did the clock do when it was hungry?");
+                            TextFormatter.PrintLineWarning("Intern: Went back for seconds.");
+                            TextFormatter.PrintLineSpecial("[REPRIMAND] [JOKE] [LAUGH] [GOODBYE]");
+                            talkCount = 2;
+                            break;
+                        case "threat":
+                            TextFormatter.PrintLinePositive("You: FIGHT ME OR ELSE!!!");
+                            TextFormatter.PrintLineWarning("Intern: or else... what? It sounds like you're just going to fight me either way lol...");
+                            TextFormatter.PrintLineSpecial("[APOLOGIZE] [TAUNT] [THREAT] [GOODBYE]");
+                            talkCount = 3;
+                            break;
+                        case "chitchat":
+                            TextFormatter.PrintLinePositive("You: Nope, don't need anything, thanks. How's life going?");
+                            TextFormatter.PrintLineWarning("Intern: Stuff's going good! Loving this job so far!");
+                            TextFormatter.PrintLineSpecial("[WORK] [PERSONAL] [FAMILY] [GOODBYE]");
+                            talkCount = 4;
+                            break;
+                        case "question":
+                            TextFormatter.PrintLinePositive("You: What do you exactly do here, again? ");
+                            TextFormatter.PrintLineWarning("Intern: Uh...I'm your lab assistant. You tell me to do stuff. Also, by the way, the tub of Purell you asked for is here. Ask me anytime if you need some more of it!");
+                            TextFormatter.PrintLineSpecial("[PURELL] [LIFE] [QUEST] [GOODBYE]");
+                            talkCount = 5;
+                            break;
+                        case "goodbye":
+                            TextFormatter.PrintLinePositive("You: GOODBYE.");
+                            TextFormatter.PrintLineWarning("Intern: uh, ok... bye...");
+                            convoIntern = false;
+                            talkCount = 0.5;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 

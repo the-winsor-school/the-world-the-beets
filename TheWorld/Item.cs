@@ -174,14 +174,14 @@ namespace TheWorld
         {
             if (IsEquipped == false)
             {
-                TheGame.Player.Stats.DefBuff=ThisBuff;
+                TheGame.Player.Stats.DefBuff=ThisBuff; //added a modifier in the program file called defbuff and thats equal to the buff of a give item
 
                 IsEquipped = true;
                 
             }
             else
             {
-                throw new WorldException(string.Format("You already equipped that {0}", this.Name), this);
+                throw new WorldException(string.Format("You already equipped that {0}", this.Name), this); //can't equip something that's already equipped
             }
 
         }

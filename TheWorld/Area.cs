@@ -207,7 +207,7 @@ namespace TheWorld
         public void AddCreature(Creature creature, string uid)
 		{
 			uid = uid.ToLowerInvariant();
-			if (Creatures.ContainsKey(uid))
+			if (CreatureExists(uid))
 				throw new WorldException("There is already a Creature with that unique name in this area.");
 
 			Creatures.Add(uid, creature);
@@ -221,8 +221,8 @@ namespace TheWorld
 		public Creature GetCreature(string uid)
 		{
 			uid = uid.ToLowerInvariant();
-			if (!Creatures.ContainsKey(uid))
-				throw new WorldException("I don't see that around here...");
+			if (!(CreatureExists(uid)))
+                throw new WorldException("I don't see that around here...");
 
 			return Creatures [uid];
 		}
@@ -235,23 +235,26 @@ namespace TheWorld
         public void RemoveCreature(string uid)
 		{
 			uid = uid.ToLowerInvariant();
-			if (!Creatures.ContainsKey(uid))
+			if (!(CreatureExists(uid)))
                 throw new WorldException("I don't see that around here...");
 
             Creatures.Remove(uid);
         }
 
         /// <summary>
-        /// TODO:  Easy Achievement
+        /// TODO: VM  Easy Achievement
         /// Implement this method to work the same way as HasItem and CanGo.
         /// This method should return true if the Creatures dictionary contains
         /// the given UID as a Key.
         ///
-        /// Use this method appropriately in  AddCreature, GetCreature and RemoveCreature.
+        /// Use this method appropriately in AddCreature, GetCreature and RemoveCreature.
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-		public bool CreatureExists(string uid) => throw new NotImplementedException();
+
+		public bool CreatureExists(string uid) => Creatures.ContainsKey(uid.ToLowerInvariant());
+        //works very much like this method we used for determining items
+            //public bool HasItem(string uid) => Items.ContainsKey(uid.ToLowerInvariant());
 
         #endregion // Creatures
 

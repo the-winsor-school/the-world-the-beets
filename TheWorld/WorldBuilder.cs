@@ -84,7 +84,7 @@ namespace TheWorld
             {
                 Name = "Fresh New Intern",
                 Description = "The new intern that's straight out of the local college. He does whatever people tell him to do. Get coffee. Wash the contaminated Petri dishes. Clean the toilets. He's fun to boss around...bless him.",
-                Stats = new StatChart() { Level = 5, MaxHPs = 7, HPs = 7, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 15 }
+                Stats = new StatChart() { Level = 100, MaxHPs = 70, HPs = 70, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 50 }
             },
                 "intern"
             );

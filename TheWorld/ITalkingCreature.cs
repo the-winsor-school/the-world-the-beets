@@ -105,7 +105,7 @@
                 case 0:
                     TextFormatter.PrintLinePositive("You: Hi intern guy!");
                     TextFormatter.PrintLineWarning("Intern: Hello! You need anything? :D");
-                    TextFormatter.PrintLineSpecial("'talk...'");
+                    TextFormatter.PrintLineSpecial("'talk ____'");
                     TextFormatter.PrintLineSpecial("[JOKE] [THREAT] [CHITCHAT] [QUESTION] [GOODBYE]");
                     convoIntern = true;
                     talkBranch = 1;
@@ -129,14 +129,14 @@
                             break;
                         case "threat":
                             TextFormatter.PrintLinePositive("You: FIGHT ME OR ELSE!!!");
-                            TextFormatter.PrintLineWarning("Intern: or else... what? It sounds like you're just going to fight me either way lol...");
+                            TextFormatter.PrintLineWarning("Intern: or else... what? It sounds like you're just going to fight me either way...");
                             TextFormatter.PrintLineSpecial("[APOLOGIZE] [TAUNT] [THREAT] [GOODBYE]");
                             talkBranch = 3;
                             break;
                         case "chitchat":
                             TextFormatter.PrintLinePositive("You: Nope, don't need anything, thanks. How's life going?");
                             TextFormatter.PrintLineWarning("Intern: Stuff's going good! Loving this job so far!");
-                            TextFormatter.PrintLineSpecial("[WORK] [PERSONAL] [FAMILY] [GOODBYE]");
+                            TextFormatter.PrintLineSpecial("[AWKWARD] [GOODBYE]");
                             talkBranch = 4;
                             break;
                         case "question":
@@ -146,13 +146,13 @@
                             talkBranch = 5;
                             break;
                         case "goodbye":
-                            TextFormatter.PrintLinePositive("You: GOODBYE.");
+                            TextFormatter.PrintLinePositive("You: GOODBYE!");
                             TextFormatter.PrintLineWarning("Intern: uh, ok... bye...");
                             convoIntern = false;
                             talkBranch = 0.5;
                             break;
                         default:
-                            TextFormatter.PrintLineDanger("You're all for free speech, but you think twice about saying that to the new intern...");
+                            TextFormatter.PrintLineDanger("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
                             break;
                     }
                     break;
@@ -186,11 +186,45 @@
                             talkBranch = 0.5;
                             break;
                         default:
-                            TextFormatter.PrintLineDanger("You're all for free speech, but you think twice about saying that to the new intern...");
+                            TextFormatter.PrintLineDanger("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
                             break;
                     }
                     break;
+                    //result of "threat"
                 case 3:
+                    switch (word)
+                    {
+                        case "apologize":
+                            TextFormatter.PrintLinePositive("You: i'm sorry...you're right...that was weird and dumb of me...violence is never okay...T-T");
+                            TextFormatter.PrintLineWarning("Intern: Haha, it's all good, boss. I'm always here if you need someone to talk to :3");
+                            TextFormatter.PrintLineSpecial("[PURELL] [LIFE] [QUEST] [GOODBYE]");
+                            talkBranch = 0;
+                            break;
+                        case "taunt":
+                            TextFormatter.PrintLinePositive("You: YOU SCARED?");
+                            TextFormatter.PrintLineWarning("Intern: nope. just confused why you're suddenly trying to fight people now...");
+                            TextFormatter.PrintLineSpecial("You: HYAAA! TAKE THAT!");
+                            //start fight sequence
+                            convoIntern = false;
+                            break;
+                        case "threat":
+                            TextFormatter.PrintLinePositive("You: YEAH. MAYBE I AM GOING TO FIGHT YOU EITHER WAY. YOU SHOULD BE SCARED RIGHT NOW, KID. >:(");
+                            TextFormatter.PrintLineWarning("Intern: I'M NOT SCARED. LET'S FIGHT.");
+                            TextFormatter.PrintLineSpecial("You: TAKE THAT THEN! SUPRISE ATTACK!");
+                            //start fight sequence
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "goodbye":
+                            TextFormatter.PrintLinePositive("You: ...goodbye...");
+                            TextFormatter.PrintLineWarning("Intern: ...");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        default:
+                            TextFormatter.PrintLineDanger("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
+                            break;
+                    }
                     break;
                 case 4:
                     break;

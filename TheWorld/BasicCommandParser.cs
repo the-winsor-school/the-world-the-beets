@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace TheWorld
 {
@@ -254,19 +255,50 @@ namespace TheWorld
                     // TODO: Part of a larger achievement
                     // After defeating an Enemy, they should drop their Inventory
                     // into the CurrentArea so that the player can then PickUp those Items.
-                    break;
-                case CombatResult.Lose:
-                    PrintLineDanger("You lose!");
-                    // TODO:  Easy Achievement:
+					break;
+				case CombatResult.Lose:
+                    // TODO: VM Easy Achievement:
                     // What happens when you die?  Deep questions.
+
+                    //below is basically just an overly-dramatic narrative about your DEMISE. Enjoy!
+                    PrintLineDanger("As the {0} deals the fatal blow, you see your life flash before your eyes.", parts[1]);
+                    //Thread.Sleep(#OfMilliSeconds) allows us to pause the program for a specified amount of time
+                    Thread.Sleep(4000);
+                    PrintLineDanger("You see the best parts of your childhood...");
+                    Thread.Sleep(3000);
+                    PrintLineDanger("Your friends. The ice-cream truck. Your school's robotics club. The 2-ply toilet paper.");
+                    Thread.Sleep(4000);
+                    PrintLineDanger("But you also see your arch-nemesis, BIG 'RONA, cackling away at your demise.");
+                    Thread.Sleep(4000);
+                    PrintLineDanger("And you slowly feel yourself fading away into the light...");
+                    Thread.Sleep(5000);
+                    PrintLineWarning("THE END");
+                    Thread.Sleep(5000);
+                    //this line below allows us to force the player to quit our game and start a new one (basically emphasises the whole-death-part of this all...)
+                    System.Environment.Exit(1);
                     break;
-                case CombatResult.RunAway:
-                    // TODO: Moderate Achievement
+
+				case CombatResult.RunAway:
+                    // TODO: VM Moderate Achievement
                     // Handle running away.  What happens if you run from a battle?
-                    break;
-                default: break;
-            }
-        }
+
+                    PrintLineWarning("You feel your heart jump into your throat. You are scared that you're going to die here. That you're going to die to the {0}", parts[1]);
+                    Thread.Sleep(2000);
+                    PrintLineWarning("So you run away as fast and as far as you can.");
+                    Thread.Sleep(2000);
+                    PrintLineWarning("You scream: AAAAAaaaaaAAAAAaaaAAAAAAaaAAAAAAAaaAAAAAaaaAAAAAAAHHHHHHhhhhhHHHHhhHhhhhhhHHHHHHHHHHHH!!!!!");
+                    Thread.Sleep(4000);
+                    PrintLineWarning("...It's not a dignified retreat...");
+                    Thread.Sleep(3000);
+                    PrintLineDanger("And as you flee, the {0} takes one, last, nearly-deadly, swipe at you.", parts[1]);
+                    Thread.Sleep(2000);
+                    PrintLineDanger("You are down to 1 HP.");
+					break;
+
+				default: break;
+			}
+		}
+
 
         /// <summary>
         /// What happens when the user types "look" as the command word.

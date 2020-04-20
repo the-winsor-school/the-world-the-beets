@@ -109,7 +109,13 @@ namespace TheWorld
                         break;
                     case "run":
                         if(Dice.Roll(Dice.Type.Coin) == 1)
+                        {
+                            //VM: added this line below for the purposes of livening the scenario that you run away (BasicCommandParser.cs). 
+                            //The player's gotta lose something for fleeing. 
+                            //So I made the player lose basically all their HP.
+                            Player.Stats.HPs = 1;
                             return CombatResult.RunAway;
+                        }
 
                         PrintLineDanger("You tried to run away but you failed!");
                         break;

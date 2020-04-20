@@ -13,7 +13,7 @@ namespace TheWorld
     {
         string Name { get; set; }
         string Description { get; set; }
-        public StatChart Stats // it has stats
+        StatChart Stats // it has stats
         {
             get;
             set;

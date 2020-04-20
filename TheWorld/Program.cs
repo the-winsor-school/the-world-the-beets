@@ -30,10 +30,11 @@ namespace TheWorld
 
             // Check out that second parameter?!?! WAHT!@
             int hps = Dice.Roll(Dice.Type.D6, modifier: 4);  // roll 1d6+4
-            
 
 
-            Player.Stats = new StatChart() {
+
+            Player.Stats = new StatChart()
+            {
                 Level = 1,
                 MaxHPs = hps,
                 HPs = hps,

@@ -113,7 +113,7 @@
                 case 0.5:
                     TextFormatter.PrintLinePositive("You: Hi, again, intern guy.");
                     TextFormatter.PrintLineWarning("Intern: Hello! Suprised to see you again so quick, you still need anything?");
-                    TextFormatter.PrintLineSpecial("'talk...'");
+                    TextFormatter.PrintLineSpecial("'talk ____'");
                     TextFormatter.PrintLineSpecial("[JOKE] [THREAT] [CHITCHAT] [QUESTION] [GOODBYE]");
                     convoIntern = true;
                     talkBranch = 1;

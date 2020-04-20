@@ -32,7 +32,7 @@ namespace TheWorld
 		/// </summary>
 		private static List<string> CommandWords = new List<string>()
 		{
-			"go", "look", "help", "quit", "examine", "fight"
+			"go", "look", "help", "quit", "examine", "fight", "equip" 
 		};
 
         /// <summary>
@@ -84,6 +84,10 @@ namespace TheWorld
             {
                 // TODO:  Implement this to show a new player how to use commands!
             }
+            else if (cmdWord.Equals("equip"))
+            {
+				ProcessEquipCommand(parts);
+            }
 
             // TODO: Many Achievements
             // Implement more commands like "use" and "get" and "talk"
@@ -95,6 +99,8 @@ namespace TheWorld
         /// Several Achievements inside.
         /// </summary>
         /// <param name="parts"></param>
+        ///
+        
         private static void ProcessHelpCommand(string[] parts)
         {
             if(parts.Length == 1)
@@ -119,6 +125,31 @@ namespace TheWorld
                 // an Error message (Use the PrintWarning() method to make it obvious).
             }
         }
+		private static void ProcessEquipCommand(string[] parts) //write to equip from backpack 
+		{
+			string itemName = parts[1];
+			if (CurrentArea.HasItem(itemName))
+			{
+				Item item = CurrentArea.GetItem(itemName);
+
+				if (itemName is IEquippableItem)
+				{
+					try
+					{
+						((IEquippableItem)item).Equip();
+					}
+					catch (WorldException)
+					{
+						return;
+					}
+				}
+                else
+                {
+					throw new WorldException("You can't equip that!");
+                }
+			}
+            else { throw new WorldException("That's not in your backpack!"); }
+		}
 
 		/// <summary>
 		/// Enter Combat mode.

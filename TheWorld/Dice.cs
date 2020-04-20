@@ -148,13 +148,23 @@ namespace TheWorld
         {
             char[] splitChars = { 'd', '+' };
             string[] diceParam = DnDFormat.Split(splitChars);
-            foreach (var Param in diceParam)
+            if (diceParam.Length != 2 || diceParam.Length != 3) { throw new ArgumentException(string.Format("Your input was not in DnD Format. Please enter in a valid format.")); }
+            else if (diceParam.Length == 2)
             {
-                if (!Char.IsNumber(DnDFormat, 0) || !Char.IsNumber(DnDFormat, -1)! || int.TryParse(Param, out int result1) || !Type.TryParse(Param, out char result2))
+                if (!Char.IsNumber(DnDFormat, 0) || !Char.IsNumber(DnDFormat, -1)! || DnDFormat[diceParam[0].Length] != 'd') { throw new ArgumentException(string.Format("Your input was not in DnD Format. Please enter in a valid format.")); }
+            }
+            else if (diceParam.Length == 3)
+            {
+                if (!Char.IsNumber(DnDFormat, 0) || !Char.IsNumber(DnDFormat, -1)! || DnDFormat[-(diceParam[3].Length + 1)] != '+') { throw new ArgumentException(string.Format("Your input was not in DnD Format. Please enter in a valid format.")); }
+            }
+            else
+            {
+                foreach (var Param in diceParam)
                 {
-                    throw new ArgumentException(string.Format("Your input was not in DnD Format. Please enter in a valid format."));
+                    if (int.TryParse(Param, out int result1) || !Type.TryParse(Param, out char result2)){throw new ArgumentException(string.Format("Your input was not in DnD Format. Please enter in a valid format."));}
                 }
             }
+
             DiceType = (Type)Convert.ToInt32(diceParam[1]);
             Count = Convert.ToInt32(diceParam[0]);
             Modifier = Convert.ToInt32(diceParam[2]);

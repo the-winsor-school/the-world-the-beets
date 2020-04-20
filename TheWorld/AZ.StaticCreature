@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace TheWorld
+{
+	public partial class Creature
+	{
+		//final boss "Big Rona"
+        public static Creature BigRona => new Creature()
+        {
+            Name = "Big Rona"
+            Description = "This is the final boss. Defeat Big Rona to win the game.",
+            Stats 
+        }
+
+	}
+}

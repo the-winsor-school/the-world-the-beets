@@ -1,5 +1,4 @@
-﻿using System;
-namespace TheWorld
+﻿namespace TheWorld
 {
     /// <summary>
     /// A Creature that can TALK
@@ -96,12 +95,12 @@ namespace TheWorld
 
     public class Intern : Creature, ITalkingCreature
     {
-        double talkCount = 0;
+        double talkBranch = 0;
         public static bool convoIntern = false;
 
         public void Talk(string word)
         {
-            switch (talkCount)
+            switch (talkBranch)
             {
                 case 0:
                     TextFormatter.PrintLinePositive("You: Hi intern guy!");
@@ -109,15 +108,15 @@ namespace TheWorld
                     TextFormatter.PrintLineSpecial("'talk...'");
                     TextFormatter.PrintLineSpecial("[JOKE] [THREAT] [CHITCHAT] [QUESTION] [GOODBYE]");
                     convoIntern = true;
-                    talkCount = 1;
+                    talkBranch = 1;
                     break;
                 case 0.5:
-                    TextFormatter.PrintLinePositive("You: Hi, again, intern guy!");
+                    TextFormatter.PrintLinePositive("You: Hi, again, intern guy.");
                     TextFormatter.PrintLineWarning("Intern: Hello! Suprised to see you again so quick, you still need anything?");
                     TextFormatter.PrintLineSpecial("'talk...'");
                     TextFormatter.PrintLineSpecial("[JOKE] [THREAT] [CHITCHAT] [QUESTION] [GOODBYE]");
                     convoIntern = true;
-                    talkCount = 1;
+                    talkBranch = 1;
                     break;
                 case 1:
                     switch (word)
@@ -126,37 +125,70 @@ namespace TheWorld
                             TextFormatter.PrintLinePositive("You: What did the clock do when it was hungry?");
                             TextFormatter.PrintLineWarning("Intern: Went back for seconds.");
                             TextFormatter.PrintLineSpecial("[REPRIMAND] [JOKE] [LAUGH] [GOODBYE]");
-                            talkCount = 2;
+                            talkBranch = 2;
                             break;
                         case "threat":
                             TextFormatter.PrintLinePositive("You: FIGHT ME OR ELSE!!!");
                             TextFormatter.PrintLineWarning("Intern: or else... what? It sounds like you're just going to fight me either way lol...");
                             TextFormatter.PrintLineSpecial("[APOLOGIZE] [TAUNT] [THREAT] [GOODBYE]");
-                            talkCount = 3;
+                            talkBranch = 3;
                             break;
                         case "chitchat":
                             TextFormatter.PrintLinePositive("You: Nope, don't need anything, thanks. How's life going?");
                             TextFormatter.PrintLineWarning("Intern: Stuff's going good! Loving this job so far!");
                             TextFormatter.PrintLineSpecial("[WORK] [PERSONAL] [FAMILY] [GOODBYE]");
-                            talkCount = 4;
+                            talkBranch = 4;
                             break;
                         case "question":
                             TextFormatter.PrintLinePositive("You: What do you exactly do here, again? ");
-                            TextFormatter.PrintLineWarning("Intern: Uh...I'm your lab assistant. You tell me to do stuff. Also, by the way, the tub of Purell you asked for is here. Ask me anytime if you need some more of it!");
+                            TextFormatter.PrintLineWarning("Intern: Uh...I'm your lab assistant. You tell me to do stuff. Also, by the way, the tub of Purell you asked for is ready in the storage room. Let me know if you need any help with it!");
                             TextFormatter.PrintLineSpecial("[PURELL] [LIFE] [QUEST] [GOODBYE]");
-                            talkCount = 5;
+                            talkBranch = 5;
                             break;
                         case "goodbye":
                             TextFormatter.PrintLinePositive("You: GOODBYE.");
                             TextFormatter.PrintLineWarning("Intern: uh, ok... bye...");
                             convoIntern = false;
-                            talkCount = 0.5;
+                            talkBranch = 0.5;
                             break;
                         default:
+                            TextFormatter.PrintLineDanger("You're all for free speech, but you think twice about saying that to the new intern...");
                             break;
                     }
                     break;
+
+                    //result of "joke"
                 case 2:
+                    switch (word)
+                    {
+                        case "reprimand":
+                            TextFormatter.PrintLinePositive("You: LISTEN YOUNG'UN, YOU SHOULD KNOW BETTER THAN TO SPOIL THE PUNCHLINE OF A GOOD OL' JOKE!");
+                            TextFormatter.PrintLineWarning("Intern: Okay, then I'll tell you a joke. Why aren't koalas considered as bears?");
+                            TextFormatter.PrintLineSpecial("[WHY] [SCIENTIFIC] [PUNCHLINE] [PUNCH] [LAUGH] [GOODBYE]");
+                            talkBranch = 0;
+                            break;
+                        case "joke":
+                            TextFormatter.PrintLinePositive("You: Here's another one for ya then: why did the bike fall dow-");
+                            TextFormatter.PrintLineWarning("Intern: because it was two-tired.");
+                            TextFormatter.PrintLineSpecial("[CRY] [SCREAM] [LAUGH] [GOODBYE]");
+                            talkBranch = 0;
+                            break;
+                        case "laugh":
+                            TextFormatter.PrintLinePositive("You: AHAHAHAHAHHAAHAHA!!!");
+                            TextFormatter.PrintLineWarning("Intern: Are you really laughing at your own joke?");
+                            TextFormatter.PrintLineSpecial("[CONFRONT] [LAUGH] [GOODBYE]");
+                            talkBranch = 0;
+                            break;
+                        case "goodbye":
+                            TextFormatter.PrintLinePositive("You: Hmmph! GOODBYE THEN.");
+                            TextFormatter.PrintLineWarning("Intern: Bye! :D");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        default:
+                            TextFormatter.PrintLineDanger("You're all for free speech, but you think twice about saying that to the new intern...");
+                            break;
+                    }
                     break;
                 case 3:
                     break;

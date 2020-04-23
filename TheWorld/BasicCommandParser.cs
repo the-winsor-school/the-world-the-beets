@@ -116,7 +116,8 @@ namespace TheWorld
 				}
                 else
                 {
-					PrintLineWarning("{0} cannot be used...", itemToUse);
+					
+                    PrintLineWarning("{0} cannot be used...", itemToUse);
 				}
 
 
@@ -131,11 +132,10 @@ namespace TheWorld
 
 			if (parts.Length == 2)
 				CurrentArea.GetItem(parts[1]);
-			    IUseableItem itemToUse2 = CurrentArea.GetItem(parts[1]) as IUseableItem;
-                //could i create some sort of parameter for the things you can 
-			    if (itemToUse2 != null)
+               // IUseableItem itemToUse = CurrentArea.GetItem(parts[1]) as IUseableItem;
+			//if (itemToUse != null)
 			{
-				itemToUse2.Use(Creature);
+				//itemToUse.Use(object to target);
 				//Player.Backpack.Use(parts[1])
 			}
 

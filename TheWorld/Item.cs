@@ -179,7 +179,7 @@ namespace TheWorld
                 TheGame.Player.Stats.Def.Modifier += ThisBuff;
 
                 IsEquipped = true;
-                
+                TextFormatter.PrintLineSpecial("Equipped {0}! It adds {1} to your defense", this.Name, this.ThisBuff);
             }
             else
             {

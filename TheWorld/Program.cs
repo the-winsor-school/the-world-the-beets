@@ -39,7 +39,7 @@ namespace TheWorld
                 MaxHPs = hps,
                 HPs = hps,
                 Atk = new Dice(Dice.Type.D6),  // 1d6
-                Def = new Dice(Dice.Type.D4,1,Player.Stats.DefBuff),  // 1d4 with a modifier
+                Def = new Dice(Dice.Type.D4),  // 1d4 with a modifier
                 Exp = 0
 			};
 

@@ -174,7 +174,9 @@ namespace TheWorld
         {
             if (IsEquipped == false)
             {
-                TheGame.Player.Stats.DefBuff=ThisBuff; //added a modifier in the program file called defbuff and thats equal to the buff of a give item
+                //TheGame.Player.Stats.DefBuff=ThisBuff; //added a modifier in the program file called defbuff and thats equal to the buff of a give item
+
+                TheGame.Player.Stats.Def.Modifier += ThisBuff;
 
                 IsEquipped = true;
                 

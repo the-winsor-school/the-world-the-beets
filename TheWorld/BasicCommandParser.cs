@@ -32,7 +32,7 @@ namespace TheWorld
 		/// </summary>
 		private static List<string> CommandWords = new List<string>()
 		{
-			"go", "look", "help", "quit", "examine", "fight", "use"
+			"go", "look", "help", "quit", "examine", "fight", "use", "get"
 		};
 
         /// <summary>
@@ -120,6 +120,7 @@ namespace TheWorld
                     PrintLineWarning("{0} cannot be used...", itemToUse);
 				}
 
+            }
 
 				//access the backpack
 				//using the Use method of the backpack dictionary
@@ -130,20 +131,23 @@ namespace TheWorld
 				//confused on getting the instance of the player and how to write this general (sorry) 
 			}
 
-			if (parts.Length == 2)
-				CurrentArea.GetItem(parts[1]);
+			//if (parts.Length == 2)
+				//CurrentArea.GetItem(parts[1]);
                // IUseableItem itemToUse = CurrentArea.GetItem(parts[1]) as IUseableItem;
 			//if (itemToUse != null)
-			{
+			
 				//itemToUse.Use(object to target);
 				//Player.Backpack.Use(parts[1])
+			if (parts.Length == 1)
+			{
+
 			}
 
 		}
 
 		private static void ProcessGetCommand(string[] parts)
 		{
-			if (parts.Length == 2)
+			if (parts.Length == 1)
 			{
 
 			}

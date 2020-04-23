@@ -3,38 +3,38 @@ using System.Collections.Generic;
 
 namespace TheWorld
 {
-	/// <summary>
-	/// A generic item in the world
-	/// </summary>
-	public class Item
-	{
+    /// <summary>
+    /// A generic item in the world
+    /// </summary>
+    public class Item
+    {
         /// <summary>
         /// Name of the Item
         /// </summary>
 		public string Name
-		{
-			get;
-			set;
-		}
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// A description of the item.
         /// </summary>
 		public string Description
-		{
-			get;
-			set;
-		}
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// How much is the Item worth?
         /// </summary>
 		public Money Value
-		{
-			get;
-			set;
-		}
-	}
+        {
+            get;
+            set;
+        }
+    }
 
     // TODO: Moderate Achievement
     // Build a "Book" class which is an Item that is both Carryable and Useable.
@@ -132,7 +132,7 @@ namespace TheWorld
         {
             TheGame.Player.Stats.HPs += HealValue;
 
-            if(--UseCount <= 0) // short hand, subtract one from UseCount and then compare.
+            if (--UseCount <= 0) // short hand, subtract one from UseCount and then compare.
                 throw new ItemDepletedException(string.Format("Your {0} has run out.", this.Name), this);
         }
 
@@ -143,7 +143,7 @@ namespace TheWorld
         /// <param name="target">target must be of type Creature.</param>
         public void Use(ref object target)
         {
-            if(target is Creature)
+            if (target is Creature)
             {
                 Creature creature = (Creature)target;
                 creature.Stats.HPs += HealValue;
@@ -156,5 +156,6 @@ namespace TheWorld
             }
         }
     }
+
 }
 

@@ -128,28 +128,35 @@ namespace TheWorld
 		private static void ProcessEquipCommand(string[] parts) //write to equip from backpack 
 		{
 			string itemName = parts[1];
-			if (CurrentArea.HasItem(itemName))
+			
+				Item item;
+			if (CurrentArea.HasItem(parts[1]))
 			{
-				Item item = CurrentArea.GetItem(itemName);
 
-				if (itemName is IEquippableItem)
+				item = CurrentArea.GetItem(parts[1]);// turn into backpack
+
+				if (item is IEquippableItem)
 				{
 					try
 					{
 						((IEquippableItem)item).Equip();
 					}
 					catch (WorldException)
-					{
+                    {
 						return;
 					}
 				}
-                else
-                {
+				else
+				{
 					throw new WorldException("You can't equip that!");
-                }
+				}
+			} else
+			{
+				throw new WorldException("That's not in your backpack!");
 			}
-            else { throw new WorldException("That's not in your backpack!"); }
 		}
+
+		   
 
 		/// <summary>
 		/// Enter Combat mode.

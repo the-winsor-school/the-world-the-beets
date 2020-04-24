@@ -26,6 +26,7 @@ namespace TheWorld
     public static partial class TheGame
     {
 
+
         /// <summary>
         /// The command words.
         /// These are all the words that the game will accept as commands.
@@ -33,7 +34,7 @@ namespace TheWorld
         /// </summary>
         private static List<string> CommandWords = new List<string>()
         {
-            "go", "look", "help", "quit", "examine", "fight", "played_time", "talk"
+            "go", "look", "help", "quit", "examine", "fight", "played_time", "talk", "equip"
         };
 
         //This below CommandWordsFormats list was created for the purpose of improving the Help command a few lines below
@@ -43,6 +44,11 @@ namespace TheWorld
         {
             "go [direction]", "look", "look [item or creature]", "help", "help [command word]", "quit", "examine", "examine [item or creature]", "fight [creature]", "played_time"
         };
+        /// <summary>
+        /// The command words.
+        /// These are all the words that the game will accept as commands.
+        /// You will need to add more words to make the game more interesting!
+        /// </summary>
 
         /// <summary>
         /// TODO:  Easy Achievement
@@ -56,7 +62,7 @@ namespace TheWorld
         /// </summary>
         /// <param name="cmdWord"></param>
         /// <returns></returns>
-		private static bool IsValidCommandWord(string cmdWord) => throw new NotImplementedException();
+        private static bool IsValidCommandWord(string cmdWord) => throw new NotImplementedException();
 
         /// <summary>
         /// Parses the command and do any required actions.
@@ -99,6 +105,10 @@ namespace TheWorld
                 ProcessHelpCommand(parts);
                 //This line takes us to the ProcessHelpCommand method a couple lines below :)
             }
+            else if (cmdWord.Equals("equip"))
+            {
+				ProcessEquipCommand(parts);
+            }
 
             // TODO: Many Achievements
             // Implement more commands like "use" and "get" and "talk"
@@ -117,6 +127,8 @@ namespace TheWorld
         /// Several Achievements inside.
         /// </summary>
         /// <param name="parts"></param>
+        ///
+        
         private static void ProcessHelpCommand(string[] parts)
         {
             if (parts.Length == 1)
@@ -216,6 +228,38 @@ namespace TheWorld
                 }
             }
         }
+		private static void ProcessEquipCommand(string[] parts) //write to equip from backpack 
+		{
+			string itemName = parts[1];
+			
+				Item item;
+			if (CurrentArea.HasItem(parts[1]))
+			{
+
+				item = CurrentArea.GetItem(parts[1]);// turn into backpack
+
+				if (item is IEquippableItem)
+				{
+					try
+					{
+						((IEquippableItem)item).Equip();
+					}
+					catch (WorldException)
+                    {
+						return;
+					}
+				}
+				else
+				{
+					throw new WorldException("You can't equip that!");
+				}
+			} else
+			{
+				throw new WorldException("That's not in your backpack!");
+			}
+		}
+
+		   
 
         /// <summary>
         /// Enter Combat mode.

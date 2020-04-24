@@ -40,6 +40,12 @@ namespace TheWorld
 			set;
 		}
 
+        public int DefBuff //used with masks, a modifier for Def rolls for player
+        {
+			get;
+			set;
+        }
+
 		/// <summary>
 		/// Attack Power
 		/// </summary>
@@ -57,6 +63,7 @@ namespace TheWorld
 		{
 			get;
 			set;
+          
 		}
 
         public int Exp

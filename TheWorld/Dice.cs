@@ -89,7 +89,7 @@ namespace TheWorld
         /// Modifier added to the Dice roll
         ///(e.g. 4d6 +5)
         /// </summary>
-        public int Modifier { get; protected set; }
+        public int Modifier { get; set; }
         
         /// <summary>
         /// Initialize a Dice type for you to roll

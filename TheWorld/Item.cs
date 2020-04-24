@@ -180,5 +180,38 @@ namespace TheWorld
             }
         }
     }
+    public class Mask : Item, ICarryableItem, IEquippableItem
+    {
+        public int Weight { get; set; }
+
+        public int UseCount { get; set; }
+
+        public int ThisBuff { get; set; }
+
+        public StatChart Stats { get; set; }
+
+        public bool IsEquipped { get; set; }
+
+       // public Dice Def { get; set; }
+
+        public void Equip()
+        {
+            if (IsEquipped == false)
+            {
+                //TheGame.Player.Stats.DefBuff=ThisBuff; //added a modifier in the program file called defbuff and thats equal to the buff of a give item
+
+                TheGame.Player.Stats.Def.Modifier += ThisBuff;
+
+                IsEquipped = true;
+                TextFormatter.PrintLineSpecial("Equipped {0}! It adds {1} to your defense", this.Name, this.ThisBuff);
+            }
+            else
+            {
+                throw new WorldException(string.Format("You already equipped that {0}", this.Name), this); //can't equip something that's already equipped
+            }
+
+        }
+    }
+        
 }
 

@@ -42,7 +42,6 @@
     public class SleepyScientist : Creature, ITalkingCreature
     {
         double talkCount = 0;
-
         public void Talk(string word)
         {
             //this if statement allows us to cycle through the dialogue a second time
@@ -93,6 +92,10 @@
         }
     }
 
+
+    /// VM: Summary!
+    /// This class implements the ITalkingCreature interface
+    /// the Talk method for this class brings 
     public class Intern : Creature, ITalkingCreature
     {
         double talkBranch = 0;
@@ -141,7 +144,7 @@
                             break;
                         case "question":
                             TextFormatter.PrintLinePositive("You: What do you exactly do here, again? ");
-                            TextFormatter.PrintLineWarning("Intern: Uh...I'm your lab assistant. You tell me to do stuff. Also, by the way, the tub of Purell you asked for is ready in the storage room. Let me know if you need any help with it!");
+                            TextFormatter.PrintLineWarning("Intern: Uh...I'm your lab assistant. You tell me to do stuff. Also, by the way, the tub of Purell you asked for is ready in the storage room. Let me know if you need any help with it.");
                             TextFormatter.PrintLineSpecial("[PURELL] [LIFE] [QUEST] [GOODBYE]");
                             talkBranch = 5;
                             break;
@@ -152,12 +155,12 @@
                             talkBranch = 0.5;
                             break;
                         default:
-                            TextFormatter.PrintLineDanger("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
+                            TextFormatter.PrintLineWarning("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
                             break;
                     }
                     break;
 
-                    //result of "joke"
+                //result of "joke"
                 case 2:
                     switch (word)
                     {
@@ -165,19 +168,19 @@
                             TextFormatter.PrintLinePositive("You: LISTEN YOUNG'UN, YOU SHOULD KNOW BETTER THAN TO SPOIL THE PUNCHLINE OF A GOOD OL' JOKE!");
                             TextFormatter.PrintLineWarning("Intern: Okay, then I'll tell you a joke. Why aren't koalas considered as bears?");
                             TextFormatter.PrintLineSpecial("[WHY] [SCIENTIFIC] [PUNCHLINE] [PUNCH] [LAUGH] [GOODBYE]");
-                            talkBranch = 0;
+                            talkBranch = 6;
                             break;
                         case "joke":
                             TextFormatter.PrintLinePositive("You: Here's another one for ya then: why did the bike fall dow-");
                             TextFormatter.PrintLineWarning("Intern: because it was two-tired.");
                             TextFormatter.PrintLineSpecial("[CRY] [SCREAM] [LAUGH] [GOODBYE]");
-                            talkBranch = 0;
+                            talkBranch = 7;
                             break;
                         case "laugh":
                             TextFormatter.PrintLinePositive("You: AHAHAHAHAHHAAHAHA!!!");
                             TextFormatter.PrintLineWarning("Intern: Are you really laughing at your own joke?");
                             TextFormatter.PrintLineSpecial("[CONFRONT] [LAUGH] [GOODBYE]");
-                            talkBranch = 0;
+                            talkBranch = 8;
                             break;
                         case "goodbye":
                             TextFormatter.PrintLinePositive("You: Hmmph! GOODBYE THEN.");
@@ -186,11 +189,11 @@
                             talkBranch = 0.5;
                             break;
                         default:
-                            TextFormatter.PrintLineDanger("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
+                            TextFormatter.PrintLineWarning("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
                             break;
                     }
                     break;
-                    //result of "threat"
+                //result of "threat"
                 case 3:
                     switch (word)
                     {
@@ -198,7 +201,7 @@
                             TextFormatter.PrintLinePositive("You: i'm sorry...you're right...that was weird and dumb of me...violence is never okay...T-T");
                             TextFormatter.PrintLineWarning("Intern: Haha, it's all good, boss. I'm always here if you need someone to talk to :3");
                             TextFormatter.PrintLineSpecial("[PURELL] [LIFE] [QUEST] [GOODBYE]");
-                            talkBranch = 0;
+                            talkBranch = 0.5;
                             break;
                         case "taunt":
                             TextFormatter.PrintLinePositive("You: YOU SCARED?");
@@ -206,11 +209,12 @@
                             TextFormatter.PrintLineSpecial("You: HYAAA! TAKE THAT!");
                             //start fight sequence
                             convoIntern = false;
+                            talkBranch = 0.5;
                             break;
                         case "threat":
                             TextFormatter.PrintLinePositive("You: YEAH. MAYBE I AM GOING TO FIGHT YOU EITHER WAY. YOU SHOULD BE SCARED RIGHT NOW, KID. >:(");
                             TextFormatter.PrintLineWarning("Intern: I'M NOT SCARED. LET'S FIGHT.");
-                            TextFormatter.PrintLineSpecial("You: TAKE THAT THEN! SUPRISE ATTACK!");
+                            TextFormatter.PrintLinePositive("You: TAKE THAT THEN! SUPRISE ATTACK!");
                             //start fight sequence
                             convoIntern = false;
                             talkBranch = 0.5;
@@ -222,15 +226,182 @@
                             talkBranch = 0.5;
                             break;
                         default:
-                            TextFormatter.PrintLineDanger("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
+                            TextFormatter.PrintLineWarning("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
                             break;
                     }
                     break;
                 case 4:
+                    switch (word)
+                    {
+                        case "awkward":
+                            TextFormatter.PrintLinePositive("You:...uh, I'm not great at casual chitchat so I think it's best we make a mutual agreement to end the conversation and for me to just shuffle away. Good with you?");
+                            TextFormatter.PrintLineWarning("Intern: yeah...this is awkward...see ya boss.");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "goodbye":
+                            TextFormatter.PrintLinePositive("You: goodbye. :|");
+                            TextFormatter.PrintLineWarning("Intern: goodbye. :|");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        default:
+                            TextFormatter.PrintLineWarning("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
+                            break;
+                    }
                     break;
                 case 5:
+                    switch (word)
+                    {
+                        case "purell":
+                            TextFormatter.PrintLinePositive("You: Where's the tub of Purell, again?");
+                            TextFormatter.PrintLineWarning("Intern: Just in the backroom! To the south of us! Also, if you were thinking about bathing in it... do not bathe in it.");
+                            TextFormatter.PrintLinePositive("You: Wh-");
+                            TextFormatter.PrintWarning("Intern: Just... don't. I still get shivers down my spine when I think about it. It's not as nice as you think.");
+                            TextFormatter.PrintLinePositive("You: Okay...bye then...thanks for your...advice... 0____________0");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "life":
+                            TextFormatter.PrintLinePositive("You: What's the meaning of life?");
+                            TextFormatter.PrintLineWarning("Intern: To wash your hands constantly. 20 seconds! Don't forget! ;)");
+                            TextFormatter.PrintLinePositive("You: Okay never mind...you're hopeless. Bye intern guy.");
+                            TextFormatter.PrintWarning("Intern: Byeeee :P");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "quest":
+                            TextFormatter.PrintLinePositive("You: Hey...intern guy?");
+                            TextFormatter.PrintLineWarning("Intern: Yeah...?");
+                            TextFormatter.PrintLinePositive("You: I dunno... I guess I'm just nervous about this whole QUEST thing. I don't have any CLUE what I'm supposed to do. I don't even know if I'm going to see this lab again...");
+                            TextFormatter.PrintWarning("Intern: Aw boss, it's going to be okay. That's for sure. Let your ANGER TOWARDS BIG 'RONA FUEL YOUR DECISION MAKING. Also, you know Bertha is upstairs, right? I've been visiting her a lot lately. She's a really good listener!");
+                            TextFormatter.PrintLinePositive("You: Thanks, intern guy. I feel a lot better now. I hope I'll see you again...someday...");
+                            TextFormatter.PrintWarning("Hope to see you again, too!");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "goodbye":
+                            TextFormatter.PrintLinePositive("You: Cool! See you then!");
+                            TextFormatter.PrintLineWarning("Intern: *mumble* *mumble* (took me 10 hours and 500 bottles of mini Purell. MINI BOTTLES. BECAUSE THAT'S THE ONLY KIND WE HAD AT THE LAB. But do I get a 'thank you'? or even a 'bye FRIEND'?... no i do not. >:( )");
+                            TextFormatter.PrintLineWarning("Intern:...see you...boss friend... T-T");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        default:
+                            TextFormatter.PrintLineWarning("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
+                            break;
+                    }
+                    break;
+
+                case 6:
+                    switch (word)
+                    {
+                        case "why":
+                            TextFormatter.PrintLinePositive("You: Why.");
+                            TextFormatter.PrintLineWarning("Intern: Because they don't KOALA-fy!");
+                            TextFormatter.PrintLinePositive("You: ...goodbye.");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "scientific":
+                            TextFormatter.PrintLinePositive("You: ACTUALLY, koala's aren't bears at all. They are marsupials.");
+                            TextFormatter.PrintLineWarning("Intern: ...that was way worse than saying the actual punchline of the joke.");
+                            TextFormatter.PrintLinePositive("You: I know. Goodbye intern man.");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "punchline":
+                            TextFormatter.PrintLinePositive("You: Because they don't KOALA-fy!!");
+                            TextFormatter.PrintLineWarning("Intern: ...that was mean and hurtful...goodbye.");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "punch":
+                            TextFormatter.PrintLinePositive("You: TAKE THIS!");
+                            TextFormatter.PrintLineWarning("Intern: wha-");
+                            //start fight
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "laugh":
+                            TextFormatter.PrintLinePositive("You: HAHAHAHAHAHA!");
+                            TextFormatter.PrintLineWarning("Intern: Okay, there's no punchline yet...this is weird...goodbye...?");
+                            TextFormatter.PrintLinePositive("You: hehehehe.");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "goodbye":
+                            TextFormatter.PrintLinePositive("No, I'm leaving. This is a toxic relationship and a dangerous environment. Goodbye.");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        default:
+                            TextFormatter.PrintLineWarning("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
+                            break;
+                    }
+                    break;
+                case 7:
+                    switch (word)
+                    {
+                        case "cry":
+                            TextFormatter.PrintLinePositive("You: *crying uncontrollably* T-T");
+                            TextFormatter.PrintLineWarning("Intern: Aw it's going to be okay, boss :3 *pats you on back*");
+                            TextFormatter.PrintLinePositive("You: *staggers away, still sobbing*");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "scream":
+                            TextFormatter.PrintLinePositive("You: AHHHHHHHHHHHHHHH!");
+                            TextFormatter.PrintLineWarning("Intern: O___o goodbye then...");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "laugh":
+                            TextFormatter.PrintLinePositive("You: hahahahaha...*walks away w/o saying goodbye*");
+                            TextFormatter.PrintLineWarning("Intern: *staring from a distance* why is boss still laughing? weird....");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "goodbye":
+                            TextFormatter.PrintLinePositive("You: GOODBYE. >:O");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        default:
+                            TextFormatter.PrintLineWarning("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
+                            break;
+                    }
+                    break;
+                case 8:
+                    switch (word)
+                    {
+                        case "confront":
+                            TextFormatter.PrintLinePositive("You: YES I AM AND I'M NOT ASHAMED OF IT. GOODBYE.");
+                            TextFormatter.PrintLineWarning("Intern: Whatever you say, boss!");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "laugh":
+                            TextFormatter.PrintLinePositive("You: AHAHHAHAHAHAHAHA.");
+                            TextFormatter.PrintLineWarning("Intern: You're scaring me. Bye! *ducks and covers under his desk*");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        case "goodbye":
+                            TextFormatter.PrintLinePositive("You: heh...bye intern boy...");
+                            TextFormatter.PrintLineWarning("Intern: bye boss boy...");
+                            convoIntern = false;
+                            talkBranch = 0.5;
+                            break;
+                        default:
+                            TextFormatter.PrintLineWarning("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
+                            break;
+                    }
                     break;
                 default:
+                    TextFormatter.PrintLineWarning("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
+                    convoIntern = false;
+                    talkBranch = 0.5;
                     break;
             }
 

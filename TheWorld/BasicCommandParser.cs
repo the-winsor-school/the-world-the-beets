@@ -101,8 +101,9 @@ namespace TheWorld
         {
             if (parts.Length == 1)
             {
-				PrintLineWarning("Please specify which item."); 
-            }
+				PrintLineWarning("Please specify which item.");
+				return;
+			}
 
             if (parts.Length == 2)
             {
@@ -110,39 +111,43 @@ namespace TheWorld
 				IUseableItem itemToUse = CurrentArea.GetItem(parts[1]) as IUseableItem;
 				if (itemToUse != null)
 				{
-					itemToUse.Use(); //make this an exception later
-					PrintLinePositive("Neat thing!"); 
-					
+					try
+					{
+						((IUseableItem)itemToUse).Use();
+						PrintLinePositive("Neat thing!");
+					}
+					catch (ItemDepletedException ide)
+					{
+						PrintLineSpecial(ide.Message);
+					}
+					catch (WorldException we)
+					{
+						PrintLineDanger(we.Message);
+					}
 				}
                 else
                 {
-					
-                    PrintLineWarning("{0} cannot be used...", itemToUse);
+                    PrintLineWarning("This item cannot be used...");
+					return;
 				}
 
             }
+            
+			string targetName = parts[3];
+			object target;
 
-				//access the backpack
-				//using the Use method of the backpack dictionary
-				//Player.Backpack.Use(parts[1])
-				//["use"] ["HealingPotion"] ["Rabbit"]
-				//parts[1]-- > "HealingPotion"
-				//problem: how do i get from this text to the item
-				//confused on getting the instance of the player and how to write this general (sorry) 
-			//}
+			if (CurrentArea.HasItem(targetName))
 
-			//if (parts.Length == 2)
-				//CurrentArea.GetItem(parts[1]);
-               // IUseableItem itemToUse = CurrentArea.GetItem(parts[1]) as IUseableItem;
-			//if (itemToUse != null)
-			
-				//itemToUse.Use(object to target);
-				//Player.Backpack.Use(parts[1])
-			if (parts.Length == 1)
+				target = CurrentArea.GetItem(targetName);
+
+			else if (CurrentArea.CreatureExists(targetName))
+
+				target = CurrentArea.GetCreature(targetName);
+			else
 			{
-
+				PrintLineWarning("I don't see any of that around here...");
+				return;
 			}
-
 		}
 
 		private static void ProcessGetCommand(string[] parts)
@@ -151,7 +156,6 @@ namespace TheWorld
 			{
 
 			}
-
 		}
 
 		/// <summary>

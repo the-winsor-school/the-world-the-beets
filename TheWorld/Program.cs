@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
 // this allows me to use the static methods defined in TextFormatter without typing "TextFormatter." every time.
 using static TheWorld.TextFormatter;
@@ -12,7 +11,7 @@ namespace TheWorld
 		public static Area CurrentArea;
 		public static Player Player;
 
-        // TODO: VM Moderate Achievement
+        // TODO: Moderate Achievement
         //
         // Implement a property called PlayedTime which is of type TimeSpan
         // and a private DateTime StartTime.
@@ -57,7 +56,7 @@ namespace TheWorld
 
 			string command = "";
 
-            // TODO: VM Easy Achievement:
+            // TODO:  Easy Achievement:
             // Script an Intro Sequence setting the stage for your game.
             // Start your storyline off with a little more than just dropping
             // the player into the world with no idea what is going on....
@@ -65,7 +64,7 @@ namespace TheWorld
             // when I landed in this world.
 
             // Display the short information about the Starting Area
-            Console.WriteLine(CurrentArea);
+			Console.WriteLine(CurrentArea);
 
             #region The Entire Game Happens HERE
 

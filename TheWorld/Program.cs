@@ -64,38 +64,6 @@ namespace TheWorld
             // ... or maybe that's what you want, nobody told me what was going on
             // when I landed in this world.
 
-            PrintLineWarning("Welcome!");
-            Thread.Sleep(2000);
-            PrintLineWarning("You are a scientist here in this world.");
-            Thread.Sleep(2000);
-            PrintLineWarning("It is a blessing and a curse.");
-            Thread.Sleep(2000);
-            PrintLineWarning("Sitting at your desk, quarantined in your lab, you notice a face mask blow by in the wind.");
-            Thread.Sleep(4000);
-            PrintLineWarning("You reminisce to the old days before Coronavirus (aka Big ‘Rona) ruled the world and everyone suffered its oppression.");
-            Thread.Sleep(3000);
-            PrintLineWarning("Back when you could high five your friends and have a meeting without worrying about wifi.");
-            Thread.Sleep(4000);
-            PrintLineWarning("Suddenly, you know that now, at this moment, it is your destiny to defeat Big ‘Rona.");
-            Thread.Sleep(5000);
-            PrintLineWarning("A long journey to defeat Big ‘Rona and its minions lies ahead.");
-            Thread.Sleep(4000);
-            PrintLineWarning("You’ll need to defend yourself with masks, toilet paper, and tubs of Purell.");
-            Thread.Sleep(2000);
-            PrintLineWarning("You need to be quick.");
-            Thread.Sleep(1000);
-            PrintLineWarning("You need to outwit your enemies.");
-            Thread.Sleep(1000);
-            PrintLineWarning("And if necessary, you’ll need BRUTE FORCE to survive.");
-            Thread.Sleep(4000);
-            PrintLineWarning("As the sun creeps through the cobwebs and through the musty air of your lab, you feel its warmth.");
-            Thread.Sleep(3500);
-            PrintLineWarning("And you realize this may be the last sunrise you’ll ever see.");
-            Thread.Sleep(3500);
-            PrintLineWarning("But you know you’re doing the right thing, and if you succeed, the world will remember your name and your story for generations to come.");
-            Thread.Sleep(5000);
-            PrintLineWarning("And so your story begins. Right here. Right now.");
-            Thread.Sleep(3000);
             // Display the short information about the Starting Area
             Console.WriteLine(CurrentArea);
 

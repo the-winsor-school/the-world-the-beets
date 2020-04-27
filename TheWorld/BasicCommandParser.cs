@@ -72,7 +72,7 @@ namespace TheWorld
 			{
 				ProcessLookCommand(parts);
 			}
-			else if (cmdWord.Equals("go"))
+            else if (cmdWord.Equals("go"))
 			{
 				ProcessGoCommand(parts);
 			}

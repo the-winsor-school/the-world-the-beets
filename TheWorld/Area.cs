@@ -250,6 +250,9 @@ namespace TheWorld
             Creatures.Remove(uid);
         }
 
+        public bool ContainsKey(string uid) => Creatures.ContainsKey(uid.ToLowerInvariant());
+        //this boolean should work with the AddCreature+GetCreature
+
         /// <summary>
         /// TODO: VM  Easy Achievement
         /// Implement this method to work the same way as HasItem and CanGo.

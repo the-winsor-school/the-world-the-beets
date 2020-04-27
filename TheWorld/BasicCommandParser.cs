@@ -129,7 +129,7 @@ namespace TheWorld
 				//parts[1]-- > "HealingPotion"
 				//problem: how do i get from this text to the item
 				//confused on getting the instance of the player and how to write this general (sorry) 
-			}
+			//}
 
 			//if (parts.Length == 2)
 				//CurrentArea.GetItem(parts[1]);

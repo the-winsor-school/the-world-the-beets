@@ -41,41 +41,43 @@ namespace TheWorld
 
 			// I can create a new Item and add it directly into the Area without having a separate variable for it!  Convenient!
 			start.AddItem(new Item()
-                {
-				    Name = "Boulder",
-				    Description = "It's a big granite boulder.  It has a weird glyph carved into it, but you can't make any sense of it."
-			    },
-                "boulder"
-            );
+			{
+				Name = "Boulder",
+				Description = "It's a big granite boulder.  It has a weird glyph carved into it, but you can't make any sense of it."
+			},
+				"boulder"
+			);
 
 			// Doing it again--no separate variable for the new item.  It goes directly into the created area.
 			start.AddItem(new Item()
-                {
-                    Name = "Grass",
-                    Description = "Grass... Lots of Grass... Like... Everywhere."
-                },
+			{
+				Name = "Grass",
+				Description = "Grass... Lots of Grass... Like... Everywhere."
+			},
 				"grass"
-            );
+			);
 
 			// I can do that with any kind of object that I can create entirely in one command.
 			// Don't forget that last word is the Unique Identifier.  So I can't have more than one thing in my area named "bunny"
 			start.AddCreature(new Creature()
-                {
-				    Name = "Bunny Rabbit",
-				    Description = "A cute bunny.  Looks pretty tasty actually...",
-				    Stats = new StatChart() { Level = 1, MaxHPs = 10, HPs = 10, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 3 }
-			    },
-                "bunny"
-            );
+			{
+				Name = "Bunny Rabbit",
+				Description = "A cute bunny.  Looks pretty tasty actually...",
+				Stats = new StatChart() { Level = 1, MaxHPs = 10, HPs = 10, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 3 }
+			},
+				"bunny"
+			);
 
 			start.AddItem(new HealingPotion()
 			{
-				Name = "Healing Potion Lv1",
-				Description = "Pretty neat, drink up!",
-				UseCount = 8
+				Name = "Basic Healing potion",
+				Description = "Looks healthy!",
+				HealValue = 10,
+				UseCount = 5,
 			},
-			"healing_potion"
-			);  
+				"healingpotion"
+
+              );
 
 			// Here's a second area.
 			Area stream = new Area()

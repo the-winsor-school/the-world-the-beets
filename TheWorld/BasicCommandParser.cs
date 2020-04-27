@@ -265,7 +265,7 @@ namespace TheWorld
         /// Enter Combat mode.
         /// </summary>
         /// <param name="parts">Command as typed by the user split into individual words.</param>
-        private static void ProcessFightCommand(string[] parts)
+        public static void ProcessFightCommand(string[] parts)
         {
             Creature creature;
             try
@@ -433,6 +433,8 @@ namespace TheWorld
             }
         }
 
+        //VM: Ultimately, this talk command allows you to talk to creatures with the ITalkingCreature interface implemented
+            //And funny stuff happens when you try to talk to unvalid things, like talking to no one and talking to boulders
         private static void ProcessTalkCommand(string[] parts)
         {
             // This is where the talk command runs not quite so successfully
@@ -445,34 +447,77 @@ namespace TheWorld
             }
 
             //this is when the player types more than 2 words, and we're just letting them know that they shouldn't do that
-            //(player is most likely trying to talk to two things at the same time
+            //there are two scenarios: the player typed in multiple REAL creatures, or AT LEAST ONE creature that ISN'T REAL
+            //this block of code below tests which of the two cases (listed in line directly above) is true :)
             else if (parts.Length > 2)
             {
-                PrintLineWarning("Please only try to talk to one person/creature at a time!");
+                bool validCreatures = true;
+                int i = 1;
+                while (validCreatures == true && i <= parts.Length - 1)
+                {
+                    validCreatures = CurrentArea.CreatureExists(parts[i]);
+                    i++;
+                }
+                if (validCreatures == true)
+                {
+                    PrintLinePositive("You try to talk to multiple creatures, which are all real, thankfully. But it's hard to keep up a conversation with even one, so you decide it's best to try to talk to just one creature at a time!");
+                }
+                else
+                {
+                    PrintLinePositive("You try to talk to multiple creatures. Some weren't real. Even hearing you address just 1 imaginary creature scared off all the other, real creatures...");
+                }
             }
 
+            //This block below allows us to have a continual conversation with the intern (there's always a "goodbye" option though)
+            //this continual conversation aspect makes it easier for the player to talk
+            //the player doesn't need to keep typing intern after talk and before the conversation word
+            //also helps simulate a "real/normal" conversation with normal people haha ;p
+            else if (parts.Length == 2 && Intern.convoIntern == true)
+            {
+                Creature creature = CurrentArea.GetCreature("intern"); 
+                ((ITalkingCreature)creature).Talk(parts[1]);
+            }
 
             //this is when the player's typed in two words, "talk" and parts[1], and we're going to check whether parts[1] is a valid creature that we can talk to.
             else if (parts.Length == 2)
             {
                 try
                 {
-                    if (CurrentArea.HasItem(parts[1]))
+                    if (CurrentArea.CreatureExists(parts[1]))
                     {
-                        PrintLinePositive("TEST: works -> you typed in 'talk' with a valid creature name!!!");
+                        Creature creature = CurrentArea.GetCreature(parts[1]);
+                        if (creature is ITalkingCreature)
+                        {
+                            //SUCCESS!
+                            //This is the scenario where the player has succesfully typed in a creature that they can actually talk to
+                            //(checked to see whether the creature has the ITalkingCreature interface fully implemented)
+                            //now we can call this specific creature's Talk method so we can engage in unique dialogue with them
+                            ((ITalkingCreature)creature).Talk();
+                        }
+                        else
+                        {
+                            //we know that either the creature has the ITalkingCreature interface, or it doesn't
+                            //this case below is the scenario that the player wants to talk to a NON-TALKING creature...
+                            PrintLinePositive("...the {0} can't speak human...", parts[1]);
+                        }
                     }
+                    //this is when the player tries to talk to an item...
+                    else if (CurrentArea.HasItem(parts[1]))
+                    {
+                        PrintLinePositive("You try to talk to the {0}... It doesn't respond, obviously. And then you realize that you're just growing slightly less sane by the second...", parts[1]);
+                    }
+                    else
+                    {
+                        PrintLinePositive("You try to talk to the '{0},' a creature that doesn't exist. Hmmm...is any of this actually real?", parts[1]);
+                    }
+
                 }
                 catch (WorldException e)
                 {
-                    //this is when the player tries to talk to an item...
-                    if (CurrentArea.HasItem(parts[1]))
-                        PrintLinePositive("You try to talk to the {0}... It doesn't respond, obviously. And then you realize that you're just growing slightly less sane by the second...", parts[1]);
-                    else
-                        PrintLineDanger(e.Message);
+                    PrintLineDanger(e.Message);
                     return;
                 }
             }
-
 
 
             }

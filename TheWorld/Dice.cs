@@ -155,21 +155,12 @@ namespace TheWorld
             }
             else if (diceParam.Length == 3)
             {
-                char modChar = DnDFormat[DnDFormat.Length - (diceParam[2].Length + 1)];
                 if (!Char.IsNumber(DnDFormat, 0) | !Char.IsNumber(DnDFormat, DnDFormat.Length-1) | DnDFormat[DnDFormat.Length-(diceParam[2].Length + 1)] != '+') { throw new ArgumentException(string.Format("Your input was not in DnD Format. Please enter in a valid format.")); }
-            }
-            else
-            {
-                foreach (var Param in diceParam)
-                {
-                    if (!int.TryParse(Param, out int result1) | !Type.TryParse(Param, out char result2)){throw new ArgumentException(string.Format("Your input was not in DnD Format. Please enter in a valid format."));}
-                }
             }
 
             DiceType = (Type)Convert.ToInt32(diceParam[1]);
             Count = Convert.ToInt32(diceParam[0]);
             if (diceParam.Length == 3) { Modifier = Convert.ToInt32(diceParam[2]); }
-
         }
 
         /// <summary>

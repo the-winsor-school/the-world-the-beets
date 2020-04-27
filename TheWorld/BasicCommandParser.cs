@@ -220,7 +220,7 @@ namespace TheWorld
         /// Enter Combat mode.
         /// </summary>
         /// <param name="parts">Command as typed by the user split into individual words.</param>
-        private static void ProcessFightCommand(string[] parts)
+        public static void ProcessFightCommand(string[] parts)
         {
             Creature creature;
             try

@@ -95,11 +95,22 @@
 
     /// VM: Summary!
     /// This class implements the ITalkingCreature interface
-    /// the Talk method for this class brings 
+    /// the Talk method for this class allows the player to talk to the intern with a complex (branching) talking system
+    /// all these branches either end in fighting, awkwardness, or just friendliness :p
     public class Intern : Creature, ITalkingCreature
     {
         double talkBranch = 0;
+        //this variable is an easy way to keep track of which conversation branch the player is on -> changes with each choice of word the player talks with
+
         public static bool convoIntern = false;
+        //above; this bool officially "initiates" a conversation with the player and the intern
+        //it is for the main purpose of making it easier for the player to talk with the intern
+            //instead of writing "talk *intern* word", now the player just needs to type "talk word"
+
+        readonly string[] internArray = new string[] { "fight", "intern" };
+        //above; this is mostly for the purposes of when the player is initiating fights with the intern
+        //basically it's like a mock parts[] array in BasicCommandParser.cs 
+        //this array will be used in the place of parts[] as the parameters for the ProcessFightCommand method
 
         public void Talk(string word)
         {
@@ -108,12 +119,17 @@
                 case 0:
                     TextFormatter.PrintLinePositive("You: Hi intern guy!");
                     TextFormatter.PrintLineWarning("Intern: Hello! You need anything? :D");
+                    //below line introduces the player to how to use the talk command -> "talk [one of the offered choices]"
                     TextFormatter.PrintLineSpecial("'talk ____'");
+                    //below line (along with all similar lines) is structured to give the player multiple choices to talk about
+                    //it's not the same set of words each time because we want some ~variety~ to the player's conversation
                     TextFormatter.PrintLineSpecial("[JOKE] [THREAT] [CHITCHAT] [QUESTION] [GOODBYE]");
                     convoIntern = true;
                     talkBranch = 1;
                     break;
                 case 0.5:
+                    //this case, 0.5, is specifically created to serve the purpose of talking to the intern again
+                    //while at the same time (most importantly), making it seem like you're really talking to the intern AGAIN 
                     TextFormatter.PrintLinePositive("You: Hi, again, intern guy.");
                     TextFormatter.PrintLineWarning("Intern: Hello! Suprised to see you again so quick, you still need anything?");
                     TextFormatter.PrintLineSpecial("'talk ____'");
@@ -156,6 +172,7 @@
                             break;
                         default:
                             TextFormatter.PrintLineWarning("You're all for free speech, but you think it's for the best if you just stick to regular conversation stuff.");
+                            //this is most normal way to say: don't try using anything besides the many multiple choices offered to you
                             break;
                     }
                     break;
@@ -193,7 +210,6 @@
                             break;
                     }
                     break;
-                //result of "threat"
                 case 3:
                     switch (word)
                     {
@@ -207,7 +223,7 @@
                             TextFormatter.PrintLinePositive("You: YOU SCARED?");
                             TextFormatter.PrintLineWarning("Intern: nope. just confused why you're suddenly trying to fight people now...");
                             TextFormatter.PrintLineSpecial("You: HYAAA! TAKE THAT!");
-                            //start fight sequence
+                            TheGame.ProcessFightCommand(internArray);
                             convoIntern = false;
                             talkBranch = 0.5;
                             break;
@@ -215,7 +231,7 @@
                             TextFormatter.PrintLinePositive("You: YEAH. MAYBE I AM GOING TO FIGHT YOU EITHER WAY. YOU SHOULD BE SCARED RIGHT NOW, KID. >:(");
                             TextFormatter.PrintLineWarning("Intern: I'M NOT SCARED. LET'S FIGHT.");
                             TextFormatter.PrintLinePositive("You: TAKE THAT THEN! SUPRISE ATTACK!");
-                            //start fight sequence
+                            TheGame.ProcessFightCommand(internArray);
                             convoIntern = false;
                             talkBranch = 0.5;
                             break;
@@ -319,7 +335,7 @@
                         case "punch":
                             TextFormatter.PrintLinePositive("You: TAKE THIS!");
                             TextFormatter.PrintLineWarning("Intern: wha-");
-                            //start fight
+                            TheGame.ProcessFightCommand(internArray);
                             convoIntern = false;
                             talkBranch = 0.5;
                             break;

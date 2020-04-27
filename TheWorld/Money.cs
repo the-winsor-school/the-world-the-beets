@@ -53,23 +53,56 @@ namespace TheWorld
             if (displayString.Contains('-'))
             {
                 string[] moneyParts = displayString.Split(' ');
-                for (int i = 0; i == moneyParts.Length; i++)
+                for (int i = 0; i == moneyParts.Length - 1; i++)
                 {
                     if (moneyParts[i].Contains('c'))
                     {
+                        moneyParts[i] = moneyParts[i].Remove('c');
+                        if (!moneyParts[i].Contains('s') && !moneyParts[i].Contains('g') && !moneyParts[i].Contains('p'))
+                        {
+                            Copper = Convert.ToUInt16(moneyParts[i], 16);
+                        }
+                        else
+                        {
+                            TextFormatter.PrintLineWarning("Hmm...more than more than one unit for a single money amount? No.");
+                        }
 
                     }
                     else if (moneyParts[i].Contains('s'))
                     {
-
+                        moneyParts[i] = moneyParts[i].Remove('s');
+                        if (!moneyParts[i].Contains('c') && !moneyParts[i].Contains('g') && !moneyParts[i].Contains('p'))
+                        {
+                            Silver = Convert.ToUInt16(moneyParts[i], 16);
+                        }
+                        else
+                        {
+                            TextFormatter.PrintLineWarning("Hmm...more than more than one unit for a single money amount? No.");
+                        }
                     }
                     else if (moneyParts[i].Contains('g'))
                     {
-
+                        moneyParts[i] = moneyParts[i].Remove('g');
+                        if (!moneyParts[i].Contains('c') && !moneyParts[i].Contains('s') && !moneyParts[i].Contains('p'))
+                        {
+                            Gold = Convert.ToUInt16(moneyParts[i], 16);
+                        }
+                        else
+                        {
+                            TextFormatter.PrintLineWarning("Hmm...more than more than one unit for a single money amount? No.");
+                        }
                     }
                     else if (moneyParts[i].Contains('p'))
                     {
-
+                        moneyParts[i] = moneyParts[i].Remove('p');
+                        if (!moneyParts[i].Contains('c') && !moneyParts[i].Contains('s') && !moneyParts[i].Contains('g'))
+                        {
+                            Platinum = Convert.ToUInt16(moneyParts[i], 16);
+                        }
+                        else
+                        {
+                            TextFormatter.PrintLineWarning("Hmm...more than more than one unit for a single money amount? No.");
+                        }
                     }
                     else
                     {

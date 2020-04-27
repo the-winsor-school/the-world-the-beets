@@ -35,7 +35,7 @@ namespace TheWorld
         }
 
         /// <summary>
-        /// TODO:  Hard Achievement
+        /// TODO: VM Hard Achievement
         /// Convert a String like "400g 34c" into a Money object.
         /// You should be able to Enter large numbers, but not negative numbers.
         /// (after all, these properties are "unsigned integers")
@@ -50,7 +50,37 @@ namespace TheWorld
         /// <param name="displayString"></param>
         public Money(string displayString)
         {
-            throw new NotImplementedException();
+            if (displayString.Contains('-'))
+            {
+                string[] moneyParts = displayString.Split(' ');
+                for (int i = 0; i == moneyParts.Length; i++)
+                {
+                    if (moneyParts[i].Contains('c'))
+                    {
+
+                    }
+                    else if (moneyParts[i].Contains('s'))
+                    {
+
+                    }
+                    else if (moneyParts[i].Contains('g'))
+                    {
+
+                    }
+                    else if (moneyParts[i].Contains('p'))
+                    {
+
+                    }
+                    else
+                    {
+                        TextFormatter.PrintLineWarning("Remember to add monetary units at the end of your amounts (ex: Make sure to write 5p and not just 5).");
+                    }
+                }
+            }
+            else
+            {
+                TextFormatter.PrintLineWarning("Negative money is bad! Don't even think about typing negative signs!!!");
+            }
         }
 
         /// <summary>
@@ -143,7 +173,8 @@ namespace TheWorld
         /// <returns></returns>
         public static Money operator -(Money a, Money b)
         {
-            //TODO: You write this method!!
+            //TODO: VM You write this method!!
+
             return new Money();
         }
     }

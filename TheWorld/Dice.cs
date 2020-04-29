@@ -158,7 +158,18 @@ namespace TheWorld
                 if (!Char.IsNumber(DnDFormat, 0) | !Char.IsNumber(DnDFormat, DnDFormat.Length-1) | DnDFormat[DnDFormat.Length-(diceParam[2].Length + 1)] != '+') { throw new ArgumentException(string.Format("Your input was not in DnD Format. Please enter in a valid format.")); }
             }
 
-            DiceType = (Type)Convert.ToInt32(diceParam[1]);
+            int typeNumber = Convert.ToInt32(diceParam[1]);
+
+            // Here's what I found!  This is a byproduct of the enum in C#.  we can check if a value is defined like this:
+            // This is, actually, a larger problem--So I'm going to insert this into the DiceType property and record a video of it
+            // You can implement that change in your code eventually too~
+            if(!Enum.IsDefined(typeof(Dice.Type), typeNumber))
+            {
+                throw new ArgumentException(string.Format("{0} is not a valid dice type", typeNumber));
+            }
+
+            DiceType = (Type)typeNumber;
+
             Count = Convert.ToInt32(diceParam[0]);
             if (diceParam.Length == 3) { Modifier = Convert.ToInt32(diceParam[2]); }
         }

@@ -250,7 +250,7 @@ namespace TheWorld
             Creatures.Remove(uid);
         }
 
-        public bool ContainsKey(string uid) => Creatures.ContainsKey(uid.ToLowerInvariant());
+        public bool ContainsCreature(string uid) => Creatures.ContainsKey(uid.ToLowerInvariant());
         //this boolean should work with the AddCreature+GetCreature
 
 

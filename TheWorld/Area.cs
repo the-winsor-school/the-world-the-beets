@@ -121,12 +121,14 @@ namespace TheWorld
         public void AddNeighbor(Area neighbor, string keyword)
 		{
 			keyword = keyword.ToLowerInvariant();
+            //below; this line, along with the others I implemented, basically replace all space characters with "", aka, NO CHARACTERS
+            keyword = keyword.Replace(" ", "");
 
-            // TODO:  Easy Achievement
+            // TODO: VM Easy Achievement
             // Make sure there are no Spaces in the keyword.
             // Implement this in each of the other AddX methods as well.
 
-			if(this.CanGo(keyword))
+            if (this.CanGo(keyword))
 				throw new WorldException("That keyword is already taken");
 			
 			NeighboringAreas.Add(keyword, neighbor);
@@ -141,7 +143,8 @@ namespace TheWorld
 		public Area GetNeighbor(string keyword)
 		{
 			keyword = keyword.ToLowerInvariant();
-			if (!this.CanGo(keyword))
+            keyword = keyword.Replace(" ", "");
+            if (!this.CanGo(keyword))
 				throw new WorldException("I can't go that way...");
 
 			return NeighboringAreas [keyword];
@@ -167,7 +170,9 @@ namespace TheWorld
         public void AddItem(Item item, string uid)
 		{
 			uid = uid.ToLowerInvariant();
-			if(this.HasItem(uid))
+            uid = uid.Replace(" ", "");
+
+            if (this.HasItem(uid))
 				throw new WorldException("There is already an Item in this area with that uid.");
 			
 			Items.Add(uid, item);
@@ -181,6 +186,7 @@ namespace TheWorld
 		public Item GetItem(string uid)
 		{
 			uid = uid.ToLowerInvariant();
+            uid = uid.Replace(" ", "");
 			if (!this.HasItem(uid))
 				throw new WorldException("I don't see anything like that...");
 
@@ -207,7 +213,8 @@ namespace TheWorld
         public void AddCreature(Creature creature, string uid)
 		{
 			uid = uid.ToLowerInvariant();
-			if (Creatures.ContainsKey(uid))
+            uid = uid.Replace(" ", "");
+            if (CreatureExists(uid))
 				throw new WorldException("There is already a Creature with that unique name in this area.");
 
 			Creatures.Add(uid, creature);
@@ -221,8 +228,9 @@ namespace TheWorld
 		public Creature GetCreature(string uid)
 		{
 			uid = uid.ToLowerInvariant();
-			if (!Creatures.ContainsKey(uid))
-				throw new WorldException("I don't see that around here...");
+            uid = uid.Replace(" ", "");
+            if (!(CreatureExists(uid)))
+                throw new WorldException("I don't see that around here...");
 
 			return Creatures [uid];
 		}
@@ -235,23 +243,32 @@ namespace TheWorld
         public void RemoveCreature(string uid)
 		{
 			uid = uid.ToLowerInvariant();
-			if (!Creatures.ContainsKey(uid))
+            uid = uid.Replace(" ", "");
+            if (!(CreatureExists(uid)))
                 throw new WorldException("I don't see that around here...");
 
             Creatures.Remove(uid);
         }
 
         /// <summary>
-        /// TODO:  Easy Achievement
+        /// TODO: VM  Easy Achievement
         /// Implement this method to work the same way as HasItem and CanGo.
         /// This method should return true if the Creatures dictionary contains
         /// the given UID as a Key.
         ///
-        /// Use this method appropriately in  AddCreature, GetCreature and RemoveCreature.
+        /// Use this method appropriately in AddCreature, GetCreature and RemoveCreature.
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-		public bool CreatureExists(string uid) => throw new NotImplementedException();
+
+        public bool CreatureExists(string uid)
+        {
+            uid = uid.ToLowerInvariant();
+            uid = uid.Replace(" ", "");
+            return Creatures.ContainsKey(uid);
+        }
+        //works very much like this method we used for determining items
+            //public bool HasItem(string uid) => Items.ContainsKey(uid.ToLowerInvariant());
 
         #endregion // Creatures
 

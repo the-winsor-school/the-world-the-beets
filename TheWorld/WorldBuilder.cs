@@ -57,6 +57,15 @@ namespace TheWorld
 				"grass"
 			);
 
+			start.AddItem(new Mask()
+			{
+				Name = "N 95",
+				Description = "This'll protect you and others from that pesky disease!",
+                ThisBuff = 2,
+               // UseCount
+			},
+				"N95"
+			) ;
 			// I can do that with any kind of object that I can create entirely in one command.
 			// Don't forget that last word is the Unique Identifier.  So I can't have more than one thing in my area named "bunny"
 			start.AddCreature(new Creature()
@@ -69,8 +78,29 @@ namespace TheWorld
 			);
 		
 
-			// Here's a second area.
-			Area stream = new Area()
+            //VM: Added this new "creature", the scientist, to implement the ITalkingCreature interface into it (in ITalkingCreature.cs)
+            //This scientist is just to allow the player to try talking with someone for a little bit of convo...
+            start.AddCreature(new SleepyScientist()
+            {
+                Name = "Sleepy Scientist",
+                Description = "A fellow scientist who is sleeping on the floor. He cuddles with the lab's last roll of 2-ply toilet paper like it's a teddy bear. It's honestly a pretty sad scene to be looking at",
+                Stats = new StatChart() { Level = 10, MaxHPs = 30, HPs = 30, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 10 }
+            },
+                "scientist"
+            );
+
+            //VM: Added this new "creature", the intern, to create a more-complex talking system than I used for the sleepy scientist above
+            start.AddCreature(new Intern()
+            {
+                Name = "Fresh New Intern",
+                Description = "The new intern that's straight out of the local college. He does whatever people tell him to do. Get coffee. Wash the contaminated Petri dishes. Clean the toilets. He's fun to boss around...bless him.",
+                Stats = new StatChart() { Level = 100, MaxHPs = 70, HPs = 70, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 50 }
+            },
+                "intern"
+            );
+
+            // Here's a second area.
+            Area stream = new Area()
             {
 				Name = "Stream",
 				Description = "A burbling stream.  There are some rocks that look like you could cross them to get to the other side."

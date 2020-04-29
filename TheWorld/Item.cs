@@ -36,11 +36,35 @@ namespace TheWorld
 		}
 	}
 
-    // TODO: Moderate Achievement
+    // TODO: VM Moderate Achievement
     // Build a "Book" class which is an Item that is both Carryable and Useable.
     // The Use method should print a short bit of text which is the "Story" or 
     // maybe some Plot element in your game.
 
+    public class Book : Item, ICarryableItem, IUseableItem
+    {
+        //these two lines below fully implement the ICarryableItem interface
+        public int Weight { get; set; }
+        public int UseCount { get; set; }
+
+        //these two functions, Use() and Use(ref object target), fully implement the IUseableItem interface
+        public void Use()
+        {
+            TextFormatter.PrintLinePositive("You see your own scrawled, messy handwriting.");
+            TextFormatter.PrintLineWarning("4/1/20");
+            //just FYI this is the intro sequence and I just added it as a reminder as to what the player is doing and who the player is supposed to be :)
+            TextFormatter.PrintLineWarning("To anyone who finds this book: I am a scientist here in this world. It is a blessing and a curse. One day, as I was sitting at my desk, quarantined in my lab, I noticed a face mask blow by in the wind. I reminisced to the old days before Big 'Rona ruled the world and everyone suffered her oppression. Back when I could high-five my friends, and have a meeting without worrying about wifi. Suddenly, in that moment, I realized that it was my destiny to defeat Big ‘Rona. I saw that a long journey to defeat Big ‘Rona and her minions lay ahead, and I understood the dangers I would be facing. I made sure to fully prepare myself with masks, toilet paper, and Purell. Tubs of purell. I wrote this as my final note to my love if anything ever happened to me. Bertha, my love, my pet cow, my life, I hope I will be able to see you again. Wish me luck! <3");
+        }
+
+        //since we can't use a book ON something, we'll just laugh at the player for a sec and then just make them read the book's contents
+        public void Use(ref object target) 
+        {
+            TextFormatter.PrintWarning("You try to use the book on the {0}... So you fling your book at the {0}...", target);
+            TextFormatter.PrintWarning("It doesn't work, of course, and you, growing red in the face, walk over and pick up your book and finally read it.", target);
+            Use(); 
+        }
+
+    }
 
 
     /// <summary>
@@ -161,5 +185,38 @@ namespace TheWorld
             }
         }
     }
+    public class Mask : Item, ICarryableItem, IEquippableItem
+    {
+        public int Weight { get; set; }
+
+        public int UseCount { get; set; }
+
+        public int ThisBuff { get; set; }
+
+        public StatChart Stats { get; set; }
+
+        public bool IsEquipped { get; set; }
+
+       // public Dice Def { get; set; }
+
+        public void Equip()
+        {
+            if (IsEquipped == false)
+            {
+                //TheGame.Player.Stats.DefBuff=ThisBuff; //added a modifier in the program file called defbuff and thats equal to the buff of a give item
+
+                TheGame.Player.Stats.Def.Modifier += ThisBuff;
+
+                IsEquipped = true;
+                TextFormatter.PrintLineSpecial("Equipped {0}! It adds {1} to your defense", this.Name, this.ThisBuff);
+            }
+            else
+            {
+                throw new WorldException(string.Format("You already equipped that {0}", this.Name), this); //can't equip something that's already equipped
+            }
+
+        }
+    }
+        
 }
 

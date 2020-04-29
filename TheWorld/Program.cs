@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 // this allows me to use the static methods defined in TextFormatter without typing "TextFormatter." every time.
 using static TheWorld.TextFormatter;
@@ -11,7 +12,7 @@ namespace TheWorld
 		public static Area CurrentArea;
 		public static Player Player;
 
-        // TODO: Moderate Achievement
+        // TODO: VM Moderate Achievement
         //
         // Implement a property called PlayedTime which is of type TimeSpan
         // and a private DateTime StartTime.
@@ -39,12 +40,15 @@ namespace TheWorld
             // Check out that second parameter?!?! WAHT!@
             int hps = Dice.Roll(Dice.Type.D6, modifier: 4);  // roll 1d6+4
 
-            Player.Stats = new StatChart() {
+
+
+            Player.Stats = new StatChart()
+            {
                 Level = 1,
                 MaxHPs = hps,
                 HPs = hps,
                 Atk = new Dice(Dice.Type.D6),  // 1d6
-                Def = new Dice(Dice.Type.D4),  // 1d4
+                Def = new Dice(Dice.Type.D4),  // 1d4 with a modifier
                 Exp = 0
 			};
 
@@ -53,7 +57,7 @@ namespace TheWorld
 
 			string command = "";
 
-            // TODO:  Easy Achievement:
+            // TODO: VM Easy Achievement:
             // Script an Intro Sequence setting the stage for your game.
             // Start your storyline off with a little more than just dropping
             // the player into the world with no idea what is going on....
@@ -61,7 +65,7 @@ namespace TheWorld
             // when I landed in this world.
 
             // Display the short information about the Starting Area
-			Console.WriteLine(CurrentArea);
+            Console.WriteLine(CurrentArea);
 
             #region The Entire Game Happens HERE
 

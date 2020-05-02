@@ -34,7 +34,7 @@ namespace TheWorld
         /// </summary>
         private static List<string> CommandWords = new List<string>()
         {
-            "go", "look", "help", "quit", "examine", "fight", "played_time", "talk", "equip"
+            "go", "look", "help", "quit", "examine", "fight", "played_time", "talk", "equip", "use", "get"
         };
 
         //This below CommandWordsFormats list was created for the purpose of improving the Help command a few lines below
@@ -44,11 +44,6 @@ namespace TheWorld
         {
             "go [direction]", "look", "look [item or creature]", "help", "help [command word]", "quit", "examine", "examine [item or creature]", "fight [creature]", "played_time"
         };
-        /// <summary>
-        /// The command words.
-        /// These are all the words that the game will accept as commands.
-        /// You will need to add more words to make the game more interesting!
-        /// </summary>
 
         /// <summary>
         /// TODO:  Easy Achievement
@@ -83,23 +78,28 @@ namespace TheWorld
                 return;
             }
 
-            if (cmdWord.Equals("look"))
-            {
-                ProcessLookCommand(parts);
-            }
+			if (cmdWord.Equals("look"))
+			{
+				ProcessLookCommand(parts);
+			}
             else if (cmdWord.Equals("go"))
+			{
+				ProcessGoCommand(parts);
+			}
+			else if (cmdWord.Equals("fight"))
+			{
+				ProcessFightCommand(parts);
+			}
+            else if (cmdWord.Equals("use"))
+
             {
-                ProcessGoCommand(parts);
-            }
-            else if (cmdWord.Equals("fight"))
-            {
-                ProcessFightCommand(parts);
-            }
-            else if (cmdWord.Equals("played_time"))
-            {
-                ProcessPlayedTimeCommand(parts);
-            }
-            else if (cmdWord.Equals("help"))
+				ProcessUseCommand(parts);
+			}
+			else if (cmdWord.Equals("get"))
+			{
+				ProcessGetCommand(parts);
+			}
+			else if (cmdWord.Equals("help"))
             {
                 // TODO:  Implement this to show a new player how to use commands! VM
                 ProcessHelpCommand(parts);
@@ -121,14 +121,72 @@ namespace TheWorld
             }
         }
 
+        private static void ProcessUseCommand(string[] parts)
+        {
+            if (parts.Length == 1)
+            {
+				PrintLineWarning("Please specify which item.");
+				return;
+			}
 
-        /// <summary>
-        /// TODO: VM  Write this Method
-        /// Several Achievements inside.
-        /// </summary>
-        /// <param name="parts"></param>
-        ///
-        
+            if (parts.Length == 2)
+            {
+				CurrentArea.GetItem(parts[1]);
+				IUseableItem itemToUse = CurrentArea.GetItem(parts[1]) as IUseableItem;
+				if (itemToUse != null)
+				{
+					try
+					{
+						((IUseableItem)itemToUse).Use();
+						PrintLinePositive("Neat thing!");
+					}
+					catch (ItemDepletedException ide)
+					{
+						PrintLineSpecial(ide.Message);
+					}
+					catch (WorldException we)
+					{
+						PrintLineDanger(we.Message);
+					}
+				}
+                else
+                {
+                    PrintLineWarning("This item cannot be used...");
+					return;
+				}
+
+            }
+            
+			string targetName = parts[3];
+			object target;
+
+			if (CurrentArea.HasItem(targetName))
+
+				target = CurrentArea.GetItem(targetName);
+
+			else if (CurrentArea.CreatureExists(targetName))
+
+				target = CurrentArea.GetCreature(targetName);
+			else
+			{
+				PrintLineWarning("I don't see any of that around here...");
+				return;
+			}
+		}
+
+		private static void ProcessGetCommand(string[] parts)
+		{
+			if (parts.Length == 1)
+			{
+
+			}
+		}
+
+		/// <summary>
+		/// TODO:  Write this Method
+		/// Several Achievements inside.
+		/// </summary>
+		/// <param name="parts"></param>
         private static void ProcessHelpCommand(string[] parts)
         {
             if (parts.Length == 1)
@@ -343,7 +401,6 @@ namespace TheWorld
 			}
 		}
 
-
         /// <summary>
         /// What happens when the user types "look" as the command word.
         /// </summary>
@@ -524,6 +581,4 @@ namespace TheWorld
 
         }
     }
-
-
 

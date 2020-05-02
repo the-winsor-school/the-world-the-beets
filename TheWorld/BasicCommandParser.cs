@@ -90,6 +90,10 @@ namespace TheWorld
 			{
 				ProcessFightCommand(parts);
 			}
+            else if (cmdWord.Equals("played_time"))
+            {
+                ProcessPlayedTimeCommand(parts);
+            }
             else if (cmdWord.Equals("use"))
 
             {

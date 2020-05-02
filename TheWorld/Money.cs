@@ -127,12 +127,22 @@ namespace TheWorld
 
             sum.Platinum +=(sum.Gold + b.Gold) / 1000;
             sum.Gold     +=(sum.Gold + b.Gold) % 1000;
-
             sum.Platinum += b.Platinum;
 
+            //VM: just making sure we return a nice, normalized money object with no more than 100 of each money unit
+            sum.NormalizeCoinage();
             return sum;
         }
 
+        /// <summary>
+        /// VM: This function converts an object's money into just copper units, and returns a uint value.
+        /// </summary>
+        /// <returns>The copper.</returns>
+        public uint ToCopper()
+        {
+            this.Copper = (10000000*this.Platinum) + (10000*this.Gold) + (100*this.Silver) + this.Copper;
+            return this.Copper;
+        }
 
         /// <summary>
         /// Subtract b from a.
@@ -143,8 +153,46 @@ namespace TheWorld
         /// <returns></returns>
         public static Money operator -(Money a, Money b)
         {
-            //TODO: You write this method!!
-            return new Money();
+            //TODO: VM You write this method!!
+            //(writing this differently from the addition Money operator)
+
+            //these two lines below are basically converting all the money "contained" in the properties of each a and b
+            //and turning them into just one uint value: the total amount of copper
+            //just like you would take all your dollars and checks and nickels and dimes and lump them all in terms of pennies!
+            uint aCopper = a.ToCopper();
+            uint bCopper = b.ToCopper();
+
+            if (aCopper >= bCopper)
+            {
+                //this is our new object, our Money diff, which we plan to return when we are finished
+                Money diff = new Money();
+                diff.Copper = aCopper - bCopper;
+
+                //here, we are dividing by the biggest (untouched) unit possible 
+
+                //first, divide by # of c per p
+                diff.Platinum = diff.Copper / 10000000;
+                //change value of c accordingly to what is remaining after p(s) are "removed" from the total c amount
+                diff.Copper = diff.Copper % 10000000;
+
+                //repeat twice more until finished with all units!
+                diff.Gold = diff.Copper / 10000;
+                diff.Copper = diff.Copper % 10000;
+
+                diff.Silver = diff.Copper / 100;
+                diff.Copper = diff.Copper % 100;
+
+                //then, finally, we return our new Money object whose properties are the differences in monetary values between Money a and Money b!
+                return diff;
+
+            }
+            else
+            {
+                //the only other scenario is that a's monetary value is less than b's monetary value
+                //which means b is less than a in this scenario
+                //so we throw an exception that basically says the argument (the data passed in this function's parameters) are out of range for this function's purposes
+                throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

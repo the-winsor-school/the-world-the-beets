@@ -50,9 +50,15 @@ namespace TheWorld
         /// <param name="displayString"></param>
         public Money(string displayString)
         {
-            if (displayString.Contains('-'))
+            if (!displayString.Contains('-'))
             {
+                //we split the string entered as a parameter into multiple parts (if any)
+                //these splitparts then are added to create an array
                 string[] moneyParts = displayString.Split(' ');
+
+                //then we run a loop that goes through each part
+                //each time we loop, we check whether the monetary amount in in units of c, s, g, or p 
+                    //player will recieve separate warnings for having mixed units (ex: 25 cg), having no units (ex: 25), or negative money amounts (ex: -25c)
                 for (int i = 0; i == moneyParts.Length - 1; i++)
                 {
                     if (moneyParts[i].Contains('c'))
@@ -64,7 +70,7 @@ namespace TheWorld
                         }
                         else
                         {
-                            TextFormatter.PrintLineWarning("Hmm...more than more than one unit for a single money amount? No.");
+                            TextFormatter.PrintLineWarning("Hmm...mixed units of money...? Only one unit per number please.");
                         }
 
                     }
@@ -77,7 +83,7 @@ namespace TheWorld
                         }
                         else
                         {
-                            TextFormatter.PrintLineWarning("Hmm...more than more than one unit for a single money amount? No.");
+                            TextFormatter.PrintLineWarning("Hmm...mixed units of money...? Only one unit per number please.");
                         }
                     }
                     else if (moneyParts[i].Contains('g'))
@@ -89,7 +95,7 @@ namespace TheWorld
                         }
                         else
                         {
-                            TextFormatter.PrintLineWarning("Hmm...more than more than one unit for a single money amount? No.");
+                            TextFormatter.PrintLineWarning("Hmm...mixed units of money...? Only one unit per number please.");
                         }
                     }
                     else if (moneyParts[i].Contains('p'))
@@ -101,12 +107,12 @@ namespace TheWorld
                         }
                         else
                         {
-                            TextFormatter.PrintLineWarning("Hmm...more than more than one unit for a single money amount? No.");
+                            TextFormatter.PrintLineWarning("Hmm...mixed units of money...? Only one unit per number please.");
                         }
                     }
                     else
                     {
-                        TextFormatter.PrintLineWarning("Remember to add monetary units at the end of your amounts (ex: Make sure to write 5p and not just 5).");
+                        TextFormatter.PrintLineWarning("Remember to add monetary units at the end of your money amounts (ex: Make sure to write 5p and not just 5).");
                     }
                 }
             }

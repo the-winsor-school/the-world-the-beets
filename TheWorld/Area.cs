@@ -255,7 +255,7 @@ namespace TheWorld
 
 
         /// <summary>
-        /// TODO: VM  Easy Achievement
+        /// TODO: VM  Easy Achievement DONE
         /// Implement this method to work the same way as HasItem and CanGo.
         /// This method should return true if the Creatures dictionary contains
         /// the given UID as a Key.

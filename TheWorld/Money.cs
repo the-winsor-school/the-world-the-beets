@@ -35,7 +35,7 @@ namespace TheWorld
         }
 
         /// <summary>
-        /// TODO:  Hard Achievement
+        /// TODO: VM Hard Achievement
         /// Convert a String like "400g 34c" into a Money object.
         /// You should be able to Enter large numbers, but not negative numbers.
         /// (after all, these properties are "unsigned integers")
@@ -50,7 +50,76 @@ namespace TheWorld
         /// <param name="displayString"></param>
         public Money(string displayString)
         {
-            throw new NotImplementedException();
+            if (!displayString.Contains('-'))
+            {
+                //we split the string entered as a parameter into multiple parts (if any)
+                //these splitparts then are added to create an array
+                string[] moneyParts = displayString.Split(' ');
+
+                //then we run a loop that goes through each part
+                //each time we loop, we check whether the monetary amount in in units of c, s, g, or p 
+                    //player will recieve separate warnings for having mixed units (ex: 25 cg), having no units (ex: 25), or negative money amounts (ex: -25c)
+                for (int i = 0; i == moneyParts.Length - 1; i++)
+                {
+                    if (moneyParts[i].Contains('c'))
+                    {
+                        moneyParts[i] = moneyParts[i].Remove('c');
+                        if (!moneyParts[i].Contains('s') && !moneyParts[i].Contains('g') && !moneyParts[i].Contains('p'))
+                        {
+                            Copper = Convert.ToUInt16(moneyParts[i], 16);
+                        }
+                        else
+                        {
+                            TextFormatter.PrintLineWarning("Hmm...mixed units of money...? Only one unit per number please.");
+                        }
+
+                    }
+                    else if (moneyParts[i].Contains('s'))
+                    {
+                        moneyParts[i] = moneyParts[i].Remove('s');
+                        if (!moneyParts[i].Contains('c') && !moneyParts[i].Contains('g') && !moneyParts[i].Contains('p'))
+                        {
+                            Silver = Convert.ToUInt16(moneyParts[i], 16);
+                        }
+                        else
+                        {
+                            TextFormatter.PrintLineWarning("Hmm...mixed units of money...? Only one unit per number please.");
+                        }
+                    }
+                    else if (moneyParts[i].Contains('g'))
+                    {
+                        moneyParts[i] = moneyParts[i].Remove('g');
+                        if (!moneyParts[i].Contains('c') && !moneyParts[i].Contains('s') && !moneyParts[i].Contains('p'))
+                        {
+                            Gold = Convert.ToUInt16(moneyParts[i], 16);
+                        }
+                        else
+                        {
+                            TextFormatter.PrintLineWarning("Hmm...mixed units of money...? Only one unit per number please.");
+                        }
+                    }
+                    else if (moneyParts[i].Contains('p'))
+                    {
+                        moneyParts[i] = moneyParts[i].Remove('p');
+                        if (!moneyParts[i].Contains('c') && !moneyParts[i].Contains('s') && !moneyParts[i].Contains('g'))
+                        {
+                            Platinum = Convert.ToUInt16(moneyParts[i], 16);
+                        }
+                        else
+                        {
+                            TextFormatter.PrintLineWarning("Hmm...mixed units of money...? Only one unit per number please.");
+                        }
+                    }
+                    else
+                    {
+                        TextFormatter.PrintLineWarning("Remember to add monetary units at the end of your money amounts (ex: Make sure to write 5p and not just 5).");
+                    }
+                }
+            }
+            else
+            {
+                TextFormatter.PrintLineWarning("Negative money is bad! Don't even think about typing negative signs!!!");
+            }
         }
 
         /// <summary>
@@ -153,7 +222,6 @@ namespace TheWorld
         /// <returns></returns>
         public static Money operator -(Money a, Money b)
         {
-            //TODO: VM You write this method!!
             //(writing this differently from the addition Money operator)
 
             //these two lines below are basically converting all the money "contained" in the properties of each a and b

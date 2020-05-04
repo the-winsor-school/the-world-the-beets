@@ -5,11 +5,13 @@ namespace TheWorld
     {
         public Backpack()
         {
-           // int MaxCapacity;  
+            Backpack Backpack;
+            // int MaxCapacity;
+            void Add(ICarryableItem item, string uid) { };
+            
         }
     }
 }
-//Backpack = new Dictionary<string, List<ICarryableItem>>();
 /// <summary>
 /// The items. In Stacks.  By Name.
 /// _______________________________________

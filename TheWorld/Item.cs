@@ -178,6 +178,11 @@ namespace TheWorld
             {
                 throw new WorldException(string.Format("You can't use this item on {0}...", this.Name), target);
             }
+            if (target is Item)
+            {
+                Item itemTarget = (Item)target;
+                //im not sure how to finish this 
+            }
         }
     }
     public class Mask : Item, ICarryableItem, IEquippableItem

@@ -8,7 +8,8 @@ namespace TheWorld
     ///
     /// TODO:  Create your own world!
     ///
-    /// TODO:  Easy Achievement (1):
+    /// TODO:  Easy Achievement (1): AZ
+    //
     /// Create 4 Areas which are linked together somehow.
     ///
     /// TODO:  Easy Achievement (2):
@@ -98,6 +99,7 @@ namespace TheWorld
 			// and no way out!!!
 			start.AddNeighbor(stream, "north");
 			stream.AddNeighbor(start, "south");
+
 
 			// Go back to the Main method and tell it where to start the game!
 			return start;

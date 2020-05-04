@@ -50,7 +50,7 @@
     <Compile Include="IUseableItem.cs" />
     <Compile Include="ITalkingCreature.cs" />
     <Compile Include="IEquippableItem.cs" />
-    <Compile Include="Backpack.cs" />
+    <Compile Include="EmptyClass.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

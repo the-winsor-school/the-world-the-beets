@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TheWorld
 {
@@ -73,10 +74,10 @@ namespace TheWorld
 				Name = "Bunny Rabbit",
 				Description = "A cute bunny.  Looks pretty tasty actually...",
 				Stats = new StatChart() { Level = 1, MaxHPs = 10, HPs = 10, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 3 }
-			},
+            },
 				"bunny"
 			);
-		
+
 
             //VM: Added this new "creature", the scientist, to implement the ITalkingCreature interface into it (in ITalkingCreature.cs)
             //This scientist is just to allow the player to try talking with someone for a little bit of convo...
@@ -84,7 +85,8 @@ namespace TheWorld
             {
                 Name = "Sleepy Scientist",
                 Description = "A fellow scientist who is sleeping on the floor. He cuddles with the lab's last roll of 2-ply toilet paper like it's a teddy bear. It's honestly a pretty sad scene to be looking at",
-                Stats = new StatChart() { Level = 10, MaxHPs = 30, HPs = 30, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 10 }
+                Stats = new StatChart() { Level = 1, MaxHPs = 3, HPs = 3, Atk = new Dice(Dice.Type.D4), Def = new Dice(Dice.Type.D4), Exp = 10 },
+                CreatureInventory = new List<string> { "N95" }
             },
                 "scientist"
             );

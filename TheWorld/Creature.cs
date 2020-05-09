@@ -35,13 +35,18 @@ namespace TheWorld
 			set;
 		}
 
-
-        // TODO:  Moderate Achievement
+        // TODO: VM  Moderate Achievement
         // Give Creatures an Inventory (much like the Player's Backpack)
         // When the Creature is defeated, these Items should then drop into the
         // CurrentArea for the Player to be able to PickUp.
         // (That logic will be added to the ProcessFightCommand method in the Win case.)
 
-	}
+        public List<string> CreatureInventory
+        {
+            get;
+            set;
+        }
+
+    }
 }
 

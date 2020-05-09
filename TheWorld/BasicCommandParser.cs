@@ -358,9 +358,11 @@ namespace TheWorld
                     // there should be some rules to how this works.
                     // But, you are the god of this universe.  You make the rules.
 
-                    // TODO: Part of a larger achievement
+                    // TODO: VM Part of a larger achievement
                     // After defeating an Enemy, they should drop their Inventory
                     // into the CurrentArea so that the player can then PickUp those Items.
+                    //for (int i = 0; i <= creature.CreatureInventory.Length(); i++)
+                    //CurrentArea.AddItem();
 					break;
 				case CombatResult.Lose:
                     // TODO: VM Easy Achievement:

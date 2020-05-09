@@ -67,6 +67,7 @@ namespace TheWorld
 			},
 				"N95"
 			) ;
+			
 			// I can do that with any kind of object that I can create entirely in one command.
 			// Don't forget that last word is the Unique Identifier.  So I can't have more than one thing in my area named "bunny"
 			start.AddCreature(new Creature()

@@ -361,9 +361,23 @@ namespace TheWorld
                     // TODO: VM Part of a larger achievement
                     // After defeating an Enemy, they should drop their Inventory
                     // into the CurrentArea so that the player can then PickUp those Items.
-                    //for (int i = 0; i <= creature.CreatureInventory.Length(); i++)
-                    //CurrentArea.AddItem();
-					break;
+                    Item realItem = new Item();
+                    string verbalCreatureInventory = "";
+                    for (int i = 0; i < creature.CreatureInventory.Count(); i++)
+                    {
+                        realItem = CurrentArea.GetItem(creature.CreatureInventory[i]);
+                        CurrentArea.AddItem(realItem, creature.CreatureInventory[i]);
+                        if (i != creature.CreatureInventory.Count() - 1)
+                        {
+                            verbalCreatureInventory += "a " + creature.CreatureInventory[i] + "," ;
+                        }
+                        else
+                        {
+                            verbalCreatureInventory += "and a " + creature.CreatureInventory[i];
+                        }
+                    }
+                    PrintLinePositive("The {0} dropped {1}!", creature.Name, verbalCreatureInventory);
+                    break;
 				case CombatResult.Lose:
                     // TODO: VM Easy Achievement:
                     // What happens when you die?  Deep questions.
